@@ -17,8 +17,10 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::post('login','API\LoginController@login');
+Route::post('login','Api\LoginController@login');
 Route::post('register','Api\RegisterController@register');
 Route::group(['middleware' => 'auth:api'],function(){
-    Route::post('get-details','API\PassportController@getDetails');
+    Route::post('getDetails','Api\GetUserData@getData');
 });
+
+Route::post('logout','Api\LoginController@Logout');

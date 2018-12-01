@@ -39,6 +39,7 @@ Button{
 }
 .button{
     margin-left: 24%;
+    margin-top: 5%;
 }
 #spanDiv{
     padding-top: 63px;
@@ -46,6 +47,11 @@ Button{
 span.psw {
     float: right;  
 }
+.errMsgr{
+    text-align: center;
+}
+
+
 @media only screen and (max-width: 600px) {
     .maindiv{
         padding-top: 30%;
