@@ -26,7 +26,7 @@ body {
     border-radius: 4%;
     box-shadow: 0px 0px 20px;  
     margin: auto;
-    height: 350px;
+    height: 360px;
     width: 327px;
     padding-left: 5%;
     padding-right: 5%;
@@ -42,15 +42,26 @@ Button{
     margin-top: 5%;
 }
 #spanDiv{
-    padding-top: 63px;
+    margin-bottom: 10px;
 }
 span.psw {
+    
     float: right;  
 }
 .errMsgr{
     text-align: center;
 }
-
+.msg{
+    height: 15px;
+    font-size: 14px;
+    color: red;
+    float: right;
+}
+.errMsg{
+    text-align: center;
+    margin-top: 30px;
+    color: red;
+}
 
 @media only screen and (max-width: 600px) {
     .maindiv{

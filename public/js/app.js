@@ -21105,11 +21105,6 @@ var Input = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
 
-        {
-            _this.state = {
-                data: ''
-            };
-        }
         _this.sendDataToParent = _this.sendDataToParent.bind(_this);
         return _this;
     }
@@ -21117,8 +21112,8 @@ var Input = function (_Component) {
     _createClass(Input, [{
         key: 'sendDataToParent',
         value: function sendDataToParent() {
-            this.setState({ data: event.target.value });
-            this.props.onChange(this.state.data);
+
+            this.props.onChange(event.target.value);
         }
     }, {
         key: 'render',
@@ -71552,6 +71547,7 @@ module.exports = hoistNonReactStatics;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_core__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_main_css__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_main_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__css_main_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_UserServices__ = __webpack_require__(526);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -71567,6 +71563,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+var services = new __WEBPACK_IMPORTED_MODULE_4__services_UserServices__["a" /* default */]();
+
 var Login = function (_Component) {
     _inherits(Login, _Component);
 
@@ -71577,7 +71576,8 @@ var Login = function (_Component) {
 
         _this.state = {
             email: '',
-            password: ''
+            password: '',
+            errors: {}
         };
         _this.getInputData = _this.getInputData.bind(_this);
         _this.onClickBtn = _this.onClickBtn.bind(_this);
@@ -71592,7 +71592,24 @@ var Login = function (_Component) {
     }, {
         key: 'onClickBtn',
         value: function onClickBtn() {
-            console.log('hiiiiii');
+            var _this2 = this;
+
+            var userData = {
+                email: this.state.email,
+                password: this.state.password
+            };
+
+            services.loginUser(userData).then(function (res) {
+                console.log(res);
+                if (res.status === 210) {
+                    _this2.setState({
+                        errors: {
+                            msg: res.data.error.email[0]
+                        }
+                    });
+                }
+                if (res.status === 200) {}
+            }).catch();
         }
     }, {
         key: 'render',
@@ -71633,7 +71650,7 @@ var Login = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'errMsg' },
-                            'akshansh'
+                            this.state.errors["msg"]
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -71644,7 +71661,7 @@ var Login = function (_Component) {
                                 'New User? ',
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
-                                    { href: '#' },
+                                    { href: '/register' },
                                     'register'
                                 )
                             ),
@@ -104206,7 +104223,7 @@ exports = module.exports = __webpack_require__(518)(false);
 
 
 // module
-exports.push([module.i, "body {\n    background-color: rgb(253, 255, 231);\n}\n#registerT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n#loginT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n.maindiv{\n    padding-top: 7%;\n}\n.input{\n    margin: 10px;\n    /* width: 306px; */\n    border-radius: 5%;\n}\n\n#card{\n    border-radius: 4%;\n    box-shadow: 0px 0px 20px;  \n    margin: auto;\n    height: 350px;\n    width: 327px;\n    padding-left: 5%;\n    padding-right: 5%;\n    padding-bottom: 10px;\n    background-color: rgb(255, 255, 255);\n}\nButton{\n    font-family:\"Times New Roman\";\n    width: 70%;\n}\n.button{\n    margin-left: 24%;\n    margin-top: 5%;\n}\n#spanDiv{\n    padding-top: 63px;\n}\nspan.psw {\n    float: right;  \n}\n.errMsgr{\n    text-align: center;\n}\n\n\n@media only screen and (max-width: 600px) {\n    .maindiv{\n        padding-top: 30%;\n    }\n\n    #card{\n        box-shadow: 0px 0px 10px;     \n    }\n}\n@media only screen and (max-width: 400px) {\n    .maindiv{\n        padding-top: 35%;\n    }\n    #card{\n        box-shadow: 0px 0px 5px;        \n        width: 273px;\n        padding-left: 2%;\n        padding-right: 2%;      \n    }\n    .MuiFormControl-fullWidth-67 {\n        width: 86%;\n    }\n}", ""]);
+exports.push([module.i, "body {\n    background-color: rgb(253, 255, 231);\n}\n#registerT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n#loginT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n.maindiv{\n    padding-top: 7%;\n}\n.input{\n    margin: 10px;\n    /* width: 306px; */\n    border-radius: 5%;\n}\n\n#card{\n    border-radius: 4%;\n    box-shadow: 0px 0px 20px;  \n    margin: auto;\n    height: 360px;\n    width: 327px;\n    padding-left: 5%;\n    padding-right: 5%;\n    padding-bottom: 10px;\n    background-color: rgb(255, 255, 255);\n}\nButton{\n    font-family:\"Times New Roman\";\n    width: 70%;\n}\n.button{\n    margin-left: 24%;\n    margin-top: 5%;\n}\n#spanDiv{\n    margin-bottom: 10px;\n}\nspan.psw {\n    \n    float: right;  \n}\n.errMsgr{\n    text-align: center;\n}\n.msg{\n    height: 15px;\n    font-size: 14px;\n    color: red;\n    float: right;\n}\n.errMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: red;\n}\n\n@media only screen and (max-width: 600px) {\n    .maindiv{\n        padding-top: 30%;\n    }\n\n    #card{\n        box-shadow: 0px 0px 10px;     \n    }\n}\n@media only screen and (max-width: 400px) {\n    .maindiv{\n        padding-top: 35%;\n    }\n    #card{\n        box-shadow: 0px 0px 5px;        \n        width: 273px;\n        padding-left: 2%;\n        padding-right: 2%;      \n    }\n    .MuiFormControl-fullWidth-67 {\n        width: 86%;\n    }\n}", ""]);
 
 // exports
 
@@ -104758,6 +104775,9 @@ module.exports = function (css) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_core__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_main_css__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_main_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__css_main_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_UserServices__ = __webpack_require__(526);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -104774,6 +104794,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import  from '@material-ui/core';
 
 
+
+
+var services = new __WEBPACK_IMPORTED_MODULE_5__services_UserServices__["a" /* default */]();
+
 var Register = function (_Component) {
     _inherits(Register, _Component);
 
@@ -104783,30 +104807,101 @@ var Register = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Register.__proto__ || Object.getPrototypeOf(Register)).call(this, props));
 
         _this.state = {
+
             username: '',
             email: '',
             password: '',
-            rpassword: ''
+            rpassword: '',
+            errors: {}
+
         };
         _this.getInputData = _this.getInputData.bind(_this);
         _this.onClickbtn = _this.onClickbtn.bind(_this);
+        _this.dataValidation = _this.dataValidation.bind(_this);
+
         return _this;
     }
 
     _createClass(Register, [{
         key: 'getInputData',
         value: function getInputData(data) {
+
             this.setState(_defineProperty({}, event.target.name, data));
         }
     }, {
+        key: 'dataValidation',
+        value: function dataValidation() {
+
+            var fields = this.state;
+            var errors = {};
+            var formIsValid = true;
+
+            if (!fields["username"]) {
+                formIsValid = false;
+                errors["username"] = "Cannot be empty";
+            } else {
+                if (fields["username"].length < 5) {
+                    formIsValid = false;
+                    errors["username"] = "minimum 5 character";
+                }
+            }
+
+            if (!fields["email"]) {
+                formIsValid = false;
+                errors["email"] = "Cannot be empty";
+            }
+
+            if (!fields["password"]) {
+                formIsValid = false;
+                errors["password"] = "Cannot be empty";
+            }
+
+            if (!fields["rpassword"]) {
+                formIsValid = false;
+                errors["rpassword"] = "Cannot be empty";
+            } else {
+                if (fields["password"] !== fields["rpassword"]) {
+                    formIsValid = false;
+                    errors["rpassword"] = "not match";
+                }
+            }
+
+            this.setState({ errors: errors });
+            return formIsValid;
+        }
+    }, {
         key: 'onClickbtn',
-        value: function onClickbtn() {
-            var a = this.state;
-            console.log(a);
+        value: function onClickbtn(e) {
+            var _this2 = this;
+
+            e.preventDefault();
+
+            if (this.dataValidation()) {
+                var userData = {
+                    username: this.state.username,
+                    email: this.state.email,
+                    password: this.state.password,
+                    rpassword: this.state.rpassword
+                };
+                services.registerUser(userData).then(function (res) {
+                    console.log(res);
+                    if (res.status === 210) {
+                        _this2.setState({
+                            errors: {
+                                email: res.data.error.email[0]
+                            }
+                        });
+                    }
+                    if (res.status === 200) {}
+                }).catch();
+            } else {
+                return;
+            }
         }
     }, {
         key: 'render',
         value: function render() {
+            console.log(this.state);
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -104825,22 +104920,42 @@ var Register = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'input' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'username', type: 'text', placeholder: 'username', label: 'username', onChange: this.getInputData })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'username', type: 'text', placeholder: 'username', label: 'username', onChange: this.getInputData }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'msg' },
+                                this.state.errors["username"]
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'input' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'email', type: 'text', placeholder: 'enter email', label: 'email', onChange: this.getInputData })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'email', type: 'text', placeholder: 'enter email', label: 'email', onChange: this.getInputData }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'msg' },
+                                this.state.errors["email"]
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'input' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'password', type: 'password', placeholder: 'enter password', label: 'password', onChange: this.getInputData })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'password', type: 'password', placeholder: 'enter password', label: 'password', onChange: this.getInputData }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'msg' },
+                                this.state.errors["password"]
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'input' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'rpassword', type: 'password', placeholder: 'confirm password', label: 'confirm password', onChange: this.getInputData })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Input__["a" /* default */], { name: 'rpassword', type: 'password', placeholder: 'confirm password', label: 'confirm password', onChange: this.getInputData }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'msg' },
+                                this.state.errors["rpassword"]
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -104890,6 +105005,52 @@ var Register = function (_Component) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 524 */,
+/* 525 */,
+/* 526 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var UserServices = function () {
+    function UserServices() {
+        _classCallCheck(this, UserServices);
+    }
+
+    _createClass(UserServices, [{
+        key: 'registerUser',
+        value: function registerUser(userData) {
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/register', userData).then(function (response) {
+                //console.log('check',response);
+                return response;
+            }).catch(function (error) {
+                return error;
+            });
+        }
+    }, {
+        key: 'loginUser',
+        value: function loginUser(userData) {
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/login', userData).then(function (response) {
+                return response;
+            }).catch(function (error) {
+                return error;
+            });
+        }
+    }]);
+
+    return UserServices;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (UserServices);
 
 /***/ })
 /******/ ]);

@@ -11,21 +11,29 @@ class LoginController extends Controller
 {
     public function Login()
     {
-        if (Auth::attempt(['email' => request('email'), 'password'=>request('password')])) {
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('fundoonotes')->accessToken;
-            return response()->json(['success' => $success],200);
-        }else {
-            return response()->json(['error' => 'unauthorised'],401);
+            $email = Auth::user()->email;
+            return response()->json(['success' => $success], 200);
+        } else {
+            return response()->json(['error' => 'unauthorised'], 401);
         }
     }
 
 
-    public function Logout()
+    public function Logout(Request $request)
     {
-        if (Auth::check()) {
-        Auth::user()->AauthAcessToken()->delete();
+        $value = $request->bearerToken();
+        if ($value) {
+     
+            $id = (new Parser())->parse($value)->getHeader('jti');
+            $revoked = DB::table('oauth_access_tokens')->where('id', '=', $id)->update(['revoked' => 1]);
+            $this->guard()->logout();
         }
+        Auth::logout();
+        return Response(['code' => 200, 'message' => 'You are successfully logged out'], 200);
+
     }
 }
 

@@ -17,10 +17,14 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::post('login','Api\LoginController@login');
-Route::post('register','Api\RegisterController@register');
+Route::any('login','UserController@login')->name('login');
+Route::post('register','UserController@register');
 Route::group(['middleware' => 'auth:api'],function(){
-    Route::post('getDetails','Api\GetUserData@getData');
+    Route::any('getDetails','UserController@getData');
+    Route::get('logout', 'UserController@logout');
+
 });
 
-Route::post('logout','Api\LoginController@Logout');
+
+
+//Route::get('logout','Api\LoginController@Logout');

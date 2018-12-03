@@ -26,6 +26,7 @@
         "ajv": "^6.5.5",
         "img-loader": "^3.0.1",
         "react-router-dom": "^4.3.1",
-        "react-tap-event-plugin": "^3.0.3"
+        "react-tap-event-plugin": "^3.0.3",
+        "react-validation": "^3.0.7"
     }
 }

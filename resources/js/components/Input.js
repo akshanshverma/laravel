@@ -3,17 +3,13 @@ import { TextField } from "@material-ui/core";
 export default class Input extends Component {
     constructor(props) {
         super(props);
-        {
-            this.state = {
-                data:''
-            }
-        }
+        
         this.sendDataToParent = this.sendDataToParent.bind(this);
     }
 
     sendDataToParent(){
-        this.setState({data: event.target.value})
-        this.props.onChange(this.state.data)
+        
+        this.props.onChange(event.target.value)
     }
 
     render(){

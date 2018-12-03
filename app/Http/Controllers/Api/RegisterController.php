@@ -26,8 +26,6 @@ class RegisterController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] = $user->createToken('fundoonotes')->accessToken;
-        $success['username'] = $user->username;
         
         return response()->json(['success'=>$success],200);
     }

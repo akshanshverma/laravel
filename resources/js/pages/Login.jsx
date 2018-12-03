@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Input from '../components/Input';
 import { Button, Card, Typography } from '@material-ui/core';
 import "../../css/main.css";
+import userService from '../services/UserServices';
 
+var services = new userService();
 
 export default class Login extends Component {
 
@@ -11,6 +13,7 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            errors: {},
         }
         this.getInputData = this.getInputData.bind(this);
         this.onClickBtn = this.onClickBtn.bind(this);
@@ -20,8 +23,27 @@ export default class Login extends Component {
         this.setState({ [event.target.name]: data });
     }
 
-    onClickBtn(){
-        console.log('hiiiiii'); 
+    onClickBtn() {
+        const userData = {
+            email: this.state.email,
+            password: this.state.password,         
+        }
+
+        services.loginUser(userData)
+            .then(res => {
+                console.log(res);
+                if (res.status === 210) {
+                    this.setState({
+                        errors: {
+                            msg: res.data.error.email[0],
+                        }
+                    });
+                }
+                if (res.status === 200){
+                    
+                }
+                
+            }).catch();
     }
 
     render() {
@@ -39,12 +61,12 @@ export default class Login extends Component {
                         <div className='button'>
                             <Button type='Submit' variant="contained" color='primary' onClick={this.onClickBtn()}>login</Button>
                         </div>
-                        <div className='errMsg'>
-                            akshansh
+                        <div className='errMsg' >
+                            {this.state.errors["msg"]}
                         </div>
                         <div id='spanDiv'>
 
-                            <span className="reg">New User? <a href="#">register</a></span>
+                            <span className="reg">New User? <a href="/register">register</a></span>
                             <span className="psw">Forgot <a href="#">password?</a></span>
                         </div>
                     </div>
