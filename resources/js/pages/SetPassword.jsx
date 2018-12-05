@@ -3,12 +3,11 @@ import Input from '../components/Input';
 import { Button, Card, Typography } from '@material-ui/core';
 // import  from '@material-ui/core';
 import "../../css/main.css";
-import axios from 'axios';
 import userService from '../services/UserServices';
 
 var services = new userService();
 
-export default class Register extends Component {
+export default class SetPassword extends Component {
 
     constructor(props) {
 
@@ -118,16 +117,9 @@ export default class Register extends Component {
 
             <div className='maindiv'>
                 <Card id='card'>
-                    <Typography id='registerT' color='primary'>Register</Typography>
+                    <Typography id='registerT' color='primary'>Set Password</Typography>
                     <div className='hold'>
-                        <div className='input'>
-                            <Input name={'username'} type={'text'} placeholder={'username'} label={'username'} onChange={this.getInputData} />
-                            <div className='msg' >{this.state.errors["username"]}</div>
-                        </div>
-                        <div className='input'>
-                            <Input name={'email'} type={'text'} placeholder={'enter email'} label={'email'} onChange={this.getInputData} />
-                            <div className='msg' >{this.state.errors["email"]}</div>
-                        </div>
+                        
                         <div className='input'>
                             <Input name={'password'} type={'password'} placeholder={'enter password'} label={'password'} onChange={this.getInputData} />
                             <div className='msg' >{this.state.errors["password"]}</div>
@@ -137,7 +129,7 @@ export default class Register extends Component {
                             <div className='msg' >{this.state.errors["rpassword"]}</div>
                         </div>
                         <div className='button'>
-                            <Button variant="contained" color='primary' onClick={this.onClickbtn}>Submit</Button>
+                            <Button variant="contained" color='primary' onClick={this.onClickbtn}>save</Button>
                         </div>
                     </div>
                 </Card>

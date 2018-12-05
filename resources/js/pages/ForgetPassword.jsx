@@ -8,13 +8,12 @@ import userService from '../services/UserServices';
 
 var services = new userService();
 
-export default class Login extends Component {
+export default class ForgetPassword extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            password: '',
             errors: {},
         }
         this.getInputData = this.getInputData.bind(this);
@@ -30,19 +29,18 @@ export default class Login extends Component {
     onClickBtn() {
         const userData = {
             email: this.state.email,
-            password: this.state.password,
         }
 
-        services.loginUser(userData)
+        services.resetPassword(userData)
             .then(res => {
                 console.log(res);
                 if (res.status === 200) {
-                    this.props.history.push("/profile");
+                   
                 }
                 if (res.status === 220) {
                     this.setState({
                         errors: {
-                            msg: 'invalid email or password',
+                            msg: 'invalid email',
                         }
                     });
                 }
@@ -53,31 +51,25 @@ export default class Login extends Component {
 
     render() {
        
-        if (localStorage.getItem('token') !==null) {
-            this.props.history.push("/profile");
-        }
+        // if (localStorage.getItem('token') !==null) {
+            
+        // }
         return (
             <div className='maindiv'>
                 <Card id='card'>
-                    <Typography id='loginT' color='primary'>Login</Typography>
+                    <Typography id='loginT' color='primary'>Forget Password</Typography>
                     <div className='hold'>
-                        <div className='input'>
+                        <div className='inputRsP'>
                             <Input name={'email'} type={'text'} placeholder={'enter email'} label={'email'} onChange={this.getInputData} />
                         </div>
-                        <div className='input'>
-                            <Input name={'password'} type={'password'} placeholder={'enter password'} label={'password'} onChange={this.getInputData} />
-                        </div>
+                        
                         <div className='button'>
-                            <Button type='Submit' variant="contained" color='primary' onClick={this.onClickBtn}>login</Button>
+                            <Button type='Submit' variant="contained" color='primary' onClick={this.onClickBtn}>submit</Button>
                         </div>
                         <div className='errMsg' >
                             {this.state.errors["msg"]}
                         </div>
-                        <div id='spanDiv'>
-
-                            <span className="reg">New User? <a href="/register">register</a></span>
-                            <span className="psw">Forgot <a href="#">password?</a></span>
-                        </div>
+                       
                     </div>
                 </Card>
             </div>

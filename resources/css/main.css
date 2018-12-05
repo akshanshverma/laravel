@@ -63,6 +63,17 @@ span.psw {
     color: red;
 }
 
+.userData{
+    margin-top: 25%;  
+    text-align: center;
+}
+#logout{
+    margin-top: 50%;
+    margin-left: 17%;
+}
+.inputRsP{
+    margin-top: 20%;
+}
 @media only screen and (max-width: 600px) {
     .maindiv{
         padding-top: 30%;

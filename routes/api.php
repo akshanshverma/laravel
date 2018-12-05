@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth:api'],function(){
     Route::get('logout', 'UserController@logout');
 
 });
+Route::post('check','ForgotPasseordController@postForgotPassword');
 
 
 

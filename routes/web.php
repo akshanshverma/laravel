@@ -20,3 +20,11 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('welcome');
 });
+Route::get('/profile', function () {
+    return view('welcome');
+});
+Route::get('/forget_password', function () {
+    return view('welcome');
+});
+
+
