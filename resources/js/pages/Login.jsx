@@ -39,10 +39,17 @@ export default class Login extends Component {
                 if (res.status === 200) {
                     this.props.history.push("/profile");
                 }
-                if (res.status === 220) {
+                if(res.status === 220) {
                     this.setState({
                         errors: {
                             msg: 'invalid email or password',
+                        }
+                    });
+                }
+                if(res.status === 221) {
+                    this.setState({
+                        errors: {
+                            msg: 'email is not verified',
                         }
                     });
                 }
@@ -76,7 +83,7 @@ export default class Login extends Component {
                         <div id='spanDiv'>
 
                             <span className="reg">New User? <a href="/register">register</a></span>
-                            <span className="psw">Forgot <a href="#">password?</a></span>
+                            <span className="psw">Forgot <a href="/forget_password">password?</a></span>
                         </div>
                     </div>
                 </Card>

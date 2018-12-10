@@ -47,7 +47,7 @@ export default class UserServices {
     }
 
     logoutUser() {
-    
+
         var auth = "Bearer ".concat(localStorage.getItem('token'))
         return axios.get('/api/logout', { headers: { Authorization: auth } })
             .then((response) => {
@@ -61,4 +61,46 @@ export default class UserServices {
                 return error;
             });
     }
+
+    forgetPassword(resetData) {
+        return axios.post('/api/password/create', resetData )
+            .then((response) => {
+                return response;
+            }
+            )
+            .catch((error) => {
+                return error;
+            });
+    }
+
+    getTokenData(token){
+        return axios.get('/api/password/find/'+token)
+        .then((response)=>{
+            return response;
+        })
+        .catch((error)=>{
+            return error;
+        });
+    }
+
+    changePassword(userData){
+        return axios.post('/api/password/reset', userData)
+            .then((response) => {
+                return response;
+            }
+            )
+            .catch((error) => {
+                return error;
+            });
+    }
+    verifyToken(token){
+        return axios.get('/api/verifymail/'+token)
+        .then((response)=>{
+            return response;
+        })
+        .catch((error)=>{
+            return error;
+        });
+    }
+
 }

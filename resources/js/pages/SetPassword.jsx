@@ -13,49 +13,48 @@ export default class SetPassword extends Component {
 
         super(props);
         this.state = {
-
-            username: '',
             email: '',
             password: '',
             rpassword: '',
+            token: '',
             errors: {}
 
         }
         this.getInputData = this.getInputData.bind(this);
-        this.onClickbtn = this.onClickbtn.bind(this);
         this.dataValidation = this.dataValidation.bind(this);
+        this.onClickbtn = this.onClickbtn.bind(this);
+    }
 
+    componentDidMount() {
+        let token = (window.location.pathname).substring(13);
+        services.getTokenData(token)
+            .then(res => {
+
+                if (res.status === 200) {
+
+                    this.setState({
+                        'email': res.data.email,
+                        'token': res.data.token,
+                    });
+                }
+                if (res.status === 220) {
+                    errors["linkError"] = "Verification link is not valid";
+                }
+
+            }).catch();
     }
 
     getInputData(data) {
-
         this.setState({
             [event.target.name]: data
         });
-
     }
 
-
     dataValidation() {
-
+        debugger;
         let fields = this.state;
         let errors = {};
         let formIsValid = true;
-
-        if (!fields["username"]) {
-            formIsValid = false;
-            errors["username"] = "Cannot be empty";
-        } else {
-            if (fields["username"].length < 5) {
-                formIsValid = false;
-                errors["username"] = "minimum 5 character";
-            }
-        }
-
-        if (!fields["email"]) {
-            formIsValid = false;
-            errors["email"] = "Cannot be empty";
-        }
 
         if (!fields["password"]) {
             formIsValid = false;
@@ -77,29 +76,21 @@ export default class SetPassword extends Component {
 
     }
 
-
     onClickbtn(e) {
         e.preventDefault();
-
         if (this.dataValidation()) {
             const userData = {
-                username: this.state.username,
                 email: this.state.email,
                 password: this.state.password,
-                rpassword: this.state.rpassword,
+                token: this.state.token,
             }
-            services.registerUser(userData)
+            services.changePassword(userData)
                 .then(res => {
-
-                    if (res.status === 210) {
-                        this.setState({
-                            errors: {
-                                email: res.data.error.email[0],
-                            }
-                        });
+                    if (res.status === 200) {
+                        this.props.history.push("/login");
                     }
-                    if (res.status === 200) {       
-                            this.props.history.push("/login");
+                    if (res.status === 205) {
+                        console.log('error');
                     }
 
                 }).catch();
@@ -109,17 +100,13 @@ export default class SetPassword extends Component {
 
     }
 
-
     render() {
-        console.log(this.state);
-
         return (
-
             <div className='maindiv'>
                 <Card id='card'>
                     <Typography id='registerT' color='primary'>Set Password</Typography>
                     <div className='hold'>
-                        
+
                         <div className='input'>
                             <Input name={'password'} type={'password'} placeholder={'enter password'} label={'password'} onChange={this.getInputData} />
                             <div className='msg' >{this.state.errors["password"]}</div>
@@ -130,6 +117,9 @@ export default class SetPassword extends Component {
                         </div>
                         <div className='button'>
                             <Button variant="contained" color='primary' onClick={this.onClickbtn}>save</Button>
+                        </div>
+                        <div className='errMsg' >
+                            {this.state.errors["linkError"]}
                         </div>
                     </div>
                 </Card>

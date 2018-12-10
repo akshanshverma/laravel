@@ -3,7 +3,6 @@ import Input from '../components/Input';
 import { Button, Card, Typography } from '@material-ui/core';
 // import  from '@material-ui/core';
 import "../../css/main.css";
-import axios from 'axios';
 import userService from '../services/UserServices';
 
 var services = new userService();

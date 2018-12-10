@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 
 use Validator;
+use App\Events\UserRegistered;
 
 /**
  * UserController is a controller which have function to login user register get user data etc 
@@ -24,6 +25,10 @@ class UserController extends Controller
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
+            $time = $user->email_verified_at;
+            if (!$time) {
+                return response()->json(['error' => 'user is not verified'], 221);
+            }
             $success['token'] = $user->createToken('fundoonotes')->accessToken;
             $email = Auth::user()->email;
             return response()->json(['success' => $success], 200);
@@ -40,8 +45,8 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
-        
-        $validator = Validator::make($request->all(),[
+
+        $validator = Validator::make($request->all(), [
             'username' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
@@ -49,30 +54,56 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            
-            return response()->json(['error'=>$validator->errors()],210);
+
+            return response()->json(['error' => $validator->errors()], 210);
         }
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+        $input['token'] = str_random(60);
         $user = User::create($input);
-        return response()->json(['successful'],200);
+        event(new UserRegistered($user));
+        return response()->json(['successful'], 200);
+    }
+
+    public function verifyMail()
+    {
+        $inputToken = request('token');
+        $user = User::where('token', $inputToken)->first();
+        $time = $user->email_verified_at;
+        if (!$time) {
+            return response()->json(['error' => 'user is not verified'], 221);
+
+            if (!$user) {
+                return response()->json(['not found'], 220);
+            }
+            $user->email_verified_at = now();
+            $user->save();
+            return response()->json(['verified successfully'], 201);
+        }else {
+            return response()->json(['already verified'], 222);
+        }
     }
 
     /**
      * funtion getData is to take user is to take user data form the database
-     * only if user is authan
+     * only if user is authenticated 
+     * 
+     * @return json respomse
      */
     public function getData()
     {
-        if (Auth::check()) {  
-            return response()->json(['userData'=>Auth::user()],200);
-        }else {
-            return response()->json(['error' => 'unauthorised'],220);
+        if (Auth::check()) {
+            return response()->json(['userData' => Auth::user()], 200);
+        } else {
+            return response()->json(['error' => 'unauthorised'], 220);
         }
-        
+
     }
 
+    /**
+     * 
+     */
     public function Logout()
     {
         Auth::user()->token()->revoke();

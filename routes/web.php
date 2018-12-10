@@ -23,8 +23,15 @@ Route::get('/register', function () {
 Route::get('/profile', function () {
     return view('welcome');
 });
-Route::get('/forget_password', function () {
+Route::get('/forgetpassword', function () {
     return view('welcome');
 });
 
+Route::get('/setpassword/{token}', function () {
+    return view('welcome');
+});
+
+Route::get('/verifyaccount/{token}', function () {
+    return view('welcome');
+});
 

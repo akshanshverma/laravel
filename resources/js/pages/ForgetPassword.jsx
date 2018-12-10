@@ -15,6 +15,7 @@ export default class ForgetPassword extends Component {
         this.state = {
             email: '',
             errors: {},
+            success: '',
         }
         this.getInputData = this.getInputData.bind(this);
         this.onClickBtn = this.onClickBtn.bind(this);
@@ -31,16 +32,17 @@ export default class ForgetPassword extends Component {
             email: this.state.email,
         }
 
-        services.resetPassword(userData)
+        services.forgetPassword(userData)
             .then(res => {
-                console.log(res);
                 if (res.status === 200) {
-                   
+                   this.setState({
+                       success:'reset password link sent to your email'
+                   });
                 }
-                if (res.status === 220) {
+                if (res.status === 205) {
                     this.setState({
                         errors: {
-                            msg: 'invalid email',
+                            email: 'cant find user',
                         }
                     });
                 }
@@ -61,15 +63,18 @@ export default class ForgetPassword extends Component {
                     <div className='hold'>
                         <div className='inputRsP'>
                             <Input name={'email'} type={'text'} placeholder={'enter email'} label={'email'} onChange={this.getInputData} />
+                            <div className='msg' >{this.state.errors["email"]}</div>
                         </div>
                         
                         <div className='button'>
                             <Button type='Submit' variant="contained" color='primary' onClick={this.onClickBtn}>submit</Button>
                         </div>
-                        <div className='errMsg' >
-                            {this.state.errors["msg"]}
+                        <div className='resetLinkMsg' >
+                            {this.state.success}
                         </div>
-                       
+                        <div id='spanDiv'>
+                            <span className="goLogin"><a href="/login">Login?</a></span>
+                        </div>                       
                     </div>
                 </Card>
             </div>

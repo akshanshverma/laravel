@@ -63,6 +63,16 @@ span.psw {
     color: red;
 }
 
+.resetLinkMsg{
+    text-align: center;
+    margin-top: 30px;
+    color: rgb(84, 192, 58);
+    text-shadow: 2px 2px 3px;
+}
+
+.goLogin{
+    margin-left: 43%;
+}
 .userData{
     margin-top: 25%;  
     text-align: center;
