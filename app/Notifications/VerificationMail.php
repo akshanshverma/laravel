@@ -42,7 +42,7 @@ class VerificationMail extends Notification implements ShouldQueue
     {   
         $url = url("/verifyaccount/$this->token");
         return (new MailMessage)
-                    ->line('click here')
+                    ->line('click button to activate account')
                     ->action('click me', url($url))
                     ->line('');
     }
