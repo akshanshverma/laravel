@@ -63,7 +63,7 @@ export default class UserServices {
     }
 
     forgetPassword(resetData) {
-        return axios.post('/api/password/create', resetData )
+        return axios.post('/api/password/create', resetData)
             .then((response) => {
                 return response;
             }
@@ -73,17 +73,17 @@ export default class UserServices {
             });
     }
 
-    getTokenData(token){
-        return axios.get('/api/password/find/'+token)
-        .then((response)=>{
-            return response;
-        })
-        .catch((error)=>{
-            return error;
-        });
+    getTokenData(token) {
+        return axios.get('/api/password/find/' + token)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                return error;
+            });
     }
 
-    changePassword(userData){
+    changePassword(userData) {
         return axios.post('/api/password/reset', userData)
             .then((response) => {
                 return response;
@@ -93,14 +93,24 @@ export default class UserServices {
                 return error;
             });
     }
-    verifyToken(token){
-        return axios.get('/api/verifymail/'+token)
-        .then((response)=>{
-            return response;
-        })
-        .catch((error)=>{
-            return error;
-        });
+    verifyToken(token) {
+        return axios.get('/api/verifymail/' + token)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                return error;
+            });
+    }
+
+    ckeckVerify(token) {
+        return axios.get('/api/checkverification/' + token)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                return error;
+            });
     }
 
 }

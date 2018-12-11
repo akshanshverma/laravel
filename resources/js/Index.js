@@ -7,8 +7,10 @@ import Profile from './pages/Profile';
 import ForgetPassword from './pages/ForgetPassword';
 import SetPassword from './pages/SetPassword';
 import verifyAccount from './pages/EmailVerify';
+import test from './pages/DashBoard';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import mainTheme from './components/Theme';
+import "../css/main.css";
 
 const theme = createMuiTheme(mainTheme);
 
@@ -25,8 +27,7 @@ export default class Index extends Component {
                         <Route path='/forgetpassword' component={ForgetPassword}></Route>
                         <Route path='/setpassword/:token' component={SetPassword}></Route>
                         <Route path='/verifyaccount/:token' component={verifyAccount}></Route>
-
-
+                        <Route path='/test' component={test}></Route>
                     </div>
                 </MuiThemeProvider>
             </Router>

@@ -98,7 +98,8 @@ export default class Register extends Component {
                             }
                         });
                     }
-                    if (res.status === 200) {       
+                    if (res.status === 200) {  
+                            alert('register successfully Check your email');     
                             this.props.history.push("/login");
                     }
 

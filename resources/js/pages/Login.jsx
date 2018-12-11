@@ -83,7 +83,7 @@ export default class Login extends Component {
                         <div id='spanDiv'>
 
                             <span className="reg">New User? <a href="/register">register</a></span>
-                            <span className="psw">Forgot <a href="/forget_password">password?</a></span>
+                            <span className="psw">Forgot <a href="/forgetpassword">password?</a></span>
                         </div>
                     </div>
                 </Card>

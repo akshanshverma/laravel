@@ -84,6 +84,28 @@ span.psw {
 .inputRsP{
     margin-top: 20%;
 }
+.divVarText{
+    margin-top: 25%;
+}
+.spanGoLogin{
+    margin-left: 3%;
+
+}
+
+/* dashboard */
+.iconBtn button {
+    width: 48px;
+    opacity: 0.5;
+}
+.searchBar{
+    background: rgba(0,0,0,0.04);
+    border-radius: 8px;
+    max-width: 720px;
+}
+/* .searchInput{
+    width: 100%;
+} */
+/* ............... */
 @media only screen and (max-width: 600px) {
     .maindiv{
         padding-top: 30%;

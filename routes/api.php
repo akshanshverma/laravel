@@ -22,6 +22,7 @@ Route::any('login', 'UserController@login')->name('login');
 
 Route::post('register', 'UserController@register');
 Route::get('verifymail/{token}', 'UserController@verifyMail');
+Route::get('checkverification/{token}', 'UserController@checkVerification');
 
 
 Route::group(['middleware' => 'auth:api'], function () {

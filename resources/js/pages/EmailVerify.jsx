@@ -12,6 +12,7 @@ export default class EmailVerify extends Component {
         super(props);
         this.state = {
             token: '',
+            status: true,
             error: '',
         }
 
@@ -20,6 +21,17 @@ export default class EmailVerify extends Component {
 
     componentDidMount() {
         let token = (window.location.pathname).substring(15);
+        services.ckeckVerify(token)
+            .then(res => {
+                console.log(res);
+                if (res.status === 201) {
+                    this.setState({
+                        status:false
+                    })
+                }
+            }).catch();
+
+
         this.setState({
             'token': token,
         });
@@ -52,20 +64,29 @@ export default class EmailVerify extends Component {
 
     render() {
 
-       
+
         return (
             <div className='maindiv'>
                 <Card id='card'>
-                    <Typography id='loginT' color='primary'>Account Verification</Typography>
-                    <div className='hold'>
+                    {this.state.status ? (
+                    <div>
+                        <Typography id='loginT' color='primary'>Account Verification</Typography>
+                        <div className='hold'>
 
-                        <div className='button'>
-                            <Button type='Submit' variant="contained" color='primary' onClick={this.onClickBtn}>Activate Account</Button>
+                            <div className='button'>
+                                <Button type='Submit' variant="contained" color='primary' onClick={this.onClickBtn}>Activate Account</Button>
+                            </div>
+                            <div className='errMsg' >
+                                {this.state.error.msg}
+                            </div>
                         </div>
-                        <div className='errMsg' >
-                            {this.state.error.msg}
-                        </div>
-                    </div>
+                    </div>) 
+                    : 
+                    (<div className = 'divVarText'>
+                        <Typography id='loginT' className='loginT' color='primary'>Verification Is done</Typography>
+                        <span className="spanGoLogin">please go to <a href="/login">login</a> page</span>
+                    </div>)}
+
                 </Card>
             </div>
         );

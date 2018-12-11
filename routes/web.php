@@ -35,3 +35,10 @@ Route::get('/verifyaccount/{token}', function () {
     return view('welcome');
 });
 
+
+
+
+Route::get('/test', function () {
+    return view('welcome');
+});
+

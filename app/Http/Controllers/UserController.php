@@ -72,8 +72,6 @@ class UserController extends Controller
         $user = User::where('token', $inputToken)->first();
         $time = $user->email_verified_at;
         if (!$time) {
-            return response()->json(['error' => 'user is not verified'], 221);
-
             if (!$user) {
                 return response()->json(['not found'], 220);
             }
@@ -83,6 +81,19 @@ class UserController extends Controller
         }else {
             return response()->json(['already verified'], 222);
         }
+    }
+
+    public function checkVerification()
+    {
+        $token = request('token');
+        $user = User::where('token', $token)->first();
+        $time = $user->email_verified_at;
+        
+        if (!$time) {
+            return response()->json(['not verified'], 200);
+        } else {
+            return response()->json(['already verified'], 201);
+        }      
     }
 
     /**
