@@ -68,21 +68,24 @@ class PasswordResetController extends Controller
             'password' => 'required',
             'token' => 'required'
         ]);
+
         $passwordReset = PasswordReset::where([
             ['token', $request->token],
             ['email', $request->email]
         ])->first();
+
         if (!$passwordReset)
             return response()->json([
             'message' => 'This password reset token is invalid.'
         ], 205);
+        
         $user = User::where('email', $passwordReset->email)->first();
         if (!$user)
             return response()->json([
             'message' => 'We cant find a user with that e-mail address.'
         ], 205);
         $user->password = bcrypt($request->password);
-        $pascheck = $user->password;
+        // $pascheck = $user->password;
         $user->save();
         $passwordReset->delete();
         $user->notify(new PasswordResetSuccess($passwordReset));

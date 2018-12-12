@@ -17,6 +17,7 @@ export default class SetPassword extends Component {
             password: '',
             rpassword: '',
             token: '',
+            status:true,
             errors: {}
 
         }
@@ -38,7 +39,9 @@ export default class SetPassword extends Component {
                     });
                 }
                 if (res.status === 220) {
-                    errors["linkError"] = "Verification link is not valid";
+                   this.setState({
+                       status:false
+                   })
                 }
 
             }).catch();
@@ -104,6 +107,8 @@ export default class SetPassword extends Component {
         return (
             <div className='maindiv'>
                 <Card id='card'>
+                {this.state.status ? (
+                <div>
                     <Typography id='registerT' color='primary'>Set Password</Typography>
                     <div className='hold'>
 
@@ -122,6 +127,15 @@ export default class SetPassword extends Component {
                             {this.state.errors["linkError"]}
                         </div>
                     </div>
+                </div>)
+                :
+                (
+                <div className = 'divVarText'>
+                    <Typography id='loginT' className='loginT' color='primary'>Password link Expire</Typography>
+                    <Typography align='center'><span className="spanGoLogin">please go to <a href="/login">login</a> page</span></Typography> 
+                </div>
+                )}
+                    
                 </Card>
             </div>
 

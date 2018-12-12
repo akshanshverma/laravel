@@ -92,19 +92,59 @@ span.psw {
 
 }
 
-/* dashboard */
+/********** dashboard **************/
+.menuDrawer{
+
+}
+/**navbar***/
 .iconBtn button {
     width: 48px;
     opacity: 0.5;
 }
+.iconBtnEnd button {
+    width: 48px;
+    opacity: 0.5;
+    
+}
+
+.iconBtnEnd{
+    margin: auto;
+}
 .searchBar{
     background: rgba(0,0,0,0.04);
     border-radius: 8px;
-    max-width: 720px;
+    margin-left:7%;
+    display: flex;
+    width: 47%;
 }
-/* .searchInput{
-    width: 100%;
-} */
+.menulogo{
+    display: flex;
+}
+.appName{
+    margin: auto;
+    padding-left: 8px;
+    opacity: 0.5;
+}
+.avatarIcon button{
+    width: 64px;
+}
+.avatarIcon {
+    margin: auto;
+    
+}
+.endBar{
+    display: flex;
+    margin-left: auto;
+}
+.searchInput{
+    margin: auto;
+}
+.endIcon{
+    display: inline-flex;
+}
+
+/*****menudrawer******/
+
 /* ............... */
 @media only screen and (max-width: 600px) {
     .maindiv{
