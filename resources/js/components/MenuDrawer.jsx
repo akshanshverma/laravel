@@ -17,6 +17,8 @@ const theme = createMuiTheme({
                 width: 270,
             }
         }
+    }, typography: {
+        useNextVariants: true,
     },
 })
 
@@ -24,10 +26,8 @@ export default class MenuDrawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: this.menuAction
         }
     }
-
     render() {
 
         return (
@@ -36,7 +36,8 @@ export default class MenuDrawer extends Component {
                     <Drawer
                         variant="persistent"
                         anchor="left"
-                        open={this.state.open}>
+                        open={this.props.menuAction}>
+
                         <List>
                             <ListItem >
                                 <ListItemIcon>

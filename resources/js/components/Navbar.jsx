@@ -13,28 +13,23 @@ export default class Navbar extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            menuBar: true
-        }
     }
 
-
-
     render() {
-        const { open } = this.state;
+       
         return (
             <div >
                 <AppBar position="fixed" style={{ backgroundColor: 'white' }}>
                     <Toolbar>
                         <div className='menulogo'>
                             <div className="iconBtn">
-                                <IconButton onClick={this.handleDrawerOpen}>
+                                <IconButton onClick={this.props.menuClick}>
                                     <img src={menu} className="menu" alt="menu" />
                                 </IconButton>
                             </div>
                             <img src={appIcon} className="appIcon" alt="appIcon" />
                             <div className='appName'>
-                                <Typography variant='title'>
+                                <Typography variant='h5'>
                                     FundooNotes
                                 </Typography>
                             </div>
@@ -45,7 +40,7 @@ export default class Navbar extends Component {
                                     <img src={search} className="search" alt="search" />
                                 </IconButton>
                             </div>
-                            <InputBase id='inputSearch' fullWidth/>
+                            <InputBase placeholder='Search' id='inputSearch' fullWidth/>
                             <div className="iconBtn">
                                 <IconButton>
                                     <img src={close} className="close" alt="close" />
@@ -58,16 +53,19 @@ export default class Navbar extends Component {
                                     <IconButton>
                                         <img src={refresh} className="refresh" alt="refresh" />
                                     </IconButton>
+                                    <span className="sHint">Refresh</span>
                                 </div>
                                 <div className="iconBtnEnd">
                                     <IconButton>
                                         <img src={agenda} className="agenda" alt="agenda" />
                                     </IconButton>
+                                    <span className="sHint">Refresh</span>
                                 </div>
                                 <div className="iconBtnEnd">
                                     <IconButton>
                                         <img src={setting} className="setting" alt="setting" />
                                     </IconButton>
+                                    <span className="sHint">Refresh</span>
                                 </div>
                             </div>
                             <div className='avatarIcon'>

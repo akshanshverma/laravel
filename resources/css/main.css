@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(253, 255, 231);
+    /* background-color: rgb(253, 255, 231); */
 }
 #registerT{
     font-size: 40px;
@@ -97,6 +97,25 @@ span.psw {
 
 }
 /**navbar***/
+.iconBtnEnd .sHint {
+    visibility: hidden;
+    width: 40px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 5px;
+    font-size: smaller;
+
+
+    position: absolute;
+    left: 82%;
+    top: 91%;
+    z-index: 1;
+  }
+
+  
+
 .iconBtn button {
     width: 48px;
     opacity: 0.5;
@@ -106,6 +125,11 @@ span.psw {
     opacity: 0.5;
     
 }
+
+.iconBtnEnd:hover .sHint {
+    visibility: visible;
+    opacity: 0.8;
+  }
 
 .iconBtnEnd{
     margin: auto;
@@ -145,6 +169,76 @@ span.psw {
 
 /*****menudrawer******/
 
+/*****addnote******/
+.NotesBox{
+    display: flex;
+    opacity: 0.5;
+    height: 46px;
+    width: 598px;
+    margin:108px auto 0 auto;
+    box-shadow: 0 0 9px #444343b5;
+    border-radius: 8px;
+    /* position: absolute;
+    top: 108px;
+    left: 28%; */  
+}
+
+.addNoteEndIcons{
+    margin: auto;
+    padding: 0 12px 0 12px;
+}
+.titleIcon{
+    margin-top: 10px;
+    margin-left: auto;
+    padding-right: 17px;
+}
+
+.addNoteBox{
+    width: 598px;
+    margin:108px auto 0 auto;
+    box-shadow: 0 0 9px #444343b5;
+    border-radius: 8px;
+    /* position: absolute;
+    top: 108px;
+    left: 28%; */  
+}
+.takeNote{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 17px;
+}
+.iconClose{
+    display: flex;
+}
+.addTitle{
+    display: flex;
+    padding: 10px 20px 0 17px;
+}
+#noteInput{
+    font-size: 15px;
+}
+
+.addNotesInput{
+    margin-left: 17px;
+    padding-top: 3px;
+    padding-bottom: 14px;
+}
+.takeNoteIcons{
+    opacity: .5;
+    display: flex;
+}
+.noteCloseButton{
+   float: right;
+}
+.iconsclass{
+    padding: 0 8px 0 15px;
+}
+
+.divCloseButton{
+    margin-left: auto;
+    padding-right: 22px;
+    padding-bottom: 4px;
+}
 /* ............... */
 @media only screen and (max-width: 600px) {
     .maindiv{
