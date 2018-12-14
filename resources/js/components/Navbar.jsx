@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Typography, InputBase, Avatar, Divider} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, InputBase, Avatar, ClickAwayListener, MenuList, MenuItem, Paper, Grow, Popper,Divider } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
-import menu from "../assets/icons/menu-24px.svg"
+import menuicon from "../assets/icons/menu-24px.svg"
 import search from "../assets/icons/search-24px.svg"
 import close from "../assets/icons/close-24px.svg"
 import appIcon from "../assets/icons/AppIcon.svg"
@@ -13,18 +13,34 @@ export default class Navbar extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            logoutmenu: false
+        }
+        this.logoutMenuOpen = this.logoutMenuOpen.bind(this);
+        this.logoutMenuClose = this.logoutMenuClose.bind(this);
+    }
+
+    logoutMenuOpen() {
+        this.setState({
+            logoutmenu: true
+        })
+    }
+    logoutMenuClose() {
+        this.setState({
+            logoutmenu: false
+        })
     }
 
     render() {
-       
+
         return (
             <div >
-                <AppBar position="fixed" style={{ backgroundColor: 'white' }}>
-                    <Toolbar>
+                <AppBar id='tb' position="fixed" style={{ backgroundColor: 'white' }}>
+                    <Toolbar >
                         <div className='menulogo'>
                             <div className="iconBtn">
                                 <IconButton onClick={this.props.menuClick}>
-                                    <img src={menu} className="menu" alt="menu" />
+                                    <img src={menuicon} className="menuicon" alt="menuicon" />
                                 </IconButton>
                             </div>
                             <img src={appIcon} className="appIcon" alt="appIcon" />
@@ -40,7 +56,7 @@ export default class Navbar extends Component {
                                     <img src={search} className="search" alt="search" />
                                 </IconButton>
                             </div>
-                            <InputBase placeholder='Search' id='inputSearch' fullWidth/>
+                            <InputBase placeholder='Search' id='inputSearch' fullWidth />
                             <div className="iconBtn">
                                 <IconButton>
                                     <img src={close} className="close" alt="close" />
@@ -69,15 +85,37 @@ export default class Navbar extends Component {
                                 </div>
                             </div>
                             <div className='avatarIcon'>
-                                <IconButton>
+                                <IconButton onClick={this.logoutMenuOpen}>
                                     <Avatar />
                                 </IconButton>
                             </div>
                         </div>
                     </Toolbar>
+                    <Divider/>
                 </AppBar>
+                
+                <div className='logoutMenu'>
+                    <Popper open={this.state.logoutmenu} transition disablePortal>
+                        {({ TransitionProps, placement }) => (
+                            <Grow
+                                {...TransitionProps}
+                                id="menu-list-grow"
+                                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                            >
+                                <Paper>
+                                    <ClickAwayListener onClickAway={this.logoutMenuClose}>
+                                        <MenuList>
+                                            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                            <MenuItem onClick={this.props.logoutClick}>Logout</MenuItem>
+                                        </MenuList>
+                                    </ClickAwayListener>
+                                </Paper>
+                            </Grow>
+                        )}
+                    </Popper>
+                </div>
             </div>
         )
     }
 }
-

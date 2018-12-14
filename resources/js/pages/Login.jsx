@@ -37,7 +37,7 @@ export default class Login extends Component {
             .then(res => {
                 console.log(res);
                 if (res.status === 200) {
-                    this.props.history.push("/profile");
+                    this.props.history.push("/home");
                 }
                 if(res.status === 220) {
                     this.setState({

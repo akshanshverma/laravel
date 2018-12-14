@@ -13,10 +13,13 @@ export default class AddNotes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            noteEdit: false
+            noteEdit: false,
+            title: '',
+            note: '',
         }
         this.openAddnote = this.openAddnote.bind(this);
         this.closeAddnote = this.closeAddnote.bind(this);
+        this.getInput = this.getInput.bind(this);
     }
 
     openAddnote() {
@@ -24,10 +27,33 @@ export default class AddNotes extends Component {
             noteEdit: true
         })
     }
+
     closeAddnote() {
         this.setState({
             noteEdit: false
         })
+
+        var data = {
+            title: this.state.title,
+            note: this.state.note,
+        }
+
+
+        if (this.state.title != '' && this.state.note != '') {
+            this.props.noteData(data);
+            this.setState({
+                title: '',
+                note: '',
+            })
+           
+        }
+    }
+
+    getInput() {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+
     }
 
     render() {
@@ -46,11 +72,11 @@ export default class AddNotes extends Component {
         var edit = (
             <div className='addNoteBox'>
                 <div className='addTitle'>
-                    <InputBase placeholder='Title' fullWidth />
+                    <InputBase multiline name='title' placeholder='Title' fullWidth onChange={this.getInput} />
                     <img src={pin} className="pin" alt="pin   " />
                 </div>
                 <div className='addNotesInput'>
-                    <InputBase id='noteInput' placeholder='Take a note...' fullWidth />
+                    <InputBase multiline name='note' id='noteInput' placeholder='Take a note...' fullWidth onChange={this.getInput} />
                 </div>
                 <div className='iconClose'>
                     <div className='takeNoteIcons'>

@@ -27,7 +27,7 @@ export default class Index extends Component {
                         <Route path='/forgetpassword' component={ForgetPassword}></Route>
                         <Route path='/setpassword/:token' component={SetPassword}></Route>
                         <Route path='/verifyaccount/:token' component={verifyAccount}></Route>
-                        <Route path='/test' component={test}></Route>
+                        <Route path='/home' component={test}></Route>
                     </div>
                 </MuiThemeProvider>
             </Router>

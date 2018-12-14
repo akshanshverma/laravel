@@ -38,7 +38,7 @@ Route::get('/verifyaccount/{token}', function () {
 
 
 
-Route::get('/test', function () {
+Route::get('/home', function () {
     return view('welcome');
 });
 
