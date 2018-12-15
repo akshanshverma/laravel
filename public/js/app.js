@@ -71892,7 +71892,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       if (localStorage.getItem('token') !== null) {
-        this.props.history.push("/profile");
+        this.props.history.push("/home");
       }
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
@@ -106056,6 +106056,10 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      if (localStorage.getItem('token') === null) {
+        this.props.history.push("/login");
+      }
+
       var notes = this.state.noteData.map(function (note, index) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Note__["a" /* default */], {
           key: index,

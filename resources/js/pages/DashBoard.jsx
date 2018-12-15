@@ -52,6 +52,9 @@ export default class DashBoard extends Component {
     }
 
     render() {
+        if (localStorage.getItem('token') === null) {
+            this.props.history.push("/login");
+        }
         
         var notes=(this.state.noteData.map((note,index)=>{
             return <Note key={index} setTitle={note.title} setNote={note.note}></Note>

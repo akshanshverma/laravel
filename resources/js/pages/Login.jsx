@@ -61,7 +61,7 @@ export default class Login extends Component {
     render() {
        
         if (localStorage.getItem('token') !==null) {
-            this.props.history.push("/profile");
+            this.props.history.push("/home");
         }
         return (
             <div className='maindiv'>
