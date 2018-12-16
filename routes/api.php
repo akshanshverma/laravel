@@ -17,11 +17,11 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('/', function () {
-    $r = app()->make('redis');
-    $r->set("key1", "test");
-    return $r->get("key1");
-});
+// Route::get('/', function () {
+//     $r = app()->make('redis');
+//     $r->set("key1", "test");
+//     return $r->get("key1");
+// });
 
 Route::any('login', 'UserController@login')->name('login');
 
@@ -57,4 +57,4 @@ Route::group([
 
 
 
-
+Route::get('cacheKey', 'NotesController@cacheKey');

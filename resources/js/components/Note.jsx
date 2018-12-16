@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Card, CardContent, Typography, CardActions } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActions, Popper, Paper } from '@material-ui/core';
 import image from "../assets/icons/image-24px.svg"
-import alert from "../assets/icons/alert-24px.svg"
+
 import collab from "../assets/icons/collab.svg"
 import colorLens from "../assets/icons/color_lens-24px.svg"
 import archive from "../assets/icons/archive-24px.svg"
 import more from "../assets/icons/more_vert-24px.svg"
 import pin from "../assets/icons/pin.svg"
+import ReminderTab from "./ReminderTab";
 
 
 export default class DashBoard extends Component {
@@ -15,8 +16,9 @@ export default class DashBoard extends Component {
         this.state = {
             title: '',
             note: '',
-            reminder:'',
+            reminder: '',
         }
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -25,6 +27,14 @@ export default class DashBoard extends Component {
             note: this.props.setNote
         })
     }
+
+    handleClick(event) {
+        const { currentTarget } = event;
+        this.setState(state => ({
+            anchorEl: currentTarget,
+            open: !state.open,
+        }));
+    };
 
 
     render() {
@@ -41,9 +51,7 @@ export default class DashBoard extends Component {
                         </div>
                     </CardContent>
                     <div className='inNotetakeNoteIcons'>
-                        <div bu className='inNoteiconsclass'>
-                            <img src={alert} className="alert" alt="alert   " />
-                        </div>
+                        <ReminderTab/>
                         <div className='inNoteiconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>
@@ -61,6 +69,15 @@ export default class DashBoard extends Component {
                         </div>
                     </div>
                 </Card>
+
+                {/* <Popper open={this.state.open} anchorEl={this.state.anchorEl} transition>
+                    {({ TransitionProps }) => (
+                            <Paper>
+                                <Typography>The content of the Popper.</Typography>
+                            </Paper>
+                       
+                    )}
+                </Popper> */}
             </div>
         )
     }

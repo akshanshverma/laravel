@@ -3,10 +3,13 @@ import NavBar from "../components/Navbar";
 import ManuDrawer from "../components/MenuDrawer";
 import AddNotes from "../components/AddNotes";
 import Note from "../components/Note";
-import userService from '../services/UserServices';
+import ReminderTab from "../components/ReminderTab";
+import NoteService from '../services/NoteServices';
+import UserServices from '../services/UserServices';
 
 
-var services = new userService();
+var noteservices = new NoteService();
+var userServices = new UserServices();
 
 
 export default class DashBoard extends Component {
@@ -18,7 +21,20 @@ export default class DashBoard extends Component {
         }
         this.menuClickHandle = this.menuClickHandle.bind(this);
         this.onClickLogout = this.onClickLogout.bind(this);
+        this.createNewNote = this.createNewNote.bind(this);
         this.getNoteData = this.getNoteData.bind(this);
+    }
+    componentDidMount() {
+        this.getNoteData();
+    }
+
+    getNoteData() {
+        noteservices.getNote()
+            .then(res => {
+                this.setState({
+                    noteData: res.data
+                })
+            })
     }
 
     menuClickHandle() {
@@ -34,7 +50,7 @@ export default class DashBoard extends Component {
     }
 
     onClickLogout() {
-        services.logoutUser()
+        userServices.logoutUser()
             .then(res => {
                 if (res.status === 200) {
                     this.props.history.push("/login");
@@ -45,29 +61,39 @@ export default class DashBoard extends Component {
             }).catch();
     }
 
-    getNoteData(data) {
-        this.setState({
-            noteData: [...this.state.noteData, data]
-        })
+    createNewNote(data) {
+        // this.setState({
+        //     noteData: [...this.state.noteData, data]
+        // })
+        noteservices.createNote(data)
+            .then(res => {
+                if (res.status == 200) {
+                    console.log('data save');
+                } else if (res.status == 220) {
+                    console.log('unauthorised');
+                }
+            });
+
+            this.getNoteData();
     }
 
     render() {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-        
-        var notes=(this.state.noteData.map((note,index)=>{
-            return <Note key={index} setTitle={note.title} setNote={note.note}></Note>
+        console.log(this.state);
+
+        var notes = (this.state.noteData.map((note) => {
+            return <Note key={note.id} setTitle={note.title} setNote={note.note}></Note>
         }));
 
         return (
             <div>
                 <div className='navBAr'><NavBar menuClick={this.menuClickHandle} logoutClick={this.onClickLogout} /></div>
                 <div className='menuDrawer'><ManuDrawer menuAction={this.state.menuBar} /></div>
-                <div><AddNotes noteData={this.getNoteData} /></div>
+                <div><AddNotes noteData={this.createNewNote} /></div>
                 <div className='cradHolder'>
                     {notes}
-                    {/* <Note setTitle={this.state.noteData.title} setNote={this.state.noteData.note}/>  */}
                 </div>
             </div>
         );

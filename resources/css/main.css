@@ -249,12 +249,13 @@ span.psw {
 }
 /********Notes**********/
 .divCard{
+    margin-top: 25px;
     width: 240px;
     max-height: 304px;
 }
 
 .cradHolder{
-    margin: 3% 15%;
+    margin: 2% 15%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -264,11 +265,18 @@ span.psw {
     height: 20px;
 }
 .inNotetakeNoteIcons{
-    opacity: 0.5;
     display: flex;
     justify-content: space-evenly;
     padding-bottom: 6px;
 }
+
+.inNoteiconsclass{
+    opacity: .5;
+}
+.inNoteiconsclass:hover{
+    opacity: 1;
+}
+
 #CardContent{
     padding: 12 17px;
 }
@@ -281,6 +289,26 @@ span.psw {
     word-wrap: break-word;
 }
 
+/* .inNoteiconsclass .alertHint {
+    visibility: visible;
+    width: 80px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 1px;
+    font-size: smaller;
+
+
+    position: absolute;
+    left: 20%;
+    top: 15%;
+    z-index: 1;
+}
+.inNoteiconsclass:hover .alertHint {
+    visibility: visible;
+    opacity: 0.8;
+  } */
 /* ............... */
 @media only screen and (max-width: 600px) {
     .maindiv{
