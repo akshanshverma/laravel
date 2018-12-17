@@ -23,7 +23,8 @@ class NotesController extends Controller
             $input = [
                 'user_id' => $id,
                 'title' => $noteData['title'],
-                'note' => $noteData['note']
+                'note' => $noteData['note'],
+                'reminder' => $noteData['reminder'],
             ];
             $data = NotesData::createNewNote($input);
             return response()->json(['userData' => $data], 200);
@@ -35,9 +36,11 @@ class NotesController extends Controller
 
     public function getAllNotes()
     {   
+        // Cache::flush();
         $user = Auth::user();
         $id = $user->id;
-        $notes = Cache::remember($id, 1, function () {
+        $notes = Cache::remember($id, 5, function ()
+        {
             return NotesData::where('user_id', Auth::user()->id)->get();
         });
         return response()->json($notes);

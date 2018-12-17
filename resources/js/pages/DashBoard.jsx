@@ -84,7 +84,7 @@ export default class DashBoard extends Component {
         console.log(this.state);
 
         var notes = (this.state.noteData.map((note) => {
-            return <Note key={note.id} setTitle={note.title} setNote={note.note}></Note>
+            return <Note key={note.id} setTitle={note.title} setNote={note.note} setReminder={note.reminder}></Note>
         }));
 
         return (

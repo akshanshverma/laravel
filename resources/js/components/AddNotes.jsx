@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { InputBase, Button } from "@material-ui/core";
+import { InputBase, Button, Chip } from "@material-ui/core";
 import checkBox from "../assets/icons/check_box-24px.svg"
 import brush from "../assets/icons/brush-24px.svg"
 import image from "../assets/icons/image-24px.svg"
-import alert from "../assets/icons/alert-24px.svg"
 import collab from "../assets/icons/collab.svg"
 import colorLens from "../assets/icons/color_lens-24px.svg"
 import archive from "../assets/icons/archive-24px.svg"
 import pin from "../assets/icons/pin.svg"
+import ReminderTab from "./ReminderTab";
+
 
 export default class AddNotes extends Component {
     constructor(props) {
@@ -16,10 +17,12 @@ export default class AddNotes extends Component {
             noteEdit: false,
             title: '',
             note: '',
+            reminder: '',
         }
         this.openAddnote = this.openAddnote.bind(this);
         this.closeAddnote = this.closeAddnote.bind(this);
         this.getInput = this.getInput.bind(this);
+        this.removeReminder = this.removeReminder.bind(this);
     }
 
     openAddnote() {
@@ -36,6 +39,7 @@ export default class AddNotes extends Component {
         var data = {
             title: this.state.title,
             note: this.state.note,
+            reminder:this.state.reminder,
         }
 
 
@@ -44,8 +48,9 @@ export default class AddNotes extends Component {
             this.setState({
                 title: '',
                 note: '',
+                reminder:'',
             })
-           
+
         }
     }
 
@@ -54,6 +59,17 @@ export default class AddNotes extends Component {
             [event.target.name]: event.target.value
         });
 
+    }
+
+    setReminderDate = (date) => {
+        this.setState({
+            reminder: date
+        })
+    }
+    removeReminder(){
+        this.setState({
+            reminder: ''
+        })
     }
 
     render() {
@@ -78,11 +94,20 @@ export default class AddNotes extends Component {
                 <div className='addNotesInput'>
                     <InputBase multiline name='note' id='noteInput' placeholder='Take a note...' fullWidth onChange={this.getInput} />
                 </div>
+
+                {this.state.reminder==='' ? (<div/>) : (
+                   <div> <Chip
+                   className='reminderDateTime'
+                   label={this.state.reminder}
+                   onDelete={this.removeReminder}
+                   /></div>
+                )}
+               
+
+
                 <div className='iconClose'>
                     <div className='takeNoteIcons'>
-                        <div className='iconsclass'>
-                            <img src={alert} className="alert" alt="alert   " />
-                        </div>
+                        <ReminderTab setDate={this.setReminderDate} />
                         <div className='iconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>

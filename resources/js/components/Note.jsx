@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardContent, Typography, CardActions, Popper, Paper } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActions, Popper, Paper ,Chip} from '@material-ui/core';
 import image from "../assets/icons/image-24px.svg"
 
 import collab from "../assets/icons/collab.svg"
@@ -14,9 +14,10 @@ export default class DashBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             title: '',
             note: '',
-            reminder: '',
+            reminder: null,
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -24,7 +25,8 @@ export default class DashBoard extends Component {
     componentDidMount() {
         this.setState({
             title: this.props.setTitle,
-            note: this.props.setNote
+            note: this.props.setNote,
+            reminder: this.props.setReminder,
         })
     }
 
@@ -49,9 +51,18 @@ export default class DashBoard extends Component {
                         <div className='inputnote'>
                             {this.props.setNote}
                         </div>
+
+                        {this.state.reminder === null ? (<div />) : (
+                            <Chip
+                                className='reminderDateTimeOnNote'
+                                label={this.state.reminder}
+                                onDelete={this.removeReminder}
+                            />
+                        )}
+
                     </CardContent>
                     <div className='inNotetakeNoteIcons'>
-                        <ReminderTab/>
+                        <ReminderTab />
                         <div className='inNoteiconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>

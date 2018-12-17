@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
-import { MenuList, MenuItem, Paper, Grow, Popper, ClickAwayListener, Divider } from "@material-ui/core";
+import { MenuList, MenuItem, Paper, Grow, Popper, ClickAwayListener, Divider, TextField } from "@material-ui/core";
 import alert from "../assets/icons/alert-24px.svg"
+
 
 export default class ReminderTab extends Component {
     constructor(props) {
@@ -9,9 +10,12 @@ export default class ReminderTab extends Component {
         this.state = {
             open: false,
             anchorEl: null,
+            pickDate: false,
+            reminderDate:'',
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
+
     }
 
 
@@ -20,6 +24,9 @@ export default class ReminderTab extends Component {
             open: !state.open,
             anchorEl: null,
         }));
+        console.log(this.state);
+        
+       this.props.setDate(this.state.reminderDate);
     };
 
     handleClick(event) {
@@ -30,11 +37,20 @@ export default class ReminderTab extends Component {
         }));
     };
 
+    datePicket = () => {
+        var date = event.target.value
+        this.setState({
+            reminderDate:date
+        }) 
+    }
+
+    nextWeek = () => {
+    
+    }
+
 
 
     render() {
-        console.log(this.state);
-
         return (
             <div>
                 <div className='inNoteiconsclass'>
@@ -50,17 +66,35 @@ export default class ReminderTab extends Component {
                                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                             >
                                 <Paper>
-                                    <ClickAwayListener onClickAway={this.handleClose}>
+                                    <ClickAwayListener onClickAway={this.handleClose} >
                                         <MenuList>
-                                            <MenuItem >Reminder:</MenuItem>
-                                            <MenuItem >My account</MenuItem>
-                                            <MenuItem >Logout</MenuItem>
+                                            <div className='remindeMenuHead'>Reminder:</div>
+                                            <MenuItem onClick={this.props.today}>Later today</MenuItem>
+                                            <MenuItem >Tomorrow</MenuItem>
+                                            <MenuItem >Next week</MenuItem>
+                                            <MenuItem >
+                                                <form noValidate>
+                                                    <TextField
+                                                        onChange={this.datePicket}
+                                                        id="datetime-local"
+                                                        label="Select date"
+                                                        type="datetime-local"
+                                                        defaultValue="yyyy-mm-ddT00:00"
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                    />
+                                                </form>
+                                            </MenuItem>
                                         </MenuList>
                                     </ClickAwayListener>
                                 </Paper>
                             </Grow>
                         )}
+
                     </Popper>
+
+
                 </div>
             </div>
         )
