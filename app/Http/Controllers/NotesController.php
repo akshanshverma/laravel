@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Facades\App\NotesData;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
 
 class NotesController extends Controller
@@ -45,12 +46,4 @@ class NotesController extends Controller
         });
         return response()->json($notes);
     }
-
-    public function cacheKey()
-    {
-
-        $key = Cache::get('2');
-        return response()->json($key);
-    }
-
 }

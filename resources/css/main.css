@@ -109,6 +109,9 @@ span.psw {
     top: 91%;
     z-index: 1;
 }
+.searchEnd{
+    visibility: hidden;
+}
 
 #tb{
     box-shadow: 0 0 0;
@@ -249,19 +252,32 @@ span.psw {
     padding-bottom: 4px;
 }
 /********Notes**********/
-.divCard{
+.divCardGrid{
     margin-top: 25px;
     width: 240px;
     max-height: 304px;
 }
+.divCardList{
+    /* margin-top: 25px; */
+    width: 594px;
+    /* max-height: 304px; */
+    margin: 25px auto 0 auto;
+}
 
-.cradHolder{
+.cardGridView{
     margin: 2% 15%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: flex-start;
+    
 }
+.cardListView{
+    /* margin: 2% 27%; */
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
 .inNotetakeNoteIcons img{
     height: 20px;
 }
@@ -323,7 +339,45 @@ span.psw {
 .remindeMenuHead{
     margin: 7px;
 }
+.reminderPopper{
+    z-index: 1;
+}
 /* ............... */
+@media only screen and (max-width: 800px) {
+    .searchEnd{
+        visibility: visible;
+    }
+    .searchBar{
+        display: none;
+    }
+}
+@media only screen and (max-width: 705px) {
+    .divCardGrid{
+        margin-top: 25px;
+        width: auto;
+        max-height: 304px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cardGridView{
+        margin: 2% 0%;
+        display: block;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        
+    } 
+    .appIcon{
+        display: none;
+    }
+    button.MuiButtonBase-root-47.MuiIconButton-root-41.noteView{
+        display: none;        
+    }
+    .NotesBox{
+        width: auto;
+        
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .maindiv{
         padding-top: 30%;

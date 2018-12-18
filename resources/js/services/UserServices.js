@@ -33,7 +33,6 @@ export default class UserServices {
     }
 
     getUsrData() {
-
         var auth = "Bearer ".concat(localStorage.getItem('token'))
         return axios.get('/api/getDetails', { headers: { Authorization: auth } })
             .then((response) => {

@@ -40,9 +40,10 @@ export default class DashBoard extends Component {
 
 
     render() {
+        //
         return (
 
-            <div className='divCard'>
+            <div className={this.props.view?('divCardList'):('divCardGrid')}>
                 <Card>
                     <CardContent id='CardContent'>
                         <div className='inputTitle'>

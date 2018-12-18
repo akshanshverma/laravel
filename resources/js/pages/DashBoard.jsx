@@ -6,6 +6,7 @@ import Note from "../components/Note";
 import ReminderTab from "../components/ReminderTab";
 import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
+import SnackBar from "../components/SnackBar";
 
 
 var noteservices = new NoteService();
@@ -18,6 +19,7 @@ export default class DashBoard extends Component {
         this.state = {
             menuBar: false,
             noteData: [],
+            listView: false,
         }
         this.menuClickHandle = this.menuClickHandle.bind(this);
         this.onClickLogout = this.onClickLogout.bind(this);
@@ -74,7 +76,13 @@ export default class DashBoard extends Component {
                 }
             });
 
-            this.getNoteData();
+        this.getNoteData();
+    }
+
+    listGridView = () => {
+        this.setState({
+            listView: !this.state.listView
+        })
     }
 
     render() {
@@ -84,17 +92,25 @@ export default class DashBoard extends Component {
         console.log(this.state);
 
         var notes = (this.state.noteData.map((note) => {
-            return <Note key={note.id} setTitle={note.title} setNote={note.note} setReminder={note.reminder}></Note>
+            return <Note key={note.id} setTitle={note.title} setNote={note.note} setReminder={note.reminder} view={this.state.listView}></Note>
         }));
 
         return (
             <div>
-                <div className='navBAr'><NavBar menuClick={this.menuClickHandle} logoutClick={this.onClickLogout} /></div>
-                <div className='menuDrawer'><ManuDrawer menuAction={this.state.menuBar} /></div>
-                <div><AddNotes noteData={this.createNewNote} /></div>
-                <div className='cradHolder'>
+                <NavBar
+                    menuClick={this.menuClickHandle}
+                    logoutClick={this.onClickLogout}
+                    view={this.listGridView}
+                    viewIcon={this.state.listView}
+                />
+                <ManuDrawer menuAction={this.state.menuBar} />
+                <AddNotes noteData={this.createNewNote} />
+                <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
                     {notes}
                 </div>
+                
+                <SnackBar/>
+                
             </div>
         );
     }

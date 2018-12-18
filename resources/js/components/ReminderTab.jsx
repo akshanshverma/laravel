@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { MenuList, MenuItem, Paper, Grow, Popper, ClickAwayListener, Divider, TextField } from "@material-ui/core";
 import alert from "../assets/icons/alert-24px.svg"
+import moment from "moment";
 
 
 export default class ReminderTab extends Component {
@@ -45,7 +46,26 @@ export default class ReminderTab extends Component {
     }
 
     nextWeek = () => {
-    
+        var date =moment().add(7, 'days').calendar();  
+        var time = moment().format('LT'); 
+        this.setState({
+            reminderDate:date+"T"+time
+        })
+    }
+
+    tomorrow = () => {
+        var date =moment().add(1, 'days').calendar();  
+        var time = moment().format('LT'); 
+        this.setState({
+            reminderDate:date+"T"+time
+        })
+    }
+
+    laterToday = () => {
+        var date  = moment().format('MM/DD/YYYY, 8:00 pm')
+        this.setState({
+            reminderDate:date
+        })
     }
 
 
@@ -58,7 +78,7 @@ export default class ReminderTab extends Component {
                     {/* <span className="alertHint">Remind me</span> */}
                 </div>
                 <div className='ReminderMenu'>
-                    <Popper open={this.state.open} anchorEl={this.state.anchorEl} transition disablePortal>
+                    <Popper className='reminderPopper' open={this.state.open} anchorEl={this.state.anchorEl} transition disablePortal>
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}
@@ -69,9 +89,9 @@ export default class ReminderTab extends Component {
                                     <ClickAwayListener onClickAway={this.handleClose} >
                                         <MenuList>
                                             <div className='remindeMenuHead'>Reminder:</div>
-                                            <MenuItem onClick={this.props.today}>Later today</MenuItem>
-                                            <MenuItem >Tomorrow</MenuItem>
-                                            <MenuItem >Next week</MenuItem>
+                                            <MenuItem onClick={this.laterToday}>Later today</MenuItem>
+                                            <MenuItem onClick={this.tomorrow}>Tomorrow</MenuItem>
+                                            <MenuItem onClick={this.nextWeek}>Next week</MenuItem>
                                             <MenuItem >
                                                 <form noValidate>
                                                     <TextField

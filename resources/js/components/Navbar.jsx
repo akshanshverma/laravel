@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Typography, InputBase, Avatar, ClickAwayListener, MenuList, MenuItem, Paper, Grow, Popper,Divider } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, InputBase, Avatar, ClickAwayListener, MenuList, MenuItem, Paper, Grow, Popper, Divider } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import menuicon from "../assets/icons/menu-24px.svg"
 import search from "../assets/icons/search-24px.svg"
@@ -8,6 +8,7 @@ import appIcon from "../assets/icons/AppIcon.svg"
 import refresh from "../assets/icons/refresh-24px.svg"
 import agenda from "../assets/icons/agenda-24px.svg"
 import setting from "../assets/icons/settings-24px.svg"
+import gridView from "../assets/icons/gridView.svg"
 
 export default class Navbar extends Component {
 
@@ -35,7 +36,7 @@ export default class Navbar extends Component {
 
         return (
             <div >
-                <AppBar id='tb' position="fixed" style={{ backgroundColor: 'white' }}>
+                <AppBar id='tb'  style={{ backgroundColor: 'white' }}>
                     <Toolbar >
                         <div className='menulogo'>
                             <div className="iconBtn">
@@ -66,22 +67,30 @@ export default class Navbar extends Component {
                         <div className='endBar'>
                             <div className='endIcon'>
                                 <div className="iconBtnEnd">
+                                    <IconButton className="searchEnd">
+                                        <img src={search} className="searchEnd" alt="search" />
+                                    </IconButton>
+                                </div>
+                                <div className="iconBtnEnd">
                                     <IconButton>
                                         <img src={refresh} className="refresh" alt="refresh" />
                                     </IconButton>
                                     <span className="sHint">Refresh</span>
                                 </div>
                                 <div className="iconBtnEnd">
-                                    <IconButton>
-                                        <img src={agenda} className="agenda" alt="agenda" />
+                                    <IconButton className='noteView' onClick={this.props.view}>
+                                        {this.props.viewIcon ?
+                                            (<img src={agenda} className="agenda" alt="agenda" />)
+                                            :
+                                            (<img src={gridView} className="gridView" alt="gridView" />)}
                                     </IconButton>
-                                    <span className="sHint">Refresh</span>
+
                                 </div>
                                 <div className="iconBtnEnd">
                                     <IconButton>
                                         <img src={setting} className="setting" alt="setting" />
                                     </IconButton>
-                                    <span className="sHint">Refresh</span>
+
                                 </div>
                             </div>
                             <div className='avatarIcon'>
@@ -91,9 +100,9 @@ export default class Navbar extends Component {
                             </div>
                         </div>
                     </Toolbar>
-                    <Divider/>
+                    <Divider />
                 </AppBar>
-                
+
                 <div className='logoutMenu'>
                     <Popper open={this.state.logoutmenu} transition disablePortal>
                         {({ TransitionProps, placement }) => (
