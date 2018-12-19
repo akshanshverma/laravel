@@ -38,10 +38,11 @@ export default class ReminderTab extends Component {
         }));
     };
 
-    datePicket = () => {
+    datePicker = () => {
         var date = event.target.value
+        var newDate = moment(date).format('MM/DD/YYYY, h:mm A');
         this.setState({
-            reminderDate:date
+            reminderDate:newDate
         }) 
     }
 
@@ -49,20 +50,20 @@ export default class ReminderTab extends Component {
         var date =moment().add(7, 'days').calendar();  
         var time = moment().format('LT'); 
         this.setState({
-            reminderDate:date+"T"+time
+            reminderDate:date+", "+time
         })
     }
 
     tomorrow = () => {
         var date =moment().add(1, 'days').calendar();  
-        var time = moment().format('LT'); 
+        // var time = moment().format('LT'); 
         this.setState({
-            reminderDate:date+"T"+time
+            reminderDate:date
         })
     }
 
     laterToday = () => {
-        var date  = moment().format('MM/DD/YYYY, 8:00 pm')
+        var date  = moment().format('MM/DD/YYYY, 8:00 PM')
         this.setState({
             reminderDate:date
         })
@@ -95,11 +96,10 @@ export default class ReminderTab extends Component {
                                             <MenuItem >
                                                 <form noValidate>
                                                     <TextField
-                                                        onChange={this.datePicket}
+                                                        onChange={this.datePicker}
                                                         id="datetime-local"
                                                         label="Select date"
                                                         type="datetime-local"
-                                                        defaultValue="yyyy-mm-ddT00:00"
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}

@@ -7,7 +7,7 @@ import ReminderTab from "../components/ReminderTab";
 import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
 import SnackBar from "../components/SnackBar";
-
+import moment from "moment";
 
 var noteservices = new NoteService();
 var userServices = new UserServices();
@@ -21,6 +21,7 @@ export default class DashBoard extends Component {
             noteData: [],
             listView: false,
         }
+        this.SnackBarN = React.createRef();
         this.menuClickHandle = this.menuClickHandle.bind(this);
         this.onClickLogout = this.onClickLogout.bind(this);
         this.createNewNote = this.createNewNote.bind(this);
@@ -28,6 +29,7 @@ export default class DashBoard extends Component {
     }
     componentDidMount() {
         this.getNoteData();
+        this.checkReminder();
     }
 
     getNoteData() {
@@ -85,6 +87,18 @@ export default class DashBoard extends Component {
         })
     }
 
+    checkReminder = () => {
+
+        setInterval(() => {
+            this.state.noteData.map(note => {
+                if (moment().format('MM/DD/YYYY, h:mm A') === note.reminder) {
+                    this.SnackBarN.current.handleClick("Reminder: " + note.title);
+                }
+            });
+        }, (1000*30));
+    }
+
+
     render() {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
@@ -108,9 +122,8 @@ export default class DashBoard extends Component {
                 <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
                     {notes}
                 </div>
-                
-                <SnackBar/>
-                
+
+                <SnackBar ref={this.SnackBarN} />
             </div>
         );
     }

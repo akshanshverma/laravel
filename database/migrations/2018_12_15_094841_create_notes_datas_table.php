@@ -19,7 +19,7 @@ class CreateNotesDatasTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string("title");
             $table->string("note");
-            $table->string("reminder");
+            $table->string("reminder")->nullable();
             $table->timestamps();
         });
     }

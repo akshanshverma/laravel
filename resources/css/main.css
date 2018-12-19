@@ -342,6 +342,16 @@ span.psw {
 .reminderPopper{
     z-index: 1;
 }
+
+div#CardContent.MuiCardContent-root-230{
+    padding-left: 17px;
+    padding-right: 17px;
+
+}
+div.MuiChip-root-231.reminderDateTimeOnNote{
+    margin-top: 10px;
+    height: 22px;
+}
 /* ............... */
 @media only screen and (max-width: 800px) {
     .searchEnd{
