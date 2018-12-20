@@ -47,7 +47,7 @@ export default class ReminderTab extends Component {
     }
 
     nextWeek = () => {
-        var date =moment().add(7, 'days').calendar();  
+        var date =moment().add(7, 'days');  
         var time = moment().format('LT'); 
         this.setState({
             reminderDate:date+", "+time
@@ -55,7 +55,7 @@ export default class ReminderTab extends Component {
     }
 
     tomorrow = () => {
-        var date =moment().add(1, 'days').calendar();  
+        var date =moment().add(1, 'days').format('MM/DD/YYYY, h:mm A');  
         // var time = moment().format('LT'); 
         this.setState({
             reminderDate:date
@@ -63,9 +63,9 @@ export default class ReminderTab extends Component {
     }
 
     laterToday = () => {
-        var date  = moment().format('MM/DD/YYYY, 8:00 PM')
+        var date  = moment().format('MM/DD/YYYY, 8:00')
         this.setState({
-            reminderDate:date
+            reminderDate:date+" PM"
         })
     }
 

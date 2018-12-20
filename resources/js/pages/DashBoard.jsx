@@ -95,7 +95,7 @@ export default class DashBoard extends Component {
                     this.SnackBarN.current.handleClick("Reminder: " + note.title);
                 }
             });
-        }, (1000*30));
+        }, (1000*60));
     }
 
 

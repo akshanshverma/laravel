@@ -14478,7 +14478,7 @@ function (_Component) {
     };
 
     _this.nextWeek = function () {
-      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(7, 'days').calendar();
+      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(7, 'days');
       var time = __WEBPACK_IMPORTED_MODULE_3_moment___default()().format('LT');
 
       _this.setState({
@@ -14487,7 +14487,7 @@ function (_Component) {
     };
 
     _this.tomorrow = function () {
-      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(1, 'days').calendar(); // var time = moment().format('LT'); 
+      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(1, 'days').format('MM/DD/YYYY, h:mm A'); // var time = moment().format('LT'); 
 
       _this.setState({
         reminderDate: date
@@ -14495,10 +14495,10 @@ function (_Component) {
     };
 
     _this.laterToday = function () {
-      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().format('MM/DD/YYYY, 8:00 PM');
+      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().format('MM/DD/YYYY, 8:00');
 
       _this.setState({
-        reminderDate: date
+        reminderDate: date + " PM"
       });
     };
 
@@ -122736,7 +122736,7 @@ function (_Component) {
             _this.SnackBarN.current.handleClick("Reminder: " + note.title);
           }
         });
-      }, 1000 * 30);
+      }, 1000 * 60);
     };
 
     _this.state = {
@@ -123353,7 +123353,7 @@ function (_Component) {
         reminder: this.state.reminder
       };
 
-      if (this.state.title != '' && this.state.note != '') {
+      if (this.state.reminder !== '' || this.state.title !== '' && this.state.note !== '') {
         this.props.noteData(data);
         this.setState({
           title: '',

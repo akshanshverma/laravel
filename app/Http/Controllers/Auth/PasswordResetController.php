@@ -21,7 +21,7 @@ class PasswordResetController extends Controller
         //dd($user);
         if (!$user)
             return response()->json(
-            ['message' => 'We cant find a user with that e - mail address . '],
+            ['message' => 'We cant find a user with that mail address . '],
             205
         );
         $passwordReset = PasswordReset::updateOrCreate(
@@ -31,14 +31,14 @@ class PasswordResetController extends Controller
                 'token' => str_random(60)
             ]
         );
-        //dd($passwordReset->token);
+        //dd($passwordReset->token); 
         if ($user && $passwordReset) {
             $user->notify(
                 new PasswordResetRequest($passwordReset->token)
             );
         }
         return response()->json(
-            ['message' => 'We have e - mailed your password reset link!'],
+            ['message' => 'We have mailed your password reset link!'],
             200
         );
     }

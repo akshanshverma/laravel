@@ -32,6 +32,7 @@ export default class AddNotes extends Component {
     }
 
     closeAddnote() {
+        
         this.setState({
             noteEdit: false
         })
@@ -41,9 +42,10 @@ export default class AddNotes extends Component {
             note: this.state.note,
             reminder:this.state.reminder,
         }
+        
 
-
-        if (this.state.title != '' && this.state.note != '') {
+        if (this.state.reminder !== '' || (this.state.title !== '' && this.state.note !== '')) {
+            
             this.props.noteData(data);
             this.setState({
                 title: '',

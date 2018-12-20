@@ -17,8 +17,8 @@ class CreateNotesDatasTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string("title");
-            $table->string("note");
+            $table->string("title")->nullable();
+            $table->string("note")->nullable();
             $table->string("reminder")->nullable();
             $table->timestamps();
         });
