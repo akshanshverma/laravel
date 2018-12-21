@@ -44,6 +44,6 @@ class NotesController extends Controller
         {
             return NotesData::where('user_id', Auth::user()->id)->get();
         });
-        return response()->json($notes);
+        return response()->json($notes,200);
     }
 }

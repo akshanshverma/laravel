@@ -252,6 +252,7 @@ span.psw {
     padding-bottom: 4px;
 }
 /********Notes**********/
+
 .divCardGrid{
     margin-top: 25px;
     width: 240px;
@@ -265,11 +266,11 @@ span.psw {
 }
 
 .cardGridView{
-    margin: 2% 15%;
+    margin: 25px auto 0 auto;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    
+    width: 770px;
 }
 .cardListView{
     /* margin: 2% 27%; */
@@ -294,10 +295,6 @@ span.psw {
     opacity: 1;
 }
 
-#CardContent{
-    padding: 12 17px;
-}
-
 .inputTitle{
     font-size: 25px;
     word-wrap: break-word;
@@ -314,6 +311,34 @@ span.psw {
 .reminderDateTimeOnNote{
     margin-left: auto;
 }
+.divCardGrid .noteCard{
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    box-shadow: 0 0 0;
+
+}
+.divCardGrid .noteCard:hover{
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.divCardGrid .noteCard .noteCardContent{
+    padding: 16px 17px;
+}
+
+div.reminderDateTimeOnNote{
+    margin-top: 10px;
+    height: 25px;
+}
+/* 
+div.MuiCardContent-root-192{
+    padding-left: 17px;
+    padding-right: 17px;
+}
+div.MuiChip-root-193.reminderDateTimeOnNote{
+    margin-top: 10px;
+    height: 25px;
+}
+
 /* .inNoteiconsclass .alertHint {
     visibility: visible;
     width: 80px;
@@ -343,15 +368,6 @@ span.psw {
     z-index: 1;
 }
 
-div#CardContent.MuiCardContent-root-230{
-    padding-left: 17px;
-    padding-right: 17px;
-
-}
-div.MuiChip-root-231.reminderDateTimeOnNote{
-    margin-top: 10px;
-    height: 22px;
-}
 /* ............... */
 @media only screen and (max-width: 800px) {
     .searchEnd{
@@ -360,9 +376,12 @@ div.MuiChip-root-231.reminderDateTimeOnNote{
     .searchBar{
         display: none;
     }
+    .cardGridView{
+        width: 520px;
+    }
 }
 @media only screen and (max-width: 705px) {
-    .divCardGrid{
+    /* .divCardGrid{
         margin-top: 25px;
         width: auto;
         max-height: 304px;
@@ -375,17 +394,17 @@ div.MuiChip-root-231.reminderDateTimeOnNote{
         justify-content: space-evenly;
         flex-wrap: wrap;
         
-    } 
+    }  */
     .appIcon{
         display: none;
     }
     button.MuiButtonBase-root-47.MuiIconButton-root-41.noteView{
         display: none;        
     }
-    .NotesBox{
+    /* .NotesBox{
         width: auto;
         
-    }
+    } */
 }
 
 @media only screen and (max-width: 600px) {
@@ -395,6 +414,18 @@ div.MuiChip-root-231.reminderDateTimeOnNote{
 
     #card{
         box-shadow: 0px 0px 10px;     
+    }
+    .NotesBox{
+        width: auto;
+        
+    }
+
+    .cardGridView{
+        width: auto;
+        display: block;
+    }
+    .divCardGrid {
+        width: auto;
     }
 }
 @media only screen and (max-width: 400px) {

@@ -77,7 +77,7 @@ export default class DashBoard extends Component {
                     console.log('unauthorised');
                 }
             });
-
+        this.SnackBarN.current.handleClick("new note: " + data.title);
         this.getNoteData();
     }
 
