@@ -218,6 +218,7 @@ span.psw {
     margin-left: 17px;
 }
 .iconClose{
+    width: 100%;
     padding: 0 9px;
     margin-top: 8px;
     display: flex;
@@ -329,6 +330,10 @@ div.reminderDateTimeOnNote{
     margin-top: 10px;
     height: 25px;
 }
+
+.inputnote{
+    white-space: pre-line;
+}
 /* 
 div.MuiCardContent-root-192{
     padding-left: 17px;
@@ -366,6 +371,16 @@ div.MuiChip-root-193.reminderDateTimeOnNote{
 }
 .reminderPopper{
     z-index: 1;
+}
+
+/********EditNoteDilogBox*********/
+
+div.dilogBoxMainDv .editNoteDialogBox.editNoteContent{
+    width: 600px;
+}
+.addTitlEdit{
+    display: flex;
+    
 }
 
 /* ............... */

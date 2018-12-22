@@ -7,6 +7,7 @@ import ReminderTab from "../components/ReminderTab";
 import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
 import SnackBar from "../components/SnackBar";
+
 import moment from "moment";
 
 var noteservices = new NoteService();
@@ -22,6 +23,7 @@ export default class DashBoard extends Component {
             listView: false,
         }
         this.SnackBarN = React.createRef();
+      
         this.menuClickHandle = this.menuClickHandle.bind(this);
         this.onClickLogout = this.onClickLogout.bind(this);
         this.createNewNote = this.createNewNote.bind(this);
@@ -95,9 +97,10 @@ export default class DashBoard extends Component {
                     this.SnackBarN.current.handleClick("Reminder: " + note.title);
                 }
             });
-        }, (1000*60));
+        }, (1000 * 60));
     }
 
+    
 
     render() {
         if (localStorage.getItem('token') === null) {
@@ -106,7 +109,14 @@ export default class DashBoard extends Component {
         console.log(this.state);
 
         var notes = (this.state.noteData.map((note) => {
-            return <Note key={note.id} setTitle={note.title} setNote={note.note} setReminder={note.reminder} view={this.state.listView}></Note>
+            return <Note
+                key={note.id}
+                setTitle={note.title} 
+                setNote={note.note}
+                setReminder={note.reminder}
+                view={this.state.listView}
+                editNote={this.openEditBox}
+            ></Note>
         }));
 
         return (
@@ -124,6 +134,7 @@ export default class DashBoard extends Component {
                 </div>
 
                 <SnackBar ref={this.SnackBarN} />
+                
             </div>
         );
     }

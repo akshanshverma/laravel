@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,useRef} from 'react';
 import { Card, CardContent, Typography, CardActions, Popper, Paper, Chip } from '@material-ui/core';
 import image from "../assets/icons/image-24px.svg"
 
@@ -9,6 +9,7 @@ import archive from "../assets/icons/archive-24px.svg"
 import more from "../assets/icons/more_vert-24px.svg"
 import pin from "../assets/icons/pin.svg"
 import ReminderTab from "./ReminderTab";
+import EditNoteDialog from "./EditNoteDialog";
 
 
 
@@ -22,6 +23,7 @@ export default class DashBoard extends Component {
             reminder: null,
         }
         this.handleClick = this.handleClick.bind(this);
+        this.editNoteDialog = React.createRef();
     }
 
     componentDidMount() {
@@ -44,6 +46,10 @@ export default class DashBoard extends Component {
 
     }
 
+    openEditBox = () => {
+        this.editNoteDialog.current.handleDialog();
+    }
+
     render() {
         //
         return (
@@ -51,7 +57,7 @@ export default class DashBoard extends Component {
             <div className={this.props.view ? ('divCardList') : ('divCardGrid')}>
                 
                     <Card className="noteCard">
-                        <CardContent className='noteCardContent'>
+                        <CardContent className='noteCardContent' onClick={this.openEditBox} >
                             <div className='inputTitle'>
                                 {this.props.setTitle}
                             </div>
@@ -95,6 +101,7 @@ export default class DashBoard extends Component {
                        
                     )}
                 </Popper> */}
+                <EditNoteDialog ref={this.editNoteDialog} note= {this.state}  />
             </div>
         )
     }

@@ -96,7 +96,7 @@ export default class AddNotes extends Component {
                 <div className='addNotesInput'>
                     <InputBase multiline name='note' id='noteInput' placeholder='Take a note...' fullWidth onChange={this.getInput} />
                 </div>
-
+                
                 {this.state.reminder==='' ? (<div/>) : (
                    <div> <Chip
                    className='reminderDateTime'
