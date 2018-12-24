@@ -18,16 +18,10 @@ class NotesController extends Controller
     public function createNote(Request $request)
     {
         if ($user = Auth::user()) {
-            Cache::flush();
-            $id = $user->id;
+            Cache::flush();       
             $noteData = $request->all();
-            $input = [
-                'user_id' => $id,
-                'title' => $noteData['title'],
-                'note' => $noteData['note'],
-                'reminder' => $noteData['reminder'],
-            ];
-            $data = NotesData::createNewNote($input);
+            $noteData['user_id'] = $user->id;
+            $data = NotesData::createNewNote($noteData);
             return response()->json(['userData' => $data], 200);
         } else {
             return response()->json(['error' => 'unauthorised'], 220);
@@ -45,5 +39,17 @@ class NotesController extends Controller
             return NotesData::where('user_id', Auth::user()->id)->get();
         });
         return response()->json($notes,200);
+    }
+
+    public function updateNote(Request $request)
+    {
+        Cache::flush();
+        $newNotesData = $request->all();
+        $id = $newNotesData['id'];
+        $noteData = NotesData::where('id' , $id)->first(); 
+        $noteData->title = $newNotesData['title'];
+        $noteData->note = $newNotesData['note'];
+        $noteData->reminder = $newNotesData['reminder'];
+        $noteData->save();
     }
 }

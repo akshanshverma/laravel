@@ -43,13 +43,13 @@ export default class MenuDrawer extends Component {
                                 <ListItemIcon>
                                     <img src={noteIcon} className="noteIcon" alt="noteIcon   " />
                                 </ListItemIcon>
-                                <ListItemText />
+                                <ListItemText>Notes</ListItemText>
                             </ListItem>
-                            <ListItem >
+                            <ListItem button>
                                 <ListItemIcon>
                                     <img src={reminderIcon} className="reminderIcon" alt="reminderIcon   " />
                                 </ListItemIcon>
-                                <ListItemText />
+                                <ListItemText>Reminders</ListItemText>
                             </ListItem>
                             <Divider />
                             <span>LABELS</span>
@@ -57,7 +57,7 @@ export default class MenuDrawer extends Component {
                                 <ListItemIcon>
                                     <img src={editIcon} className="editIcon" alt="editIcon   " />
                                 </ListItemIcon>
-                                <ListItemText />
+                                <ListItemText>Edit labels</ListItemText>
                             </ListItem>
                             <Divider />
 
@@ -65,13 +65,13 @@ export default class MenuDrawer extends Component {
                                 <ListItemIcon>
                                     <img src={archive} className="archive" alt="archive   " />
                                 </ListItemIcon>
-                                <ListItemText />
+                                <ListItemText>Archive</ListItemText>
                             </ListItem>
                             <ListItem >
                                 <ListItemIcon>
                                     <img src={trash} className="trash" alt="trash   " />
                                 </ListItemIcon>
-                                <ListItemText />
+                                <ListItemText>Trash</ListItemText>
                             </ListItem>
                         </List>
                     </Drawer>

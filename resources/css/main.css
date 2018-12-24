@@ -297,10 +297,13 @@ span.psw {
 }
 
 .inputTitle{
-    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    font-size: 22px;
     word-wrap: break-word;
 }
 .inputnote{
+    font-family: Arial, Helvetica, sans-serif;
     word-wrap: break-word;
 }
 .reminderDateTime{
@@ -333,6 +336,9 @@ div.reminderDateTimeOnNote{
 
 .inputnote{
     white-space: pre-line;
+}
+.cardTitlePin{
+    display: flex;
 }
 /* 
 div.MuiCardContent-root-192{

@@ -24,4 +24,16 @@ export default class UserServices {
                 return error;
             });
     }
+
+    updateNote(noteData){
+        var auth = "Bearer ".concat(localStorage.getItem('token'))
+        return axios.post('/api/updateNote', noteData, { headers: { Authorization: auth } })
+            .then((response) => {
+                return response;
+            }
+            )
+            .catch((error) => {
+                return error;
+            });
+    }
 }

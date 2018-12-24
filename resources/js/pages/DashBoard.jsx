@@ -100,7 +100,13 @@ export default class DashBoard extends Component {
         }, (1000 * 60));
     }
 
-    
+    updateNoteData = (data) =>{
+        noteservices.updateNote(data)
+            .then(res => {
+               
+            })
+            this.getNoteData();
+    }
 
     render() {
         if (localStorage.getItem('token') === null) {
@@ -111,11 +117,13 @@ export default class DashBoard extends Component {
         var notes = (this.state.noteData.map((note) => {
             return <Note
                 key={note.id}
+                setId= {note.id}
                 setTitle={note.title} 
                 setNote={note.note}
                 setReminder={note.reminder}
                 view={this.state.listView}
                 editNote={this.openEditBox}
+                update = {this.updateNoteData}
             ></Note>
         }));
 
@@ -127,7 +135,7 @@ export default class DashBoard extends Component {
                     view={this.listGridView}
                     viewIcon={this.state.listView}
                 />
-                <ManuDrawer menuAction={this.state.menuBar} />
+                <ManuDrawer menuAction={this.state.menuBar}   />
                 <AddNotes noteData={this.createNewNote} />
                 <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
                     {notes}

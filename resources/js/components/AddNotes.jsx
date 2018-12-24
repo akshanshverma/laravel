@@ -17,7 +17,7 @@ export default class AddNotes extends Component {
             noteEdit: false,
             title: '',
             note: '',
-            reminder: '',
+            reminder: null,
         }
         this.openAddnote = this.openAddnote.bind(this);
         this.closeAddnote = this.closeAddnote.bind(this);
@@ -44,13 +44,13 @@ export default class AddNotes extends Component {
         }
         
 
-        if (this.state.reminder !== '' || (this.state.title !== '' && this.state.note !== '')) {
+        if (this.state.reminder !== null || (this.state.title !== '' && this.state.note !== '')) {
             
             this.props.noteData(data);
             this.setState({
                 title: '',
                 note: '',
-                reminder:'',
+                reminder:null,
             })
 
         }
@@ -70,7 +70,7 @@ export default class AddNotes extends Component {
     }
     removeReminder(){
         this.setState({
-            reminder: ''
+            reminder: null
         })
     }
 
@@ -97,7 +97,7 @@ export default class AddNotes extends Component {
                     <InputBase multiline name='note' id='noteInput' placeholder='Take a note...' fullWidth onChange={this.getInput} />
                 </div>
                 
-                {this.state.reminder==='' ? (<div/>) : (
+                {this.state.reminder===null ? (<div/>) : (
                    <div> <Chip
                    className='reminderDateTime'
                    label={this.state.reminder}

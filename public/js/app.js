@@ -121306,7 +121306,7 @@ exports = module.exports = __webpack_require__(655)(false);
 
 
 // module
-exports.push([module.i, "\n#registerT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n#loginT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n.maindiv{\n    padding-top: 7%;\n}\n.input{\n    margin: 10px;\n    /* width: 306px; */\n    border-radius: 5%;\n}\n\n#card{\n    border-radius: 4%;\n    box-shadow: 0px 0px 20px;  \n    margin: auto;\n    height: 360px;\n    width: 327px;\n    padding-left: 5%;\n    padding-right: 5%;\n    padding-bottom: 10px;\n    background-color: rgb(255, 255, 255);\n}\nButton{\n    font-family:\"Times New Roman\";\n    width: 70%;\n}\n.button{\n    margin-left: 24%;\n    margin-top: 5%;\n}\n#spanDiv{\n    margin-bottom: 10px;\n}\nspan.psw {\n    \n    float: right;  \n}\n.errMsgr{\n    text-align: center;\n}\n.msg{\n    height: 15px;\n    font-size: 14px;\n    color: red;\n    float: right;\n}\n.errMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: red;\n}\n\n.resetLinkMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: rgb(84, 192, 58);\n    text-shadow: 2px 2px 3px;\n}\n\n.goLogin{\n    margin-left: 43%;\n}\n.userData{\n    margin-top: 25%;  \n    text-align: center;\n}\n#logout{\n    margin-top: 50%;\n    margin-left: 17%;\n}\n.inputRsP{\n    margin-top: 20%;\n}\n.divVarText{\n    margin-top: 25%;\n}\n.spanGoLogin{\n    margin-left: 3%;\n\n}\n\n/********** dashboard **************/\n\n/**navbar***/\n.iconBtnEnd .sHint {\n    visibility: hidden;\n    width: 40px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 5px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 82%;\n    top: 91%;\n    z-index: 1;\n}\n.searchEnd{\n    visibility: hidden;\n}\n\n#tb{\n    box-shadow: 0 0 0;\n}  \n\n.iconBtn button {\n    width: 48px;\n    opacity: 0.5;\n}\n.iconBtnEnd button {\n    width: 48px;\n    opacity: 0.5;\n    \n}\n\n/* .iconBtnEnd:hover .sHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n.iconBtnEnd{\n    margin: auto;\n}\n.searchBar{\n    background: rgba(0,0,0,0.04);\n    border-radius: 8px;\n    margin-left:7%;\n    display: flex;\n    width: 47%;\n}\n.menulogo{\n    display: flex;\n}\n.appName{\n    margin: auto;\n    padding-left: 8px;\n    opacity: 0.5;\n}\n.avatarIcon button{\n    width: 64px;\n}\n.avatarIcon {\n    margin: auto;\n    \n}\n.endBar{\n    display: flex;\n    margin-left: auto;\n}\n.searchInput{\n    margin: auto;\n}\n.endIcon{\n    display: inline-flex;\n}\n/*******logoutmenu********/\n\n.logoutMenu{\n\n    position: absolute;\n    top: 61px;\n    left: 89%;\n    z-index: 9999;\n}\n\n/*****menudrawer******/\n\n/*****addnote******/\n.NotesBox{\n    display: flex;\n    opacity: 0.5;\n    height: 46px;\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n\n.addNoteEndIcons{\n    margin: auto;\n    padding: 0 12px 0 12px;\n}\n.titleIcon{\n    margin-top: 10px;\n    margin-left: auto;\n    padding-right: 17px;\n}\n\n.addNoteBox{\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n.takeNote{\n    font-size: 20px;\n    margin-top: 10px;\n    margin-left: 17px;\n}\n.iconClose{\n    width: 100%;\n    padding: 0 9px;\n    margin-top: 8px;\n    display: flex;\n}\n.addTitle{\n    display: flex;\n    padding: 10px 20px 0 17px;\n}\n#noteInput{\n    font-size: 15px;\n}\n\n.addNotesInput{\n    margin-left: 17px;\n    padding-top: 3px;\n    padding-bottom: 14px;\n    padding-right: 25PX;\n}\n.takeNoteIcons{\n    display: flex;\n}\n.noteCloseButton{\n   float: right;\n}\n.iconsclass{\n    padding: 0 8px 0 15px;\n}\n\n.divCloseButton{\n    margin-left: auto;\n    padding-right: 22px;\n    padding-bottom: 4px;\n}\n/********Notes**********/\n\n.divCardGrid{\n    margin-top: 25px;\n    width: 240px;\n    max-height: 304px;\n}\n.divCardList{\n    /* margin-top: 25px; */\n    width: 594px;\n    /* max-height: 304px; */\n    margin: 25px auto 0 auto;\n}\n\n.cardGridView{\n    margin: 25px auto 0 auto;\n    display: flex;\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n    width: 770px;\n}\n.cardListView{\n    /* margin: 2% 27%; */\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n\n}\n\n.inNotetakeNoteIcons img{\n    height: 20px;\n}\n.inNotetakeNoteIcons{\n    display: flex;\n    justify-content: space-evenly;\n    padding-bottom: 6px;\n}\n\n.inNoteiconsclass{\n    opacity: .5;\n}\n.inNoteiconsclass:hover{\n    opacity: 1;\n}\n\n.inputTitle{\n    font-size: 25px;\n    word-wrap: break-word;\n}\n.inputnote{\n    word-wrap: break-word;\n}\n.reminderDateTime{\n    margin-left: 15px;\n    font-size: 15px;\n    padding: 7px;\n    \n}\n.reminderDateTimeOnNote{\n    margin-left: auto;\n}\n.divCardGrid .noteCard{\n    border-radius: 8px;\n    border: 1px solid #dadce0;\n    box-shadow: 0 0 0;\n\n}\n.divCardGrid .noteCard:hover{\n    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n\n.divCardGrid .noteCard .noteCardContent{\n    padding: 16px 17px;\n}\n\ndiv.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n.inputnote{\n    white-space: pre-line;\n}\n/* \ndiv.MuiCardContent-root-192{\n    padding-left: 17px;\n    padding-right: 17px;\n}\ndiv.MuiChip-root-193.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n/* .inNoteiconsclass .alertHint {\n    visibility: visible;\n    width: 80px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 1px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 20%;\n    top: 15%;\n    z-index: 1;\n}\n.inNoteiconsclass:hover .alertHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n/********ReminderTab**********/\n.remindeMenuHead{\n    margin: 7px;\n}\n.reminderPopper{\n    z-index: 1;\n}\n\n/********EditNoteDilogBox*********/\n\ndiv.dilogBoxMainDv .editNoteDialogBox.editNoteContent{\n    width: 600px;\n}\n.addTitlEdit{\n    display: flex;\n    \n}\n\n/* ............... */\n@media only screen and (max-width: 800px) {\n    .searchEnd{\n        visibility: visible;\n    }\n    .searchBar{\n        display: none;\n    }\n    .cardGridView{\n        width: 520px;\n    }\n}\n@media only screen and (max-width: 705px) {\n    /* .divCardGrid{\n        margin-top: 25px;\n        width: auto;\n        max-height: 304px;\n        margin-left: auto;\n        margin-right: auto;\n    }\n    .cardGridView{\n        margin: 2% 0%;\n        display: block;\n        justify-content: space-evenly;\n        flex-wrap: wrap;\n        \n    }  */\n    .appIcon{\n        display: none;\n    }\n    button.MuiButtonBase-root-47.MuiIconButton-root-41.noteView{\n        display: none;        \n    }\n    /* .NotesBox{\n        width: auto;\n        \n    } */\n}\n\n@media only screen and (max-width: 600px) {\n    .maindiv{\n        padding-top: 30%;\n    }\n\n    #card{\n        box-shadow: 0px 0px 10px;     \n    }\n    .NotesBox{\n        width: auto;\n        \n    }\n\n    .cardGridView{\n        width: auto;\n        display: block;\n    }\n    .divCardGrid {\n        width: auto;\n    }\n}\n@media only screen and (max-width: 400px) {\n    .maindiv{\n        padding-top: 35%;\n    }\n    #card{\n        box-shadow: 0px 0px 5px;        \n        width: 273px;\n        padding-left: 2%;\n        padding-right: 2%;      \n    }\n    .MuiFormControl-fullWidth-67 {\n        width: 86%;\n    }\n}\n\n", ""]);
+exports.push([module.i, "\n#registerT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n#loginT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n.maindiv{\n    padding-top: 7%;\n}\n.input{\n    margin: 10px;\n    /* width: 306px; */\n    border-radius: 5%;\n}\n\n#card{\n    border-radius: 4%;\n    box-shadow: 0px 0px 20px;  \n    margin: auto;\n    height: 360px;\n    width: 327px;\n    padding-left: 5%;\n    padding-right: 5%;\n    padding-bottom: 10px;\n    background-color: rgb(255, 255, 255);\n}\nButton{\n    font-family:\"Times New Roman\";\n    width: 70%;\n}\n.button{\n    margin-left: 24%;\n    margin-top: 5%;\n}\n#spanDiv{\n    margin-bottom: 10px;\n}\nspan.psw {\n    \n    float: right;  \n}\n.errMsgr{\n    text-align: center;\n}\n.msg{\n    height: 15px;\n    font-size: 14px;\n    color: red;\n    float: right;\n}\n.errMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: red;\n}\n\n.resetLinkMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: rgb(84, 192, 58);\n    text-shadow: 2px 2px 3px;\n}\n\n.goLogin{\n    margin-left: 43%;\n}\n.userData{\n    margin-top: 25%;  \n    text-align: center;\n}\n#logout{\n    margin-top: 50%;\n    margin-left: 17%;\n}\n.inputRsP{\n    margin-top: 20%;\n}\n.divVarText{\n    margin-top: 25%;\n}\n.spanGoLogin{\n    margin-left: 3%;\n\n}\n\n/********** dashboard **************/\n\n/**navbar***/\n.iconBtnEnd .sHint {\n    visibility: hidden;\n    width: 40px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 5px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 82%;\n    top: 91%;\n    z-index: 1;\n}\n.searchEnd{\n    visibility: hidden;\n}\n\n#tb{\n    box-shadow: 0 0 0;\n}  \n\n.iconBtn button {\n    width: 48px;\n    opacity: 0.5;\n}\n.iconBtnEnd button {\n    width: 48px;\n    opacity: 0.5;\n    \n}\n\n/* .iconBtnEnd:hover .sHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n.iconBtnEnd{\n    margin: auto;\n}\n.searchBar{\n    background: rgba(0,0,0,0.04);\n    border-radius: 8px;\n    margin-left:7%;\n    display: flex;\n    width: 47%;\n}\n.menulogo{\n    display: flex;\n}\n.appName{\n    margin: auto;\n    padding-left: 8px;\n    opacity: 0.5;\n}\n.avatarIcon button{\n    width: 64px;\n}\n.avatarIcon {\n    margin: auto;\n    \n}\n.endBar{\n    display: flex;\n    margin-left: auto;\n}\n.searchInput{\n    margin: auto;\n}\n.endIcon{\n    display: inline-flex;\n}\n/*******logoutmenu********/\n\n.logoutMenu{\n\n    position: absolute;\n    top: 61px;\n    left: 89%;\n    z-index: 9999;\n}\n\n/*****menudrawer******/\n\n/*****addnote******/\n.NotesBox{\n    display: flex;\n    opacity: 0.5;\n    height: 46px;\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n\n.addNoteEndIcons{\n    margin: auto;\n    padding: 0 12px 0 12px;\n}\n.titleIcon{\n    margin-top: 10px;\n    margin-left: auto;\n    padding-right: 17px;\n}\n\n.addNoteBox{\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n.takeNote{\n    font-size: 20px;\n    margin-top: 10px;\n    margin-left: 17px;\n}\n.iconClose{\n    width: 100%;\n    padding: 0 9px;\n    margin-top: 8px;\n    display: flex;\n}\n.addTitle{\n    display: flex;\n    padding: 10px 20px 0 17px;\n}\n#noteInput{\n    font-size: 15px;\n}\n\n.addNotesInput{\n    margin-left: 17px;\n    padding-top: 3px;\n    padding-bottom: 14px;\n    padding-right: 25PX;\n}\n.takeNoteIcons{\n    display: flex;\n}\n.noteCloseButton{\n   float: right;\n}\n.iconsclass{\n    padding: 0 8px 0 15px;\n}\n\n.divCloseButton{\n    margin-left: auto;\n    padding-right: 22px;\n    padding-bottom: 4px;\n}\n/********Notes**********/\n\n.divCardGrid{\n    margin-top: 25px;\n    width: 240px;\n    max-height: 304px;\n}\n.divCardList{\n    /* margin-top: 25px; */\n    width: 594px;\n    /* max-height: 304px; */\n    margin: 25px auto 0 auto;\n}\n\n.cardGridView{\n    margin: 25px auto 0 auto;\n    display: flex;\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n    width: 770px;\n}\n.cardListView{\n    /* margin: 2% 27%; */\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n\n}\n\n.inNotetakeNoteIcons img{\n    height: 20px;\n}\n.inNotetakeNoteIcons{\n    display: flex;\n    justify-content: space-evenly;\n    padding-bottom: 6px;\n}\n\n.inNoteiconsclass{\n    opacity: .5;\n}\n.inNoteiconsclass:hover{\n    opacity: 1;\n}\n\n.inputTitle{\n    font-family: Arial, Helvetica, sans-serif;\n    width: 100%;\n    font-size: 22px;\n    word-wrap: break-word;\n}\n.inputnote{\n    font-family: Arial, Helvetica, sans-serif;\n    word-wrap: break-word;\n}\n.reminderDateTime{\n    margin-left: 15px;\n    font-size: 15px;\n    padding: 7px;\n    \n}\n.reminderDateTimeOnNote{\n    margin-left: auto;\n}\n.divCardGrid .noteCard{\n    border-radius: 8px;\n    border: 1px solid #dadce0;\n    box-shadow: 0 0 0;\n\n}\n.divCardGrid .noteCard:hover{\n    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n\n.divCardGrid .noteCard .noteCardContent{\n    padding: 16px 17px;\n}\n\ndiv.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n.inputnote{\n    white-space: pre-line;\n}\n.cardTitlePin{\n    display: flex;\n}\n/* \ndiv.MuiCardContent-root-192{\n    padding-left: 17px;\n    padding-right: 17px;\n}\ndiv.MuiChip-root-193.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n/* .inNoteiconsclass .alertHint {\n    visibility: visible;\n    width: 80px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 1px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 20%;\n    top: 15%;\n    z-index: 1;\n}\n.inNoteiconsclass:hover .alertHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n/********ReminderTab**********/\n.remindeMenuHead{\n    margin: 7px;\n}\n.reminderPopper{\n    z-index: 1;\n}\n\n/********EditNoteDilogBox*********/\n\ndiv.dilogBoxMainDv .editNoteDialogBox.editNoteContent{\n    width: 600px;\n}\n.addTitlEdit{\n    display: flex;\n    \n}\n\n/* ............... */\n@media only screen and (max-width: 800px) {\n    .searchEnd{\n        visibility: visible;\n    }\n    .searchBar{\n        display: none;\n    }\n    .cardGridView{\n        width: 520px;\n    }\n}\n@media only screen and (max-width: 705px) {\n    /* .divCardGrid{\n        margin-top: 25px;\n        width: auto;\n        max-height: 304px;\n        margin-left: auto;\n        margin-right: auto;\n    }\n    .cardGridView{\n        margin: 2% 0%;\n        display: block;\n        justify-content: space-evenly;\n        flex-wrap: wrap;\n        \n    }  */\n    .appIcon{\n        display: none;\n    }\n    button.MuiButtonBase-root-47.MuiIconButton-root-41.noteView{\n        display: none;        \n    }\n    /* .NotesBox{\n        width: auto;\n        \n    } */\n}\n\n@media only screen and (max-width: 600px) {\n    .maindiv{\n        padding-top: 30%;\n    }\n\n    #card{\n        box-shadow: 0px 0px 10px;     \n    }\n    .NotesBox{\n        width: auto;\n        \n    }\n\n    .cardGridView{\n        width: auto;\n        display: block;\n    }\n    .divCardGrid {\n        width: auto;\n    }\n}\n@media only screen and (max-width: 400px) {\n    .maindiv{\n        padding-top: 35%;\n    }\n    #card{\n        box-shadow: 0px 0px 5px;        \n        width: 273px;\n        padding-left: 2%;\n        padding-right: 2%;      \n    }\n    .MuiFormControl-fullWidth-67 {\n        width: 86%;\n    }\n}\n\n", ""]);
 
 // exports
 
@@ -122751,6 +122751,12 @@ function (_Component) {
       }, 1000 * 60);
     };
 
+    _this.updateNoteData = function (data) {
+      noteservices.updateNote(data).then(function (res) {});
+
+      _this.getNoteData();
+    };
+
     _this.state = {
       menuBar: false,
       noteData: [],
@@ -122836,11 +122842,13 @@ function (_Component) {
       var notes = this.state.noteData.map(function (note) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Note__["a" /* default */], {
           key: note.id,
+          setId: note.id,
           setTitle: note.title,
           setNote: note.note,
           setReminder: note.reminder,
           view: _this4.state.listView,
-          editNote: _this4.openEditBox
+          editNote: _this4.openEditBox,
+          update: _this4.updateNoteData
         });
       });
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Navbar__["a" /* default */], {
@@ -123213,23 +123221,25 @@ function (_Component) {
         src: __WEBPACK_IMPORTED_MODULE_2__assets_icons_noteIcon_svg___default.a,
         className: "noteIcon",
         alt: "noteIcon   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null, "Notes")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], {
+        button: true
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
         src: __WEBPACK_IMPORTED_MODULE_3__assets_icons_reminderIcon_svg___default.a,
         className: "reminderIcon",
         alt: "reminderIcon   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["h" /* Divider */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", null, "LABELS"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null, "Reminders")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["h" /* Divider */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", null, "LABELS"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
         src: __WEBPACK_IMPORTED_MODULE_4__assets_icons_editIcon_svg___default.a,
         className: "editIcon",
         alt: "editIcon   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["h" /* Divider */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null, "Edit labels")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["h" /* Divider */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
         src: __WEBPACK_IMPORTED_MODULE_5__assets_icons_archive_24px_svg___default.a,
         className: "archive",
         alt: "archive   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null, "Archive")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["n" /* ListItem */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["o" /* ListItemIcon */], null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
         src: __WEBPACK_IMPORTED_MODULE_6__assets_icons_trash_svg___default.a,
         className: "trash",
         alt: "trash   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null))))));
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["p" /* ListItemText */], null, "Trash"))))));
     }
   }]);
 
@@ -123339,7 +123349,7 @@ function (_Component) {
       noteEdit: false,
       title: '',
       note: '',
-      reminder: ''
+      reminder: null
     };
     _this.openAddnote = _this.openAddnote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.closeAddnote = _this.closeAddnote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -123367,12 +123377,12 @@ function (_Component) {
         reminder: this.state.reminder
       };
 
-      if (this.state.reminder !== '' || this.state.title !== '' && this.state.note !== '') {
+      if (this.state.reminder !== null || this.state.title !== '' && this.state.note !== '') {
         this.props.noteData(data);
         this.setState({
           title: '',
           note: '',
-          reminder: ''
+          reminder: null
         });
       }
     }
@@ -123385,7 +123395,7 @@ function (_Component) {
     key: "removeReminder",
     value: function removeReminder() {
       this.setState({
-        reminder: ''
+        reminder: null
       });
     }
   }, {
@@ -123434,7 +123444,7 @@ function (_Component) {
         placeholder: "Take a note...",
         fullWidth: true,
         onChange: this.getInput
-      })), this.state.reminder === '' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["f" /* Chip */], {
+      })), this.state.reminder === null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["f" /* Chip */], {
         className: "reminderDateTime",
         label: this.state.reminder,
         onDelete: this.removeReminder
@@ -123831,6 +123841,24 @@ function (_Component) {
       _this.editNoteDialog.current.handleDialog();
     };
 
+    _this.removeReminder = function () {
+      var noteData = _this.state;
+      noteData.reminder = null;
+
+      _this.props.update(noteData);
+    };
+
+    _this.setReminderDate = function (date) {
+      var noteData = _this.state;
+      noteData.reminder = date;
+
+      _this.props.update(noteData);
+    };
+
+    _this.updateNote = function (data) {
+      _this.props.update(data);
+    };
+
     _this.state = {
       id: '',
       title: '',
@@ -123846,6 +123874,7 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.setState({
+        id: this.props.setId,
         title: this.props.setTitle,
         note: this.props.setNote,
         reminder: this.props.setReminder
@@ -123865,25 +123894,35 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      //
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: this.props.view ? 'divCardList' : 'divCardGrid'
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["d" /* Card */], {
         className: "noteCard"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["e" /* CardContent */], {
-        className: "noteCardContent",
-        onClick: this.openEditBox
+        className: "noteCardContent"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-        className: "inputTitle"
+        className: "cardTitlePin"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        className: "inputTitle",
+        onClick: this.openEditBox
       }, this.props.setTitle), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-        className: "inputnote"
+        className: "inNoteiconsclass"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+        src: __WEBPACK_IMPORTED_MODULE_7__assets_icons_pin_svg___default.a,
+        className: "pin",
+        alt: "pin"
+      }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        className: "inputnote",
+        onClick: this.openEditBox
       }, this.props.setNote), this.state.reminder === null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["f" /* Chip */], {
         className: "reminderDateTimeOnNote",
         label: this.state.reminder,
         onDelete: this.removeReminder
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inNotetakeNoteIcons"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ReminderTab__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ReminderTab__["a" /* default */], {
+        setDate: this.setReminderDate
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inNoteiconsclass"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
         src: __WEBPACK_IMPORTED_MODULE_3__assets_icons_collab_svg___default.a,
@@ -123915,6 +123954,7 @@ function (_Component) {
         alt: "more   "
       })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__EditNoteDialog__["a" /* default */], {
         ref: this.editNoteDialog,
+        update: this.updateNote,
         note: this.state
       }));
     }
@@ -123973,6 +124013,8 @@ module.exports = "/images/more_vert-24px.svg?db2457110c3e8817046f33cc430431a6";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ReminderTab__ = __webpack_require__(71);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -124021,6 +124063,14 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditNoteDialog).call(this, props));
 
     _this.handleClose = function () {
+      var data = {
+        title: _this.state.title,
+        note: _this.state.note,
+        reminder: _this.props.note.reminder
+      };
+
+      _this.props.update(data);
+
       _this.setState({
         open: false
       });
@@ -124028,9 +124078,16 @@ function (_React$Component) {
 
     _this.removeReminder = function () {};
 
+    _this.getInput = function () {
+      _this.state.note(_defineProperty({}, event.target.name, event.target.value));
+    };
+
     _this.state = {
       noteData: null,
-      open: false
+      open: false,
+      title: '',
+      note: '',
+      reminder: ''
     };
     _this.handleDialog = _this.handleDialog.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -124046,6 +124103,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log(this.state);
       var fullScreen = this.props.fullScreen;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "dilogBoxMainDv"
@@ -124173,6 +124231,20 @@ function () {
     value: function getNote() {
       var auth = "Bearer ".concat(localStorage.getItem('token'));
       return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/getAllNotes', {
+        headers: {
+          Authorization: auth
+        }
+      }).then(function (response) {
+        return response;
+      }).catch(function (error) {
+        return error;
+      });
+    }
+  }, {
+    key: "updateNote",
+    value: function updateNote(noteData) {
+      var auth = "Bearer ".concat(localStorage.getItem('token'));
+      return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/updateNote', noteData, {
         headers: {
           Authorization: auth
         }

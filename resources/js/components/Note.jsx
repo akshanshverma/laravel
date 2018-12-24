@@ -1,4 +1,4 @@
-import React, { Component ,useRef} from 'react';
+import React, { Component, useRef } from 'react';
 import { Card, CardContent, Typography, CardActions, Popper, Paper, Chip } from '@material-ui/core';
 import image from "../assets/icons/image-24px.svg"
 
@@ -28,6 +28,7 @@ export default class DashBoard extends Component {
 
     componentDidMount() {
         this.setState({
+            id: this.props.setId,
             title: this.props.setTitle,
             note: this.props.setNote,
             reminder: this.props.setReminder,
@@ -50,49 +51,71 @@ export default class DashBoard extends Component {
         this.editNoteDialog.current.handleDialog();
     }
 
+    removeReminder = () => {
+        var noteData = this.state;
+        noteData.reminder = null;
+        this.props.update(noteData);
+    }
+
+    setReminderDate = (date) => {
+        var noteData = this.state;
+        noteData.reminder = date;
+        this.props.update(noteData);
+    }
+
+    updateNote = (data) =>{
+        this.props.update(data);
+    }
+
     render() {
-        //
+
+
         return (
 
             <div className={this.props.view ? ('divCardList') : ('divCardGrid')}>
-                
-                    <Card className="noteCard">
-                        <CardContent className='noteCardContent' onClick={this.openEditBox} >
-                            <div className='inputTitle'>
+
+                <Card className="noteCard">
+                    <CardContent className='noteCardContent' >
+                        <div className='cardTitlePin'>
+                            <div className='inputTitle' onClick={this.openEditBox}>
                                 {this.props.setTitle}
                             </div>
-                            <div className='inputnote'>
-                                {this.props.setNote}
-                            </div>
-
-                            {this.state.reminder === null ? (<div />) : (
-                                <Chip
-                                    className='reminderDateTimeOnNote'
-                                    label={this.state.reminder}
-                                    onDelete={this.removeReminder}
-                                />
-                            )}
-
-                        </CardContent>
-                        <div className='inNotetakeNoteIcons'>
-                            <ReminderTab />
                             <div className='inNoteiconsclass'>
-                                <img src={collab} className="collab" alt="collab   " />
-                            </div>
-                            <div className='inNoteiconsclass'>
-                                <img src={colorLens} className="colorLens" alt="colorLens   " />
-                            </div>
-                            <div className='inNoteiconsclass'>
-                                <img src={image} className="image" alt="image   " />
-                            </div>
-                            <div className='inNoteiconsclass'>
-                                <img src={archive} className="archive" alt="archive   " />
-                            </div>
-                            <div className='inNoteiconsclass'>
-                                <img src={more} className="more" alt="more   " />
+                                <img src={pin} className="pin" alt="pin" />
                             </div>
                         </div>
-                    </Card>
+                        <div className='inputnote' onClick={this.openEditBox}>
+                            {this.props.setNote}
+                        </div>
+
+                        {this.state.reminder === null ? (<div />) : (
+                            <Chip
+                                className='reminderDateTimeOnNote'
+                                label={this.state.reminder}
+                                onDelete={this.removeReminder}
+                            />
+                        )}
+
+                    </CardContent>
+                    <div className='inNotetakeNoteIcons'>
+                        <ReminderTab setDate={this.setReminderDate} />
+                        <div className='inNoteiconsclass'>
+                            <img src={collab} className="collab" alt="collab   " />
+                        </div>
+                        <div className='inNoteiconsclass'>
+                            <img src={colorLens} className="colorLens" alt="colorLens   " />
+                        </div>
+                        <div className='inNoteiconsclass'>
+                            <img src={image} className="image" alt="image   " />
+                        </div>
+                        <div className='inNoteiconsclass'>
+                            <img src={archive} className="archive" alt="archive   " />
+                        </div>
+                        <div className='inNoteiconsclass'>
+                            <img src={more} className="more" alt="more   " />
+                        </div>
+                    </div>
+                </Card>
                 {/* <Popper open={this.state.open} anchorEl={this.state.anchorEl} transition>
                     {({ TransitionProps }) => (
                             <Paper>
@@ -101,7 +124,7 @@ export default class DashBoard extends Component {
                        
                     )}
                 </Popper> */}
-                <EditNoteDialog ref={this.editNoteDialog} note= {this.state}  />
+                <EditNoteDialog ref={this.editNoteDialog} update={this.updateNote} note={this.state} />
             </div>
         )
     }

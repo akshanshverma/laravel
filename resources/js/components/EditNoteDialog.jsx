@@ -24,6 +24,9 @@ export default class EditNoteDialog extends React.Component {
         this.state = {
             noteData: null,
             open: false,
+            title: '',
+            note: '',
+            reminder:'',
         }
         this.handleDialog = this.handleDialog.bind(this);
     }
@@ -37,16 +40,31 @@ export default class EditNoteDialog extends React.Component {
 
 
     handleClose = () => {
+        var data = {
+            title: this.state.title,
+            note: this.state.note,
+            reminder:this.props.note.reminder,
+        }
+        
+        this.props.update(data);
         this.setState({ open: false });
     };
 
     removeReminder=()=>{
         
     }
+
+    getInput = () => {
+        this.state.note({
+            [event.target.name]:event.target.value
+        })
+        
+    }
+
     render() {
+        console.log(this.state);
+        
         const { fullScreen } = this.props;
-
-
         return (
             <div className='dilogBoxMainDv'>
 
