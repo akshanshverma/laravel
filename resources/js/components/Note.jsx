@@ -9,6 +9,7 @@ import archive from "../assets/icons/archive-24px.svg"
 import more from "../assets/icons/more_vert-24px.svg"
 import pin from "../assets/icons/pin.svg"
 import ReminderTab from "./ReminderTab";
+import SetColor from "./SetColor";
 import EditNoteDialog from "./EditNoteDialog";
 
 
@@ -17,31 +18,15 @@ export default class DashBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
-            title: '',
-            note: '',
-            reminder: null,
-        }
-        this.handleClick = this.handleClick.bind(this);
-        this.editNoteDialog = React.createRef();
-    }
-
-    componentDidMount() {
-        this.setState({
             id: this.props.setId,
             title: this.props.setTitle,
             note: this.props.setNote,
             reminder: this.props.setReminder,
-        })
+            color:this.props.setColor,
+        }
+        this.editNoteDialog = React.createRef();
     }
 
-    handleClick(event) {
-        const { currentTarget } = event;
-        this.setState(state => ({
-            anchorEl: currentTarget,
-            open: !state.open,
-        }));
-    };
 
     onClickCard = () => {
 
@@ -67,6 +52,12 @@ export default class DashBoard extends Component {
         this.props.update(data);
     }
 
+    updateColor = (color) =>{
+        var noteData = this.state;
+        noteData.color = color;
+        this.props.update(noteData);
+    }
+
     render() {
 
 
@@ -74,7 +65,7 @@ export default class DashBoard extends Component {
 
             <div className={this.props.view ? ('divCardList') : ('divCardGrid')}>
 
-                <Card className="noteCard">
+                <Card style={{backgroundColor: this.state.color}} className="noteCard">
                     <CardContent className='noteCardContent' >
                         <div className='cardTitlePin'>
                             <div className='inputTitle' onClick={this.openEditBox}>
@@ -98,13 +89,11 @@ export default class DashBoard extends Component {
 
                     </CardContent>
                     <div className='inNotetakeNoteIcons'>
-                        <ReminderTab setDate={this.setReminderDate} />
+                        <ReminderTab  setDate={this.setReminderDate} />
                         <div className='inNoteiconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>
-                        <div className='inNoteiconsclass'>
-                            <img src={colorLens} className="colorLens" alt="colorLens   " />
-                        </div>
+                        <SetColor changeColor={this.updateColor}/>
                         <div className='inNoteiconsclass'>
                             <img src={image} className="image" alt="image   " />
                         </div>

@@ -24,9 +24,11 @@ export default class EditNoteDialog extends React.Component {
         this.state = {
             noteData: null,
             open: false,
-            title: '',
-            note: '',
-            reminder:'',
+            id: this.props.note.id,
+            title: this.props.note.title,
+            note: this.props.note.note,
+            reminder: this.props.note.reminder,
+            color: this.props.note.color,
         }
         this.handleDialog = this.handleDialog.bind(this);
     }
@@ -37,33 +39,35 @@ export default class EditNoteDialog extends React.Component {
         });
     }
 
-
-
     handleClose = () => {
         var data = {
+            id: this.state.id,
             title: this.state.title,
             note: this.state.note,
-            reminder:this.props.note.reminder,
+            reminder: this.state.reminder,
+            color: this.state.color,
         }
-        
+
         this.props.update(data);
         this.setState({ open: false });
     };
 
-    removeReminder=()=>{
-        
+    removeReminder = () => {
+
     }
 
     getInput = () => {
-        this.state.note({
-            [event.target.name]:event.target.value
+        this.setState({
+            [event.target.name]: event.target.value
         })
-        
+
     }
 
     render() {
-        console.log(this.state);
-        
+
+        //    console.log('ch',this.state);
+
+
         const { fullScreen } = this.props;
         return (
             <div className='dilogBoxMainDv'>
@@ -93,10 +97,10 @@ export default class EditNoteDialog extends React.Component {
                             /></div>
                         )}
                     </DialogContent>
-                    <DialogActions>
+                    <DialogActions >
                         <div className='iconClose'>
                             <div className='takeNoteIcons'>
-                                <ReminderTab setDate={this.setReminderDate} />
+                                <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
                                 <div className='iconsclass'>
                                     <img src={collab} className="collab" alt="collab   " />
                                 </div>

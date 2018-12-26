@@ -15,14 +15,17 @@ export default class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logoutmenu: false
+            logoutmenu: false,
+            anchorEl:null,
         }
         this.logoutMenuOpen = this.logoutMenuOpen.bind(this);
         this.logoutMenuClose = this.logoutMenuClose.bind(this);
     }
 
-    logoutMenuOpen() {
+    logoutMenuOpen(event) {
+        const { currentTarget } = event;
         this.setState({
+            anchorEl: currentTarget,
             logoutmenu: true
         })
     }
@@ -33,10 +36,11 @@ export default class Navbar extends Component {
     }
 
     render() {
-
+        console.log(this.props.userData.username.substr(0,1));
+        
         return (
             <div >
-                <AppBar id='tb'  style={{ backgroundColor: 'white' }}>
+                <AppBar id='tb' style={{ backgroundColor: 'white' }}>
                     <Toolbar >
                         <div className='menulogo'>
                             <div className="iconBtn">
@@ -95,7 +99,7 @@ export default class Navbar extends Component {
                             </div>
                             <div className='avatarIcon'>
                                 <IconButton onClick={this.logoutMenuOpen}>
-                                    <Avatar />
+                                    <Avatar >{}</Avatar>
                                 </IconButton>
                             </div>
                         </div>
@@ -104,7 +108,7 @@ export default class Navbar extends Component {
                 </AppBar>
 
                 <div className='logoutMenu'>
-                    <Popper open={this.state.logoutmenu} transition disablePortal>
+                    <Popper className='logoutMenuPopper' anchorEl={this.state.anchorEl} open={this.state.logoutmenu} transition disablePortal>
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}
@@ -114,9 +118,16 @@ export default class Navbar extends Component {
                                 <Paper>
                                     <ClickAwayListener onClickAway={this.logoutMenuClose}>
                                         <MenuList>
-                                            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                            <div className='divAvatarMenu'>
+                                                <Avatar className='MenuAvtar' >A</Avatar>
+                                                <div className='userData'>
+                                                    <span>akshnash</span>
+                                                    <span>verma</span>
+                                                </div>
+                                            </div>
+                                            <Divider />
                                             <MenuItem onClick={this.props.logoutClick}>Logout</MenuItem>
+                                            <div className='logoutDiv'></div>
                                         </MenuList>
                                     </ClickAwayListener>
                                 </Paper>

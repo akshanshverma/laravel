@@ -71,10 +71,7 @@ span.psw {
 .goLogin{
     margin-left: 43%;
 }
-.userData{
-    margin-top: 25%;  
-    text-align: center;
-}
+
 #logout{
     margin-top: 50%;
     margin-left: 17%;
@@ -167,16 +164,35 @@ span.psw {
 .endIcon{
     display: inline-flex;
 }
-/*******logoutmenu********/
 
-.logoutMenu{
-
-    position: absolute;
-    top: 61px;
-    left: 89%;
-    z-index: 9999;
+.logoutMenu .logoutMenuPopper{
+   width: auto;
 }
 
+
+/*******logoutmenu********/
+
+/* .logoutMenu{
+    position: absolute;
+    top: 61px;
+    left: 73%;
+    z-index: 9999;
+} */
+.divAvatarMenu{
+    padding: 20px;
+    display: flex;
+}
+div.MenuAvtar{
+    font-size: 60px;
+    height: 96px;
+    width: 96px;
+}
+.userData{
+    padding: 0 25px;
+    display: grid;
+    margin-top: 10%;  
+    text-align: center;
+}
 /*****menudrawer******/
 
 /*****addnote******/
@@ -208,6 +224,7 @@ span.psw {
     margin:108px auto 0 auto;
     box-shadow: 0 0 9px #444343b5;
     border-radius: 8px;
+
     /* position: absolute;
     top: 108px;
     left: 28%; */  
@@ -287,6 +304,7 @@ span.psw {
     display: flex;
     justify-content: space-evenly;
     padding-bottom: 6px;
+    opacity: 0;
 }
 
 .inNoteiconsclass{
@@ -325,10 +343,19 @@ span.psw {
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
+.divCardGrid .noteCard:hover .inNotetakeNoteIcons{
+    opacity: 1;
+}
+
 .divCardGrid .noteCard .noteCardContent{
     padding: 16px 17px;
 }
-
+.divCardGrid .noteCard .noteCardContent .inNoteiconsclass{
+    opacity: 0;
+} 
+.divCardGrid .noteCard:hover .noteCardContent .inNoteiconsclass{
+    opacity: .8;
+} 
 div.reminderDateTimeOnNote{
     margin-top: 10px;
     height: 25px;
@@ -389,6 +416,27 @@ div.dilogBoxMainDv .editNoteDialogBox.editNoteContent{
     
 }
 
+    
+/* div .ReminderMenu  {
+    position: fixed;
+} */
+/********setColors**********/
+.colorMenuList .grid .colorAvatar{
+    height: 26px;
+    width: 26px;
+    border: solid 2px #fff;
+    
+} 
+
+.colorMenuList .grid .colorAvatar:hover{
+    border: solid 2px #a3a3a3;
+}
+
+.colorMenu .colorPopper .colorMenuList .grid{
+    padding: 3px 8px;
+    width: 138px;
+    justify-content: space-between;
+}
 /* ............... */
 @media only screen and (max-width: 800px) {
     .searchEnd{

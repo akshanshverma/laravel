@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { MenuList, MenuItem, Paper, Grow, Popper, ClickAwayListener, Divider, TextField } from "@material-ui/core";
+import { MenuList, MenuItem, Paper, Grow, Popper, ClickAwayListener, Divider, TextField, Tooltip } from "@material-ui/core";
 import alert from "../assets/icons/alert-24px.svg"
 import moment from "moment";
 
@@ -12,7 +12,7 @@ export default class ReminderTab extends Component {
             open: false,
             anchorEl: null,
             pickDate: false,
-            reminderDate:'',
+            reminderDate: null,
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -26,8 +26,8 @@ export default class ReminderTab extends Component {
             anchorEl: null,
         }));
         console.log(this.state);
-        
-       this.props.setDate(this.state.reminderDate);
+
+        this.props.setDate(this.state.reminderDate);
     };
 
     handleClick(event) {
@@ -42,30 +42,30 @@ export default class ReminderTab extends Component {
         var date = event.target.value
         var newDate = moment(date).format('MM/DD/YYYY, h:mm A');
         this.setState({
-            reminderDate:newDate
-        }) 
+            reminderDate: newDate
+        })
     }
 
     nextWeek = () => {
-        var date =moment().add(7, 'days');  
-        var time = moment().format('LT'); 
+        var date = moment().add(7, 'days');
+        var time = moment().format('LT');
         this.setState({
-            reminderDate:date+", "+time
+            reminderDate: date + ", " + time
         })
     }
 
     tomorrow = () => {
-        var date =moment().add(1, 'days').format('MM/DD/YYYY, h:mm A');  
+        var date = moment().add(1, 'days').format('MM/DD/YYYY, h:mm A');
         // var time = moment().format('LT'); 
         this.setState({
-            reminderDate:date
+            reminderDate: date
         })
     }
 
     laterToday = () => {
-        var date  = moment().format('MM/DD/YYYY, 8:00')
+        var date = moment().format('MM/DD/YYYY, 8:00')
         this.setState({
-            reminderDate:date+" PM"
+            reminderDate: date + " PM"
         })
     }
 
@@ -75,8 +75,10 @@ export default class ReminderTab extends Component {
         return (
             <div>
                 <div className='inNoteiconsclass'>
-                    <img src={alert} className="alert" alt="alert" onClick={this.handleClick} />
-                    {/* <span className="alertHint">Remind me</span> */}
+                    <Tooltip title="Remind Me">
+                        <img src={alert} className="alert" alt="alert" onClick={this.handleClick} />
+                        {/* <span className="alertHint">Remind me</span> */}
+                    </Tooltip>
                 </div>
                 <div className='ReminderMenu'>
                     <Popper className='reminderPopper' open={this.state.open} anchorEl={this.state.anchorEl} transition disablePortal>
@@ -113,8 +115,6 @@ export default class ReminderTab extends Component {
                         )}
 
                     </Popper>
-
-
                 </div>
             </div>
         )

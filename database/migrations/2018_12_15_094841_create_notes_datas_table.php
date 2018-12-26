@@ -20,6 +20,7 @@ class CreateNotesDatasTable extends Migration
             $table->string("title")->nullable();
             $table->string("note")->nullable();
             $table->string("reminder")->nullable();
+            $table->string("color")->nullable();
             $table->timestamps();
         });
     }

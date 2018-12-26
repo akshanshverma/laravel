@@ -8,6 +8,7 @@ import colorLens from "../assets/icons/color_lens-24px.svg"
 import archive from "../assets/icons/archive-24px.svg"
 import pin from "../assets/icons/pin.svg"
 import ReminderTab from "./ReminderTab";
+import SetColor from "./SetColor";
 
 
 export default class AddNotes extends Component {
@@ -18,6 +19,7 @@ export default class AddNotes extends Component {
             title: '',
             note: '',
             reminder: null,
+            color:null,
         }
         this.openAddnote = this.openAddnote.bind(this);
         this.closeAddnote = this.closeAddnote.bind(this);
@@ -41,6 +43,7 @@ export default class AddNotes extends Component {
             title: this.state.title,
             note: this.state.note,
             reminder:this.state.reminder,
+            color:this.state.color,
         }
         
 
@@ -51,6 +54,7 @@ export default class AddNotes extends Component {
                 title: '',
                 note: '',
                 reminder:null,
+                color:null,
             })
 
         }
@@ -74,6 +78,12 @@ export default class AddNotes extends Component {
         })
     }
 
+    changeColor=(color)=>{
+        this.setState({
+            color:color
+        })
+    }
+
     render() {
         var close = (
             <div onClick={this.openAddnote} className='NotesBox'>
@@ -88,8 +98,8 @@ export default class AddNotes extends Component {
         );
 
         var edit = (
-            <div className='addNoteBox'>
-                <div className='addTitle'>
+            <div style={{backgroundColor: this.state.color}} className='addNoteBox' >
+                <div  className='addTitle'>
                     <InputBase multiline name='title' placeholder='Title' fullWidth onChange={this.getInput} />
                     <img src={pin} className="pin" alt="pin   " />
                 </div>
@@ -113,9 +123,7 @@ export default class AddNotes extends Component {
                         <div className='iconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>
-                        <div className='iconsclass'>
-                            <img src={colorLens} className="colorLens" alt="colorLens   " />
-                        </div>
+                        <SetColor changeColor={this.changeColor}/>
                         <div className='iconsclass'>
                             <img src={image} className="image" alt="image   " />
                         </div>

@@ -20,6 +20,7 @@ export default class DashBoard extends Component {
         this.state = {
             menuBar: false,
             noteData: [],
+            userData:[],
             listView: false,
         }
         this.SnackBarN = React.createRef();
@@ -30,6 +31,7 @@ export default class DashBoard extends Component {
         this.getNoteData = this.getNoteData.bind(this);
     }
     componentDidMount() {
+        this.getUserData();
         this.getNoteData();
         this.checkReminder();
     }
@@ -42,7 +44,16 @@ export default class DashBoard extends Component {
                 })
             })
     }
+    getUserData =()=> {
+        userServices.getUsrData()
+            .then(res => {
+                this.setState({
+                    userData: res.data.userData
+                })
+            })
+    }
 
+    
     menuClickHandle() {
         if (this.state.menuBar === false) {
             this.setState({
@@ -121,6 +132,7 @@ export default class DashBoard extends Component {
                 setTitle={note.title} 
                 setNote={note.note}
                 setReminder={note.reminder}
+                setColor={note.color}
                 view={this.state.listView}
                 editNote={this.openEditBox}
                 update = {this.updateNoteData}
@@ -132,6 +144,7 @@ export default class DashBoard extends Component {
                 <NavBar
                     menuClick={this.menuClickHandle}
                     logoutClick={this.onClickLogout}
+                    userData={this.state.userData}
                     view={this.listGridView}
                     viewIcon={this.state.listView}
                 />

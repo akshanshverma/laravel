@@ -46,10 +46,16 @@ class NotesController extends Controller
         Cache::flush();
         $newNotesData = $request->all();
         $id = $newNotesData['id'];
-        $noteData = NotesData::where('id' , $id)->first(); 
-        $noteData->title = $newNotesData['title'];
-        $noteData->note = $newNotesData['note'];
-        $noteData->reminder = $newNotesData['reminder'];
-        $noteData->save();
+        $noteData = NotesData::where('id' , $id)->first();
+        // if (!$noteData) {
+            $noteData->title = $newNotesData['title'];
+            $noteData->note = $newNotesData['note'];
+            $noteData->reminder = $newNotesData['reminder'];
+            $noteData->color = $newNotesData['color'];
+            $noteData->save();
+            return response()->json('note update successfully',200);
+        // }
+        // return response()->json('note not found',220);
+        
     }
 }
