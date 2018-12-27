@@ -4,9 +4,9 @@ import checkBox from "../assets/icons/check_box-24px.svg"
 import brush from "../assets/icons/brush-24px.svg"
 import image from "../assets/icons/image-24px.svg"
 import collab from "../assets/icons/collab.svg"
-import colorLens from "../assets/icons/color_lens-24px.svg"
 import archive from "../assets/icons/archive-24px.svg"
 import pin from "../assets/icons/pin.svg"
+import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
 
@@ -20,6 +20,7 @@ export default class AddNotes extends Component {
             note: '',
             reminder: null,
             color:null,
+            pin:false,
         }
         this.openAddnote = this.openAddnote.bind(this);
         this.closeAddnote = this.closeAddnote.bind(this);
@@ -44,6 +45,7 @@ export default class AddNotes extends Component {
             note: this.state.note,
             reminder:this.state.reminder,
             color:this.state.color,
+            pin:this.state.pin,
         }
         
 
@@ -55,6 +57,7 @@ export default class AddNotes extends Component {
                 note: '',
                 reminder:null,
                 color:null,
+                pin:false,
             })
 
         }
@@ -84,6 +87,12 @@ export default class AddNotes extends Component {
         })
     }
 
+    pinAndUnpin = () =>{
+        this.setState({
+            pin:!this.state.pin
+        })
+    }
+
     render() {
         var close = (
             <div onClick={this.openAddnote} className='NotesBox'>
@@ -101,7 +110,7 @@ export default class AddNotes extends Component {
             <div style={{backgroundColor: this.state.color}} className='addNoteBox' >
                 <div  className='addTitle'>
                     <InputBase multiline name='title' placeholder='Title' fullWidth onChange={this.getInput} />
-                    <img src={pin} className="pin" alt="pin   " />
+                    <img src={this.state.pin ?pined:pin} className="pin" alt="pin" onClick={this.pinAndUnpin} />
                 </div>
                 <div className='addNotesInput'>
                     <InputBase multiline name='note' id='noteInput' placeholder='Take a note...' fullWidth onChange={this.getInput} />

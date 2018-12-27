@@ -4,10 +4,11 @@ import image from "../assets/icons/image-24px.svg"
 
 
 import collab from "../assets/icons/collab.svg"
-import colorLens from "../assets/icons/color_lens-24px.svg"
 import archive from "../assets/icons/archive-24px.svg"
+import unarchive from "../assets/icons/unarchive.svg"
 import more from "../assets/icons/more_vert-24px.svg"
 import pin from "../assets/icons/pin.svg"
+import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
 import EditNoteDialog from "./EditNoteDialog";
@@ -23,6 +24,8 @@ export default class DashBoard extends Component {
             note: this.props.setNote,
             reminder: this.props.setReminder,
             color:this.props.setColor,
+            pin:this.props.setPin,
+            archive:this.props.setArchive,
         }
         this.editNoteDialog = React.createRef();
     }
@@ -58,9 +61,40 @@ export default class DashBoard extends Component {
         this.props.update(noteData);
     }
 
+    pinAndUnpin = () =>{
+        var noteData = this.state;
+        if (this.state.pin === '0') {
+            noteData.pin = '1';
+            this.setState({
+                pin:'1'
+            })
+        }else{
+            noteData.pin = '0';
+            this.setState({
+                pin:'0'
+            })
+        }
+        this.props.update(noteData);
+    }
+
+    archiveAndUnarchive = () =>{
+        var noteData = this.state;
+        if (this.state.archive === '0') {
+            noteData.archive = '1';
+            this.setState({
+                archive:'1'
+            })
+        }else{
+            noteData.archive = '0';
+            this.setState({
+                archive:'0'
+            })
+        }
+        this.props.update(noteData);
+    }
+
     render() {
-
-
+        console.log(this.state);
         return (
 
             <div className={this.props.view ? ('divCardList') : ('divCardGrid')}>
@@ -72,7 +106,7 @@ export default class DashBoard extends Component {
                                 {this.props.setTitle}
                             </div>
                             <div className='inNoteiconsclass'>
-                                <img src={pin} className="pin" alt="pin" />
+                                <img src={this.state.pin === '1'?pined:pin} className="pin" alt="pin" onClick={this.pinAndUnpin}/>
                             </div>
                         </div>
                         <div className='inputnote' onClick={this.openEditBox}>
@@ -98,21 +132,13 @@ export default class DashBoard extends Component {
                             <img src={image} className="image" alt="image   " />
                         </div>
                         <div className='inNoteiconsclass'>
-                            <img src={archive} className="archive" alt="archive   " />
+                            <img src={this.state.archive === '1'?unarchive:archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive}/>
                         </div>
                         <div className='inNoteiconsclass'>
                             <img src={more} className="more" alt="more   " />
                         </div>
                     </div>
                 </Card>
-                {/* <Popper open={this.state.open} anchorEl={this.state.anchorEl} transition>
-                    {({ TransitionProps }) => (
-                            <Paper>
-                                <Typography>The content of the Popper.</Typography>
-                            </Paper>
-                       
-                    )}
-                </Popper> */}
                 <EditNoteDialog ref={this.editNoteDialog} update={this.updateNote} note={this.state} />
             </div>
         )

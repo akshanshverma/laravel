@@ -20,18 +20,17 @@ export default class DashBoard extends Component {
         this.state = {
             menuBar: false,
             noteData: [],
-            userData:[],
             listView: false,
+            noteState: 'notes',
         }
         this.SnackBarN = React.createRef();
-      
+
         this.menuClickHandle = this.menuClickHandle.bind(this);
         this.onClickLogout = this.onClickLogout.bind(this);
         this.createNewNote = this.createNewNote.bind(this);
         this.getNoteData = this.getNoteData.bind(this);
     }
     componentDidMount() {
-        this.getUserData();
         this.getNoteData();
         this.checkReminder();
     }
@@ -44,16 +43,7 @@ export default class DashBoard extends Component {
                 })
             })
     }
-    getUserData =()=> {
-        userServices.getUsrData()
-            .then(res => {
-                this.setState({
-                    userData: res.data.userData
-                })
-            })
-    }
 
-    
     menuClickHandle() {
         if (this.state.menuBar === false) {
             this.setState({
@@ -111,32 +101,98 @@ export default class DashBoard extends Component {
         }, (1000 * 60));
     }
 
-    updateNoteData = (data) =>{
+    updateNoteData = (data) => {
         noteservices.updateNote(data)
             .then(res => {
-               
+
             })
-            this.getNoteData();
+        this.getNoteData();
+    }
+
+    onClickReminderMenu = () => {
+        this.setState({
+            showReminderNote: true
+        })
     }
 
     render() {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-        console.log(this.state);
-
         var notes = (this.state.noteData.map((note) => {
-            return <Note
-                key={note.id}
-                setId= {note.id}
-                setTitle={note.title} 
-                setNote={note.note}
-                setReminder={note.reminder}
-                setColor={note.color}
-                view={this.state.listView}
-                editNote={this.openEditBox}
-                update = {this.updateNoteData}
-            ></Note>
+            if (note.pin === '0' && (note.archive === '0' || note.archive ===null )) {
+                return <Note
+                    key={note.id}
+                    setId={note.id}
+                    setTitle={note.title}
+                    setNote={note.note}
+                    setReminder={note.reminder}
+                    setColor={note.color}
+                    setPin = {note.pin}
+                    setArchive = {note.archive}
+                    view={this.state.listView}
+                    editNote={this.openEditBox}
+                    update={this.updateNoteData}
+                ></Note>
+            }
+            return;
+        }));
+
+        var reminderNote = (this.state.noteData.map((note) => {
+            if (note.reminder !== null) {
+                return <Note
+                    key={note.id}
+                    setId={note.id}
+                    setTitle={note.title}
+                    setNote={note.note}
+                    setReminder={note.reminder}
+                    setColor={note.color}
+                    setPin = {note.pin}
+                    setArchive = {note.archive}
+                    view={this.state.listView}
+                    editNote={this.openEditBox}
+                    update={this.updateNoteData}
+                ></Note>
+            }
+            return;
+        }));
+        
+        var pined = (this.state.noteData.map((note) => {
+            if (note.pin === '1') {
+                return <Note
+                    key={note.id}
+                    setId={note.id}
+                    setTitle={note.title}
+                    setNote={note.note}
+                    setReminder={note.reminder}
+                    setColor={note.color}
+                    setPin = {note.pin}
+                    setArchive = {note.archive}
+                    view={this.state.listView}
+                    editNote={this.openEditBox}
+                    update={this.updateNoteData}
+                ></Note>
+            }
+            return;
+        }));
+
+        var archived = (this.state.noteData.map((note) => {
+            if (note.archive === '1') {
+                return <Note
+                    key={note.id}
+                    setId={note.id}
+                    setTitle={note.title}
+                    setNote={note.note}
+                    setReminder={note.reminder}
+                    setColor={note.color}
+                    setPin = {note.pin}
+                    setArchive = {note.archive}
+                    view={this.state.listView}
+                    editNote={this.openEditBox}
+                    update={this.updateNoteData}
+                ></Note>
+            }
+            return;
         }));
 
         return (
@@ -148,14 +204,21 @@ export default class DashBoard extends Component {
                     view={this.listGridView}
                     viewIcon={this.state.listView}
                 />
-                <ManuDrawer menuAction={this.state.menuBar}   />
+                <ManuDrawer menuAction={this.state.menuBar} />
                 <AddNotes noteData={this.createNewNote} />
+
+
                 <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
-                    {notes}
+                    {pined}
+                </div>
+                <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                    
+                    {notes}        
                 </div>
 
+
                 <SnackBar ref={this.SnackBarN} />
-                
+
             </div>
         );
     }

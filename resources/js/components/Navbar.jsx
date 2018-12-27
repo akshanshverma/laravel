@@ -16,7 +16,9 @@ export default class Navbar extends Component {
         super(props);
         this.state = {
             logoutmenu: false,
-            anchorEl:null,
+            anchorEl: null,
+            email: localStorage.getItem('email'),
+            username: localStorage.getItem('username')
         }
         this.logoutMenuOpen = this.logoutMenuOpen.bind(this);
         this.logoutMenuClose = this.logoutMenuClose.bind(this);
@@ -36,8 +38,7 @@ export default class Navbar extends Component {
     }
 
     render() {
-        console.log(this.props.userData.username.substr(0,1));
-        
+
         return (
             <div >
                 <AppBar id='tb' style={{ backgroundColor: 'white' }}>
@@ -99,7 +100,7 @@ export default class Navbar extends Component {
                             </div>
                             <div className='avatarIcon'>
                                 <IconButton onClick={this.logoutMenuOpen}>
-                                    <Avatar >{}</Avatar>
+                                    <Avatar >{this.state.username.substr(0, 1)}</Avatar>
                                 </IconButton>
                             </div>
                         </div>
@@ -119,10 +120,10 @@ export default class Navbar extends Component {
                                     <ClickAwayListener onClickAway={this.logoutMenuClose}>
                                         <MenuList>
                                             <div className='divAvatarMenu'>
-                                                <Avatar className='MenuAvtar' >A</Avatar>
+                                                <Avatar className='MenuAvtar' >{this.state.username.substr(0, 1)}</Avatar>
                                                 <div className='userData'>
-                                                    <span>akshnash</span>
-                                                    <span>verma</span>
+                                                    <span className='usernameSpan'>{this.state.username}</span>
+                                                    <span>{this.state.email}</span>
                                                 </div>
                                             </div>
                                             <Divider />

@@ -52,6 +52,8 @@ class NotesController extends Controller
             $noteData->note = $newNotesData['note'];
             $noteData->reminder = $newNotesData['reminder'];
             $noteData->color = $newNotesData['color'];
+            $noteData->pin = $newNotesData['pin'];
+            $noteData->archive = $newNotesData['archive'];
             $noteData->save();
             return response()->json('note update successfully',200);
         // }

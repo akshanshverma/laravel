@@ -30,7 +30,11 @@ class UserController extends Controller
                 return response()->json(['error' => 'user is not verified'], 221);
             }
             $success['token'] = $user->createToken('fundoonotes')->accessToken;
-            $email = Auth::user()->email;
+           
+            $success['userData'] =[
+                'email' => $user->email,
+                'username' => $user->username,
+            ];
             return response()->json(['success' => $success], 200);
         } else {
             return response()->json(['error' => 'unauthorised'], 220);
@@ -55,7 +59,7 @@ class UserController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 210);
+            return response()->json(['errors' => $validator->errors()], 210);
         }
 
         $input = $request->all();

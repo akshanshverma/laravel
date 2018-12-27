@@ -9,6 +9,7 @@ use App\User;
 use Faker\Factory as Faker;
 use Laravel\Passport\Passport;
 
+
 class UserTest extends TestCase
 {
     /**
@@ -25,6 +26,8 @@ class UserTest extends TestCase
 
     /**
      * test user can login or not
+     * 
+     *  @return void
      */
     public function testUserLogin()
     {
@@ -38,6 +41,8 @@ class UserTest extends TestCase
 
     /**
      * test unknown  user can't login 
+     * 
+     *  @return void
      */
     public function testUserLoginAuth()
     {
@@ -51,6 +56,8 @@ class UserTest extends TestCase
 
     /**
      * test registration page is working or not
+     * 
+     *  @return void
      */
     public function testRegisterPage()
     {
@@ -60,6 +67,8 @@ class UserTest extends TestCase
 
     /**
      * test user registration working or not 
+     * 
+     *  @return void
      */
     public function testUserRegistration()
     {
@@ -75,6 +84,8 @@ class UserTest extends TestCase
 
     /**
      * test user registration validation is working or not 
+     * 
+     *  @return void
      */
 
     public function testUserRegistrationValidation()
@@ -84,11 +95,13 @@ class UserTest extends TestCase
             '/api/register',
             ['username' => 'akku', 'email' => 'akshansh.verma01@gmail.com', 'password' => '123456', 'rpassword' => '123456']
         );
-        $response->assertStatus(210);
+        $response->assertStatus(210)->assertJsonValidationErrors(['email']);
     }
 
     /**
      * test user data access 
+     * 
+     *  @return void
      */
 
     public function testGetUserData()
@@ -102,6 +115,8 @@ class UserTest extends TestCase
 
     /**
      * test get unauthorise user details 
+     * 
+     *  @return void
      */
 
     public function testGetUnauthorisedUserDetail()
@@ -111,7 +126,9 @@ class UserTest extends TestCase
     }
 
     /**
-     *test email verification at the time of registration
+    *test email verification at the time of registration
+    *
+    * @return void
     */
 
     public function testEmailVerification()
@@ -132,6 +149,8 @@ class UserTest extends TestCase
 
     /**
      * test if user is already verify
+     * 
+     *  @return void
      */
 
     public function testUserVerificationDone()
