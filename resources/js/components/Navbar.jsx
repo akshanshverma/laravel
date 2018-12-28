@@ -49,10 +49,10 @@ export default class Navbar extends Component {
                                     <img src={menuicon} className="menuicon" alt="menuicon" />
                                 </IconButton>
                             </div>
-                            <img src={appIcon} className="appIcon" alt="appIcon" />
+                            {this.props.menuName === 'Notes'?<img src={appIcon} className="appIcon" alt="appIcon" />:<div/>}
                             <div className='appName'>
                                 <Typography variant='h5'>
-                                    FundooNotes
+                                    {this.props.menuName === 'Notes'?'FundooNotes':this.props.menuName}
                                 </Typography>
                             </div>
                         </div>

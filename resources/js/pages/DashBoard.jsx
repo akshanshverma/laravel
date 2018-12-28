@@ -7,7 +7,6 @@ import ReminderTab from "../components/ReminderTab";
 import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
 import SnackBar from "../components/SnackBar";
-
 import moment from "moment";
 
 var noteservices = new NoteService();
@@ -21,7 +20,7 @@ export default class DashBoard extends Component {
             menuBar: false,
             noteData: [],
             listView: false,
-            noteState: 'notes',
+            noteState: "Notes",
         }
         this.SnackBarN = React.createRef();
 
@@ -109,18 +108,24 @@ export default class DashBoard extends Component {
         this.getNoteData();
     }
 
-    onClickReminderMenu = () => {
+    onClickMenu = (name) => {
+        console.log('das', name);
+
         this.setState({
-            showReminderNote: true
+            noteState: name
         })
     }
+
+
 
     render() {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
+        console.log('dashstate', this.state);
+
         var notes = (this.state.noteData.map((note) => {
-            if (note.pin === '0' && (note.archive === '0' || note.archive ===null )) {
+            if (note.pin === '0' && (note.archive === '0' || note.archive === null)) {
                 return <Note
                     key={note.id}
                     setId={note.id}
@@ -128,14 +133,14 @@ export default class DashBoard extends Component {
                     setNote={note.note}
                     setReminder={note.reminder}
                     setColor={note.color}
-                    setPin = {note.pin}
-                    setArchive = {note.archive}
+                    setPin={note.pin}
+                    setArchive={note.archive}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                 ></Note>
             }
-            return;
+           return;
         }));
 
         var reminderNote = (this.state.noteData.map((note) => {
@@ -147,8 +152,8 @@ export default class DashBoard extends Component {
                     setNote={note.note}
                     setReminder={note.reminder}
                     setColor={note.color}
-                    setPin = {note.pin}
-                    setArchive = {note.archive}
+                    setPin={note.pin}
+                    setArchive={note.archive}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -156,7 +161,7 @@ export default class DashBoard extends Component {
             }
             return;
         }));
-        
+
         var pined = (this.state.noteData.map((note) => {
             if (note.pin === '1') {
                 return <Note
@@ -166,8 +171,8 @@ export default class DashBoard extends Component {
                     setNote={note.note}
                     setReminder={note.reminder}
                     setColor={note.color}
-                    setPin = {note.pin}
-                    setArchive = {note.archive}
+                    setPin={note.pin}
+                    setArchive={note.archive}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -185,8 +190,8 @@ export default class DashBoard extends Component {
                     setNote={note.note}
                     setReminder={note.reminder}
                     setColor={note.color}
-                    setPin = {note.pin}
-                    setArchive = {note.archive}
+                    setPin={note.pin}
+                    setArchive={note.archive}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -203,18 +208,33 @@ export default class DashBoard extends Component {
                     userData={this.state.userData}
                     view={this.listGridView}
                     viewIcon={this.state.listView}
+                    menuName = {this.state.noteState}
                 />
-                <ManuDrawer menuAction={this.state.menuBar} />
+                <ManuDrawer menuAction={this.state.menuBar} noteState={this.onClickMenu} />
                 <AddNotes noteData={this.createNewNote} />
-
-
-                <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
-                    {pined}
-                </div>
-                <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
-                    
-                    {notes}        
-                </div>
+                {(() => {
+                    switch (this.state.noteState) {
+                        case 'Notes':
+                            return <div>
+                                <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                                    {pined}
+                                </div>
+                                <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                                    {notes}
+                                </div>
+                            </div>
+                        case 'Reminders':
+                            return <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                                {reminderNote}
+                            </div>;
+                        case 'Archive':
+                            return<div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                            {archived}
+                        </div>;
+                        default:
+                            return null;
+                    }
+                })()}
 
 
                 <SnackBar ref={this.SnackBarN} />

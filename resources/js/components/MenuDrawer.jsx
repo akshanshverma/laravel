@@ -28,48 +28,57 @@ export default class MenuDrawer extends Component {
         this.state = {
         }
     }
+
+    menuButtonAction = () => {
+        console.log(event.target.textContent);
+        
+        this.props.noteState(event.target.textContent);
+    }
+
     render() {
 
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
                     <Drawer
+                      
                         variant="persistent"
                         anchor="left"
                         open={this.props.menuAction}>
 
-                        <List>
-                            <ListItem >
+                        <List className='menuDrawerList'>
+                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Notes'>
                                 <ListItemIcon>
-                                    <img src={noteIcon} className="noteIcon" alt="noteIcon   " />
+                                    <img src={noteIcon} className="menuBarIcon" alt="noteIcon   " />
                                 </ListItemIcon>
                                 <ListItemText>Notes</ListItemText>
                             </ListItem>
-                            <ListItem button>
+                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Reminders'>
                                 <ListItemIcon>
-                                    <img src={reminderIcon} className="reminderIcon" alt="reminderIcon   " />
+                                    <img src={reminderIcon} className="menuBarIcon" alt="reminderIcon   " />
                                 </ListItemIcon>
                                 <ListItemText>Reminders</ListItemText>
                             </ListItem>
                             <Divider />
-                            <span>LABELS</span>
-                            <ListItem >
+                            <ListItem > <span className='menuLabelsSpan'>LABELS</span></ListItem>
+                           
+                            <ListItem className='menuListItem'>
                                 <ListItemIcon>
-                                    <img src={editIcon} className="editIcon" alt="editIcon   " />
+                                    <img src={editIcon} className="menuBarIcon" alt="editIcon   " />
                                 </ListItemIcon>
                                 <ListItemText>Edit labels</ListItemText>
                             </ListItem>
                             <Divider />
 
-                            <ListItem >
+                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Archive'>
                                 <ListItemIcon>
-                                    <img src={archive} className="archive" alt="archive   " />
+                                    <img src={archive} className="menuBarIcon" alt="archive   " />
                                 </ListItemIcon>
                                 <ListItemText>Archive</ListItemText>
                             </ListItem>
-                            <ListItem >
+                            <ListItem className='menuListItem' >
                                 <ListItemIcon>
-                                    <img src={trash} className="trash" alt="trash   " />
+                                    <img src={trash} className="menuBarIcon" alt="trash   " />
                                 </ListItemIcon>
                                 <ListItemText>Trash</ListItemText>
                             </ListItem>

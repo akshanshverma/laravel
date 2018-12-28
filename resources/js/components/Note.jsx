@@ -52,6 +52,7 @@ export default class DashBoard extends Component {
     }
 
     updateNote = (data) =>{
+        
         this.props.update(data);
     }
 

@@ -29,6 +29,8 @@ export default class EditNoteDialog extends React.Component {
             note: this.props.note.note,
             reminder: this.props.note.reminder,
             color: this.props.note.color,
+            pin: this.props.note.pin,
+            archive: this.props.note.archive
         }
         this.handleDialog = this.handleDialog.bind(this);
     }
@@ -46,10 +48,20 @@ export default class EditNoteDialog extends React.Component {
             note: this.state.note,
             reminder: this.state.reminder,
             color: this.state.color,
+            pin: this.state.pin,
+            archive: this.state.archive,
         }
-
         this.props.update(data);
-        this.setState({ open: false });
+        this.setState({
+            open: false,
+            // id: null,
+            // title: null,
+            // note: null,
+            // reminder: null,
+            // color: null,
+            // pin: null,
+            // archive: null,
+        });
     };
 
     removeReminder = () => {
@@ -63,9 +75,22 @@ export default class EditNoteDialog extends React.Component {
 
     }
 
+
+    setReminderDate = (date) => {
+        this.setState({
+            reminder: date
+        })
+    }
+    removeReminder = () => {
+        this.setState({
+            reminder: null
+        })
+    }
+
+
     render() {
 
-        //    console.log('ch',this.state);
+        console.log('ch', this.state);
 
 
         const { fullScreen } = this.props;
@@ -89,18 +114,21 @@ export default class EditNoteDialog extends React.Component {
                         <div className='addNotesInputEdit'>
                             <InputBase multiline name='note' id='noteInput' fullWidth onChange={this.getInput} defaultValue={this.props.note.note} />
                         </div>
-                        {this.props.note.reminder === null ? (<div />) : (
+                        {this.state.reminder === null ? (<div />) : (
                             <div> <Chip
                                 className='reminderDateTime'
-                                label={this.props.note.reminder}
+                                label={this.state.reminder}
                                 onDelete={this.removeReminder}
                             /></div>
                         )}
                     </DialogContent>
                     <DialogActions >
                         <div className='iconClose'>
-                            <div className='takeNoteIcons'>
-                                <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
+                            <div style={{ position: 'fixed' }} className='takeNoteIcons'>
+                                <div >
+                                    <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
+                                </div>
+
                                 <div className='iconsclass'>
                                     <img src={collab} className="collab" alt="collab   " />
                                 </div>

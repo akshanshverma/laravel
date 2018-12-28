@@ -416,10 +416,9 @@ div.dilogBoxMainDv .editNoteDialogBox.editNoteContent{
     
 }
 
-    
-/* div .ReminderMenu  {
-    position: fixed;
-} */
+.ReminderMenu{
+    position: inherit;
+}
 /********setColors**********/
 .colorMenuList .grid .colorAvatar{
     height: 26px;
@@ -436,6 +435,26 @@ div.dilogBoxMainDv .editNoteDialogBox.editNoteContent{
     padding: 3px 8px;
     width: 138px;
     justify-content: space-between;
+}
+
+/**********menubar********/
+.menuDrawerList{
+    border-right: 0px;
+}
+.menuBarIcon{
+    opacity: .5;
+}
+.menuBarIcon:hover{
+    opacity: 1;
+}
+
+.menuLabelsSpan{
+    opacity: .6;
+    font-size: 15px;
+}
+
+div .menuListItem{
+    border-radius: 0 25px 25px 0;
 }
 /* ............... */
 @media only screen and (max-width: 800px) {

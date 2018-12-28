@@ -5,6 +5,7 @@ import brush from "../assets/icons/brush-24px.svg"
 import image from "../assets/icons/image-24px.svg"
 import collab from "../assets/icons/collab.svg"
 import archive from "../assets/icons/archive-24px.svg"
+import unarchive from "../assets/icons/unarchive.svg"
 import pin from "../assets/icons/pin.svg"
 import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
@@ -19,8 +20,9 @@ export default class AddNotes extends Component {
             title: '',
             note: '',
             reminder: null,
-            color:null,
-            pin:false,
+            color: null,
+            pin: false,
+            archive: false,
         }
         this.openAddnote = this.openAddnote.bind(this);
         this.closeAddnote = this.closeAddnote.bind(this);
@@ -35,7 +37,6 @@ export default class AddNotes extends Component {
     }
 
     closeAddnote() {
-        
         this.setState({
             noteEdit: false
         })
@@ -43,21 +44,23 @@ export default class AddNotes extends Component {
         var data = {
             title: this.state.title,
             note: this.state.note,
-            reminder:this.state.reminder,
-            color:this.state.color,
-            pin:this.state.pin,
+            reminder: this.state.reminder,
+            color: this.state.color,
+            pin: this.state.pin,
+            archive: this.state.archive,
         }
-        
+
 
         if (this.state.reminder !== null || (this.state.title !== '' && this.state.note !== '')) {
-            
+
             this.props.noteData(data);
             this.setState({
                 title: '',
                 note: '',
-                reminder:null,
-                color:null,
-                pin:false,
+                reminder: null,
+                color: null,
+                pin: false,
+                archive: false,
             })
 
         }
@@ -75,22 +78,52 @@ export default class AddNotes extends Component {
             reminder: date
         })
     }
-    removeReminder(){
+    removeReminder() {
         this.setState({
             reminder: null
         })
     }
 
-    changeColor=(color)=>{
+    changeColor = (color) => {
         this.setState({
-            color:color
+            color: color
         })
     }
 
-    pinAndUnpin = () =>{
+    pinAndUnpin = () => {
         this.setState({
-            pin:!this.state.pin
+            pin: !this.state.pin
         })
+    }
+
+    archiveAndUnarchive = () => {
+        this.setState({
+            noteEdit: false
+        })
+        var data = {
+            title: this.state.title,
+            note: this.state.note,
+            reminder: this.state.reminder,
+            color: this.state.color,
+            pin: this.state.pin,
+            archive: '1',
+        }
+
+        if (this.state.reminder !== null || (this.state.title !== '' && this.state.note !== '')) {
+
+            this.props.noteData(data);
+            this.setState({
+                title: '',
+                note: '',
+                reminder: null,
+                color: null,
+                pin: false,
+                archive: false,
+            })
+
+        }
+
+
     }
 
     render() {
@@ -107,23 +140,23 @@ export default class AddNotes extends Component {
         );
 
         var edit = (
-            <div style={{backgroundColor: this.state.color}} className='addNoteBox' >
-                <div  className='addTitle'>
+            <div style={{ backgroundColor: this.state.color }} className='addNoteBox' >
+                <div className='addTitle'>
                     <InputBase multiline name='title' placeholder='Title' fullWidth onChange={this.getInput} />
-                    <img src={this.state.pin ?pined:pin} className="pin" alt="pin" onClick={this.pinAndUnpin} />
+                    <img src={this.state.pin ? pined : pin} className="pin" alt="pin" onClick={this.pinAndUnpin} />
                 </div>
                 <div className='addNotesInput'>
                     <InputBase multiline name='note' id='noteInput' placeholder='Take a note...' fullWidth onChange={this.getInput} />
                 </div>
-                
-                {this.state.reminder===null ? (<div/>) : (
-                   <div> <Chip
-                   className='reminderDateTime'
-                   label={this.state.reminder}
-                   onDelete={this.removeReminder}
-                   /></div>
+
+                {this.state.reminder === null ? (<div />) : (
+                    <div> <Chip
+                        className='reminderDateTime'
+                        label={this.state.reminder}
+                        onDelete={this.removeReminder}
+                    /></div>
                 )}
-               
+
 
 
                 <div className='iconClose'>
@@ -132,12 +165,12 @@ export default class AddNotes extends Component {
                         <div className='iconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>
-                        <SetColor changeColor={this.changeColor}/>
+                        <SetColor changeColor={this.changeColor} />
                         <div className='iconsclass'>
                             <img src={image} className="image" alt="image   " />
                         </div>
                         <div className='iconsclass'>
-                            <img src={archive} className="archive" alt="archive   " />
+                            <img src={archive} onClick={this.archiveAndUnarchive} className="archive" alt="archive   " />
                         </div>
                     </div>
 
