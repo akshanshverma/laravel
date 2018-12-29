@@ -25,9 +25,7 @@ export default class ReminderTab extends Component {
             open: !state.open,
             anchorEl: null,
         }));
-        console.log(this.state);
-
-        this.props.setDate(this.state.reminderDate);
+        // this.props.setDate(this.state.reminderDate);
     };
 
     handleClick(event) {
@@ -41,32 +39,24 @@ export default class ReminderTab extends Component {
     datePicker = () => {
         var date = event.target.value
         var newDate = moment(date).format('MM/DD/YYYY, h:mm A');
-        this.setState({
-            reminderDate: newDate
-        })
+        this.props.setDate(newDate);
     }
 
-    nextWeek = () => {
-        var date = moment().add(7, 'days');
+    nextWeek = () => {debugger;
+        var date = moment().add(7, 'days').calendar();
         var time = moment().format('LT');
-        this.setState({
-            reminderDate: date + ", " + time
-        })
+        this.props.setDate(date + ", " + time);
     }
 
     tomorrow = () => {
         var date = moment().add(1, 'days').format('MM/DD/YYYY, h:mm A');
         // var time = moment().format('LT'); 
-        this.setState({
-            reminderDate: date
-        })
+        this.props.setDate(date);
     }
 
     laterToday = () => {
         var date = moment().format('MM/DD/YYYY, 8:00')
-        this.setState({
-            reminderDate: date + " PM"
-        })
+        this.props.setDate(date + " PM");
     }
 
 

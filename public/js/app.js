@@ -10029,34 +10029,27 @@ function (_Component) {
       var date = event.target.value;
       var newDate = __WEBPACK_IMPORTED_MODULE_3_moment___default()(date).format('MM/DD/YYYY, h:mm A');
 
-      _this.setState({
-        reminderDate: newDate
-      });
+      _this.props.setDate(newDate);
     };
 
     _this.nextWeek = function () {
-      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(7, 'days');
+      debugger;
+      var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(7, 'days').calendar();
       var time = __WEBPACK_IMPORTED_MODULE_3_moment___default()().format('LT');
 
-      _this.setState({
-        reminderDate: date + ", " + time
-      });
+      _this.props.setDate(date + ", " + time);
     };
 
     _this.tomorrow = function () {
       var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().add(1, 'days').format('MM/DD/YYYY, h:mm A'); // var time = moment().format('LT'); 
 
-      _this.setState({
-        reminderDate: date
-      });
+      _this.props.setDate(date);
     };
 
     _this.laterToday = function () {
       var date = __WEBPACK_IMPORTED_MODULE_3_moment___default()().format('MM/DD/YYYY, 8:00');
 
-      _this.setState({
-        reminderDate: date + " PM"
-      });
+      _this.props.setDate(date + " PM");
     };
 
     _this.state = {
@@ -10078,9 +10071,7 @@ function (_Component) {
           open: !state.open,
           anchorEl: null
         };
-      });
-      console.log(this.state);
-      this.props.setDate(this.state.reminderDate);
+      }); // this.props.setDate(this.state.reminderDate);
     }
   }, {
     key: "handleClick",
@@ -121458,7 +121449,7 @@ exports = module.exports = __webpack_require__(658)(false);
 
 
 // module
-exports.push([module.i, "\n#registerT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n#loginT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n.maindiv{\n    padding-top: 7%;\n}\n.input{\n    margin: 10px;\n    /* width: 306px; */\n    border-radius: 5%;\n}\n\n#card{\n    border-radius: 4%;\n    box-shadow: 0px 0px 20px;  \n    margin: auto;\n    height: 360px;\n    width: 327px;\n    padding-left: 5%;\n    padding-right: 5%;\n    padding-bottom: 10px;\n    background-color: rgb(255, 255, 255);\n}\nButton{\n    font-family:\"Times New Roman\";\n    width: 70%;\n}\n.button{\n    margin-left: 24%;\n    margin-top: 5%;\n}\n#spanDiv{\n    margin-bottom: 10px;\n}\nspan.psw {\n    \n    float: right;  \n}\n.errMsgr{\n    text-align: center;\n}\n.msg{\n    height: 15px;\n    font-size: 14px;\n    color: red;\n    float: right;\n}\n.errMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: red;\n}\n\n.resetLinkMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: rgb(84, 192, 58);\n    text-shadow: 2px 2px 3px;\n}\n\n.goLogin{\n    margin-left: 43%;\n}\n\n#logout{\n    margin-top: 50%;\n    margin-left: 17%;\n}\n.inputRsP{\n    margin-top: 20%;\n}\n.divVarText{\n    margin-top: 25%;\n}\n.spanGoLogin{\n    margin-left: 3%;\n\n}\n\n/********** dashboard **************/\n\n/**navbar***/\n.iconBtnEnd .sHint {\n    visibility: hidden;\n    width: 40px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 5px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 82%;\n    top: 91%;\n    z-index: 1;\n}\n.searchEnd{\n    visibility: hidden;\n}\n\n#tb{\n    box-shadow: 0 0 0;\n}  \n\n.iconBtn button {\n    width: 48px;\n    opacity: 0.5;\n}\n.iconBtnEnd button {\n    width: 48px;\n    opacity: 0.5;\n    \n}\n\n/* .iconBtnEnd:hover .sHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n.iconBtnEnd{\n    margin: auto;\n}\n.searchBar{\n    background: rgba(0,0,0,0.04);\n    border-radius: 8px;\n    margin-left:7%;\n    display: flex;\n    width: 47%;\n}\n.menulogo{\n    display: flex;\n}\n.appName{\n    margin: auto;\n    padding-left: 8px;\n    opacity: 0.5;\n}\n.avatarIcon button{\n    width: 64px;\n}\n.avatarIcon {\n    margin: auto;\n    \n}\n.endBar{\n    display: flex;\n    margin-left: auto;\n}\n.searchInput{\n    margin: auto;\n}\n.endIcon{\n    display: inline-flex;\n}\n\n.logoutMenu .logoutMenuPopper{\n   width: auto;\n}\n\n\n/*******logoutmenu********/\n\n.logoutMenu .logoutMenuPopper{\n    z-index: 1;\n}\n.divAvatarMenu{\n    padding: 20px;\n    display: flex;\n}\ndiv.MenuAvtar{\n    font-size: 60px;\n    height: 96px;\n    width: 96px;\n}\n.userData{\n    padding: 0 20px;\n    display: grid;\n    /* margin-top: 10%;   */\n    text-align: center;\n}\n.usernameSpan{\n    font-size: 35px;\n}\n/*****menudrawer******/\n\n/*****addnote******/\n.NotesBox{\n    display: flex;\n    opacity: 0.5;\n    height: 46px;\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n\n.addNoteEndIcons{\n    margin: auto;\n    padding: 0 12px 0 12px;\n}\n.titleIcon{\n    margin-top: 10px;\n    margin-left: auto;\n    padding-right: 17px;\n}\n\n.addNoteBox{\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n.takeNote{\n    font-size: 20px;\n    margin-top: 10px;\n    margin-left: 17px;\n}\n.iconClose{\n    width: 100%;\n    padding: 0 9px;\n    margin-top: 8px;\n    display: flex;\n}\n.addTitle{\n    display: flex;\n    padding: 10px 20px 0 17px;\n}\n#noteInput{\n    font-size: 15px;\n}\n\n.addNotesInput{\n    margin-left: 17px;\n    padding-top: 3px;\n    padding-bottom: 14px;\n    padding-right: 25PX;\n}\n.takeNoteIcons{\n    display: flex;\n}\n.noteCloseButton{\n   float: right;\n}\n.iconsclass{\n    padding: 0 8px 0 15px;\n}\n\n.divCloseButton{\n    margin-left: auto;\n    padding-right: 22px;\n    padding-bottom: 4px;\n}\n/********Notes**********/\n\n.divCardGrid{\n    margin-top: 25px;\n    width: 240px;\n    max-height: 304px;\n}\n.divCardList{\n    /* margin-top: 25px; */\n    width: 594px;\n    /* max-height: 304px; */\n    margin: 25px auto 0 auto;\n}\n\n.cardGridView{\n    margin: 25px auto 0 auto;\n    display: flex;\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n    width: 770px;\n}\n.cardListView{\n    /* margin: 2% 27%; */\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n\n}\n\n.inNotetakeNoteIcons img{\n    height: 20px;\n}\n.inNotetakeNoteIcons{\n    display: flex;\n    justify-content: space-evenly;\n    padding-bottom: 6px;\n    opacity: 0;\n}\n\n.inNoteiconsclass{\n    opacity: .5;\n}\n.inNoteiconsclass:hover{\n    opacity: 1;\n}\n\n.inputTitle{\n    font-family: Arial, Helvetica, sans-serif;\n    width: 100%;\n    font-size: 22px;\n    word-wrap: break-word;\n}\n.inputnote{\n    font-family: Arial, Helvetica, sans-serif;\n    word-wrap: break-word;\n}\n.reminderDateTime{\n    margin-left: 15px;\n    font-size: 15px;\n    padding: 7px;\n    \n}\n.reminderDateTimeOnNote{\n    margin-left: auto;\n}\n.divCardGrid .noteCard{\n    border-radius: 8px;\n    border: 1px solid #dadce0;\n    box-shadow: 0 0 0;\n\n}\n.divCardGrid .noteCard:hover{\n    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n\n.divCardGrid .noteCard:hover .inNotetakeNoteIcons{\n    opacity: 1;\n}\n\n.divCardGrid .noteCard .noteCardContent{\n    padding: 16px 17px;\n}\n.divCardGrid .noteCard .noteCardContent .inNoteiconsclass{\n    opacity: 0;\n} \n.divCardGrid .noteCard:hover .noteCardContent .inNoteiconsclass{\n    opacity: .8;\n} \ndiv.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n.inputnote{\n    white-space: pre-line;\n}\n.cardTitlePin{\n    display: flex;\n}\n/* \ndiv.MuiCardContent-root-192{\n    padding-left: 17px;\n    padding-right: 17px;\n}\ndiv.MuiChip-root-193.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n/* .inNoteiconsclass .alertHint {\n    visibility: visible;\n    width: 80px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 1px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 20%;\n    top: 15%;\n    z-index: 1;\n}\n.inNoteiconsclass:hover .alertHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n/********ReminderTab**********/\n.remindeMenuHead{\n    margin: 7px;\n}\n.reminderPopper{\n    z-index: 1;\n}\n\n/********EditNoteDilogBox*********/\n\ndiv.dilogBoxMainDv .editNoteDialogBox.editNoteContent{\n    width: 600px;\n}\n.addTitlEdit{\n    display: flex;\n    \n}\n\n.ReminderMenu{\n    position: inherit;\n}\n/********setColors**********/\n.colorMenuList .grid .colorAvatar{\n    height: 26px;\n    width: 26px;\n    border: solid 2px #fff;\n    \n} \n\n.colorMenuList .grid .colorAvatar:hover{\n    border: solid 2px #a3a3a3;\n}\n\n.colorMenu .colorPopper .colorMenuList .grid{\n    padding: 3px 8px;\n    width: 138px;\n    justify-content: space-between;\n}\n\n/**********menubar********/\n.menuDrawerList{\n    border-right: 0px;\n}\n.menuBarIcon{\n    opacity: .5;\n}\n.menuBarIcon:hover{\n    opacity: 1;\n}\n\n.menuLabelsSpan{\n    opacity: .6;\n    font-size: 15px;\n}\n\ndiv .menuListItem{\n    border-radius: 0 25px 25px 0;\n}\n/* ............... */\n@media only screen and (max-width: 800px) {\n    .searchEnd{\n        visibility: visible;\n    }\n    .searchBar{\n        display: none;\n    }\n    .cardGridView{\n        width: 520px;\n    }\n}\n@media only screen and (max-width: 705px) {\n    /* .divCardGrid{\n        margin-top: 25px;\n        width: auto;\n        max-height: 304px;\n        margin-left: auto;\n        margin-right: auto;\n    }\n    .cardGridView{\n        margin: 2% 0%;\n        display: block;\n        justify-content: space-evenly;\n        flex-wrap: wrap;\n        \n    }  */\n    .appIcon{\n        display: none;\n    }\n    button.MuiButtonBase-root-47.MuiIconButton-root-41.noteView{\n        display: none;        \n    }\n    /* .NotesBox{\n        width: auto;\n        \n    } */\n}\n\n@media only screen and (max-width: 600px) {\n    .maindiv{\n        padding-top: 30%;\n    }\n\n    #card{\n        box-shadow: 0px 0px 10px;     \n    }\n    .NotesBox{\n        width: auto;\n        \n    }\n\n    .cardGridView{\n        width: auto;\n        display: block;\n    }\n    .divCardGrid {\n        width: auto;\n    }\n}\n@media only screen and (max-width: 400px) {\n    .maindiv{\n        padding-top: 35%;\n    }\n    #card{\n        box-shadow: 0px 0px 5px;        \n        width: 273px;\n        padding-left: 2%;\n        padding-right: 2%;      \n    }\n    .MuiFormControl-fullWidth-67 {\n        width: 86%;\n    }\n}\n\n", ""]);
+exports.push([module.i, "\n#registerT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n#loginT{\n    font-size: 40px;\n    text-shadow: 1px 1px 20px;\n    font-family:\"Times New Roman\";\n    text-align: center;\n}\n.maindiv{\n    padding-top: 7%;\n}\n.input{\n    margin: 10px;\n    /* width: 306px; */\n    border-radius: 5%;\n}\n\n#card{\n    border-radius: 4%;\n    box-shadow: 0px 0px 20px;  \n    margin: auto;\n    height: 360px;\n    width: 327px;\n    padding-left: 5%;\n    padding-right: 5%;\n    padding-bottom: 10px;\n    background-color: rgb(255, 255, 255);\n}\nButton{\n    font-family:\"Times New Roman\";\n    width: 70%;\n}\n.button{\n    margin-left: 24%;\n    margin-top: 5%;\n}\n#spanDiv{\n    margin-bottom: 10px;\n}\nspan.psw {\n    \n    float: right;  \n}\n.errMsgr{\n    text-align: center;\n}\n.msg{\n    height: 15px;\n    font-size: 14px;\n    color: red;\n    float: right;\n}\n.errMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: red;\n}\n\n.resetLinkMsg{\n    text-align: center;\n    margin-top: 30px;\n    color: rgb(84, 192, 58);\n    text-shadow: 2px 2px 3px;\n}\n\n.goLogin{\n    margin-left: 43%;\n}\n\n#logout{\n    margin-top: 50%;\n    margin-left: 17%;\n}\n.inputRsP{\n    margin-top: 20%;\n}\n.divVarText{\n    margin-top: 25%;\n}\n.spanGoLogin{\n    margin-left: 3%;\n\n}\n\n/********** dashboard **************/\n\n/**navbar***/\n.iconBtnEnd .sHint {\n    visibility: hidden;\n    width: 40px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 5px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 82%;\n    top: 91%;\n    z-index: 1;\n}\n.searchEnd{\n    visibility: hidden;\n}\n\n#tb{\n    box-shadow: 0 0 0;\n}  \n\n.iconBtn button {\n    width: 48px;\n    opacity: 0.5;\n}\n.iconBtnEnd button {\n    width: 48px;\n    opacity: 0.5;\n    \n}\n\n/* .iconBtnEnd:hover .sHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n.iconBtnEnd{\n    margin: auto;\n}\n.searchBar{\n    background: rgba(0,0,0,0.04);\n    border-radius: 8px;\n    margin-left:7%;\n    display: flex;\n    width: 47%;\n}\n.menulogo{\n    display: flex;\n}\n.appName{\n    margin: auto;\n    padding-left: 8px;\n    opacity: 0.5;\n}\n.avatarIcon button{\n    width: 64px;\n}\n.avatarIcon {\n    margin: auto;\n    \n}\n.endBar{\n    display: flex;\n    margin-left: auto;\n}\n.searchInput{\n    margin: auto;\n}\n.endIcon{\n    display: inline-flex;\n}\n\n.logoutMenu .logoutMenuPopper{\n   width: auto;\n}\n\n\n/*******logoutmenu********/\n\n.logoutMenu .logoutMenuPopper{\n    z-index: 1;\n}\n.divAvatarMenu{\n    padding: 20px;\n    display: flex;\n}\ndiv.MenuAvtar{\n    font-size: 60px;\n    height: 96px;\n    width: 96px;\n}\n.userData{\n    padding: 0 20px;\n    display: grid;\n    /* margin-top: 10%;   */\n    text-align: center;\n}\n.usernameSpan{\n    font-size: 35px;\n}\n/*****menudrawer******/\n\n/*****addnote******/\n.NotesBox{\n    display: flex;\n    opacity: 0.5;\n    height: 46px;\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n\n.addNoteEndIcons{\n    margin: auto;\n    padding: 0 12px 0 12px;\n}\n.titleIcon{\n    margin-top: 10px;\n    margin-left: auto;\n    padding-right: 17px;\n}\n\n.addNoteBox{\n    width: 598px;\n    margin:108px auto 0 auto;\n    box-shadow: 0 0 9px #444343b5;\n    border-radius: 8px;\n\n    /* position: absolute;\n    top: 108px;\n    left: 28%; */  \n}\n.takeNote{\n    font-size: 20px;\n    margin-top: 10px;\n    margin-left: 17px;\n}\n.iconClose{\n    width: 100%;\n    padding: 0 9px;\n    margin-top: 8px;\n    display: flex;\n}\n.addTitle{\n    display: flex;\n    padding: 10px 20px 0 17px;\n}\n#noteInput{\n    font-size: 15px;\n}\n\n.addNotesInput{\n    margin-left: 17px;\n    padding-top: 3px;\n    padding-bottom: 14px;\n    padding-right: 25PX;\n}\n.takeNoteIcons{\n    display: flex;\n}\n.noteCloseButton{\n   float: right;\n}\n.iconsclass{\n    padding: 0 8px 0 15px;\n}\n\n.divCloseButton{\n    margin-left: auto;\n    padding-right: 22px;\n    padding-bottom: 4px;\n}\n/********Notes**********/\n\n.divCardGrid{\n    margin-top: 25px;\n    width: 240px;\n    max-height: 304px;\n}\n.divCardList{\n    /* margin-top: 25px; */\n    width: 594px;\n    /* max-height: 304px; */\n    margin: 25px auto 0 auto;\n}\n\n.cardGridView{\n    margin: 25px auto 0 auto;\n    display: flex;\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n    width: 770px;\n}\n.cardListView{\n    /* margin: 2% 27%; */\n    justify-content: space-evenly;\n    flex-wrap: wrap;\n\n}\n\n.inNotetakeNoteIcons img{\n    height: 20px;\n}\n.inNotetakeNoteIcons{\n    display: flex;\n    justify-content: space-evenly;\n    padding-bottom: 6px;\n}\n\n.inNoteiconsclass{\n    opacity: .5;\n}\n.inNoteiconsclass:hover{\n    opacity: 1;\n}\n\n.inputTitle{\n    font-family: Arial, Helvetica, sans-serif;\n    width: 100%;\n    font-size: 22px;\n    word-wrap: break-word;\n}\n.inputnote{\n    font-family: Arial, Helvetica, sans-serif;\n    word-wrap: break-word;\n}\n.reminderDateTime{\n    margin-left: 15px;\n    font-size: 15px;\n    padding: 7px;\n    \n}\n.reminderDateTimeOnNote{\n    margin-left: auto;\n}\n.divCardGrid .noteCard{\n    border-radius: 8px;\n    border: 1px solid #dadce0;\n    box-shadow: 0 0 0;\n\n}\n.divCardGrid .noteCard:hover{\n    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n\n/* .divCardGrid .noteCard:hover .inNotetakeNoteIcons{\n    opacity: 1;\n} */\n\n.divCardGrid .noteCard .noteCardContent{\n    padding: 16px 17px;\n}\n/* .divCardGrid .noteCard .noteCardContent .inNoteiconsclass{\n    opacity: 0;\n}  */\n.divCardGrid .noteCard:hover .noteCardContent .inNoteiconsclass{\n    opacity: .8;\n} \ndiv.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n.inputnote{\n    white-space: pre-line;\n}\n.cardTitlePin{\n    display: flex;\n}\n/* \ndiv.MuiCardContent-root-192{\n    padding-left: 17px;\n    padding-right: 17px;\n}\ndiv.MuiChip-root-193.reminderDateTimeOnNote{\n    margin-top: 10px;\n    height: 25px;\n}\n\n/* .inNoteiconsclass .alertHint {\n    visibility: visible;\n    width: 80px;\n    background-color: black;\n    color: #fff;\n    text-align: center;\n    border-radius: 6px;\n    padding: 3px 1px;\n    font-size: smaller;\n\n\n    position: absolute;\n    left: 20%;\n    top: 15%;\n    z-index: 1;\n}\n.inNoteiconsclass:hover .alertHint {\n    visibility: visible;\n    opacity: 0.8;\n  } */\n\n/********ReminderTab**********/\n.remindeMenuHead{\n    margin: 7px;\n}\n.reminderPopper{\n    z-index: 1;\n}\n\n/********EditNoteDilogBox*********/\n\ndiv.dilogBoxMainDv .editNoteDialogBox.editNoteContent{\n    width: 600px;\n}\n.addTitlEdit{\n    display: flex;\n    \n}\n\n.ReminderMenu{\n    position: inherit;\n}\n\n.reminderBarDialog{\n    height: 44px;\n    background-color: #323232;\n}\n.reminderBarDialogSpan{\n    font-family: 'Roboto',arial,sans-serif;\n    color: #fff;\n    font-size: 15px;\n}\n/********setColors**********/\n.colorMenuList .grid .colorAvatar{\n    height: 26px;\n    width: 26px;\n    border: solid 2px #fff;\n    \n} \n\n.colorMenuList .grid .colorAvatar:hover{\n    border: solid 2px #a3a3a3;\n}\n\n.colorMenu .colorPopper .colorMenuList .grid{\n    padding: 3px 8px;\n    width: 138px;\n    justify-content: space-between;\n}\n\n/**********menubar********/\n.menuDrawerList{\n    border-right: 0px;\n}\n.menuBarIcon{\n    opacity: .5;\n}\n.menuBarIcon:hover{\n    opacity: 1;\n}\n\n.menuLabelsSpan{\n    opacity: .6;\n    font-size: 15px;\n}\n\ndiv .menuListItem{\n    border-radius: 0 25px 25px 0;\n}\n/* ............... */\n@media only screen and (max-width: 800px) {\n    .searchEnd{\n        visibility: visible;\n    }\n    .searchBar{\n        display: none;\n    }\n    .cardGridView{\n        width: 520px;\n    }\n}\n@media only screen and (max-width: 705px) {\n    /* .divCardGrid{\n        margin-top: 25px;\n        width: auto;\n        max-height: 304px;\n        margin-left: auto;\n        margin-right: auto;\n    }\n    .cardGridView{\n        margin: 2% 0%;\n        display: block;\n        justify-content: space-evenly;\n        flex-wrap: wrap;\n        \n    }  */\n    .appIcon{\n        display: none;\n    }\n    button.MuiButtonBase-root-47.MuiIconButton-root-41.noteView{\n        display: none;        \n    }\n    /* .NotesBox{\n        width: auto;\n        \n    } */\n}\n\n@media only screen and (max-width: 600px) {\n    .maindiv{\n        padding-top: 30%;\n    }\n\n    #card{\n        box-shadow: 0px 0px 10px;     \n    }\n    .NotesBox{\n        width: auto;\n        \n    }\n\n    .cardGridView{\n        width: auto;\n        display: block;\n    }\n    .divCardGrid {\n        width: auto;\n    }\n}\n@media only screen and (max-width: 400px) {\n    .maindiv{\n        padding-top: 35%;\n    }\n    #card{\n        box-shadow: 0px 0px 5px;        \n        width: 273px;\n        padding-left: 2%;\n        padding-right: 2%;      \n    }\n    .MuiFormControl-fullWidth-67 {\n        width: 86%;\n    }\n}\n\n", ""]);
 
 // exports
 
@@ -122997,20 +122988,14 @@ function (_Component) {
 
       if (localStorage.getItem('token') === null) {
         this.props.history.push("/login");
-      }
+      } // console.log('dashstate', this.state);
 
-      console.log('dashstate', this.state);
+
       var notes = this.state.noteData.map(function (note) {
         if (note.pin === '0' && (note.archive === '0' || note.archive === null)) {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Note__["a" /* default */], {
             key: note.id,
-            setId: note.id,
-            setTitle: note.title,
-            setNote: note.note,
-            setReminder: note.reminder,
-            setColor: note.color,
-            setPin: note.pin,
-            setArchive: note.archive,
+            noteData: note,
             view: _this4.state.listView,
             editNote: _this4.openEditBox,
             update: _this4.updateNoteData
@@ -123023,13 +123008,7 @@ function (_Component) {
         if (note.reminder !== null) {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Note__["a" /* default */], {
             key: note.id,
-            setId: note.id,
-            setTitle: note.title,
-            setNote: note.note,
-            setReminder: note.reminder,
-            setColor: note.color,
-            setPin: note.pin,
-            setArchive: note.archive,
+            noteData: note,
             view: _this4.state.listView,
             editNote: _this4.openEditBox,
             update: _this4.updateNoteData
@@ -123042,13 +123021,7 @@ function (_Component) {
         if (note.pin === '1') {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Note__["a" /* default */], {
             key: note.id,
-            setId: note.id,
-            setTitle: note.title,
-            setNote: note.note,
-            setReminder: note.reminder,
-            setColor: note.color,
-            setPin: note.pin,
-            setArchive: note.archive,
+            noteData: note,
             view: _this4.state.listView,
             editNote: _this4.openEditBox,
             update: _this4.updateNoteData
@@ -123061,13 +123034,7 @@ function (_Component) {
         if (note.archive === '1') {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Note__["a" /* default */], {
             key: note.id,
-            setId: note.id,
-            setTitle: note.title,
-            setNote: note.note,
-            setReminder: note.reminder,
-            setColor: note.color,
-            setPin: note.pin,
-            setArchive: note.archive,
+            noteData: note,
             view: _this4.state.listView,
             editNote: _this4.openEditBox,
             update: _this4.updateNoteData
@@ -124184,24 +124151,22 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DashBoard).call(this, props));
 
-    _this.onClickCard = function () {};
-
     _this.openEditBox = function () {
       _this.editNoteDialog.current.handleDialog();
     };
 
     _this.removeReminder = function () {
-      var noteData = _this.state;
+      var noteData = _this.state.noteData;
       noteData.reminder = null;
 
       _this.props.update(noteData);
     };
 
     _this.setReminderDate = function (date) {
-      var noteData = _this.state;
-      noteData.reminder = date;
+      var note = _this.state.noteData;
+      note.reminder = date;
 
-      _this.props.update(noteData);
+      _this.props.update(note);
     };
 
     _this.updateNote = function (data) {
@@ -124209,60 +124174,54 @@ function (_Component) {
     };
 
     _this.updateColor = function (color) {
-      var noteData = _this.state;
-      noteData.color = color;
+      var notes = _this.state.noteData;
+      notes.color = color;
 
-      _this.props.update(noteData);
+      _this.props.update(notes);
     };
 
     _this.pinAndUnpin = function () {
-      var noteData = _this.state;
+      var notes = _this.state.noteData;
 
-      if (_this.state.pin === '0') {
-        noteData.pin = '1';
+      if (_this.state.noteData.pin === '0') {
+        notes.pin = '1';
 
         _this.setState({
-          pin: '1'
+          noteData: notes
         });
       } else {
-        noteData.pin = '0';
+        notes.pin = '0';
 
         _this.setState({
-          pin: '0'
+          noteData: notes
         });
       }
 
-      _this.props.update(noteData);
+      _this.props.update(notes);
     };
 
     _this.archiveAndUnarchive = function () {
-      var noteData = _this.state;
+      var notes = _this.state.noteData;
 
-      if (_this.state.archive === '0') {
-        noteData.archive = '1';
+      if (_this.state.noteData.archive === '0') {
+        notes.archive = '1';
 
         _this.setState({
-          archive: '1'
+          noteData: notes
         });
       } else {
-        noteData.archive = '0';
+        notes.archive = '0';
 
         _this.setState({
-          archive: '0'
+          noteData: notes
         });
       }
 
-      _this.props.update(noteData);
+      _this.props.update(notes);
     };
 
     _this.state = {
-      id: _this.props.setId,
-      title: _this.props.setTitle,
-      note: _this.props.setNote,
-      reminder: _this.props.setReminder,
-      color: _this.props.setColor,
-      pin: _this.props.setPin,
-      archive: _this.props.setArchive
+      noteData: _this.props.noteData
     };
     _this.editNoteDialog = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createRef();
     return _this;
@@ -124271,12 +124230,12 @@ function (_Component) {
   _createClass(DashBoard, [{
     key: "render",
     value: function render() {
-      console.log(this.state);
+      // console.log('noteData',this.state);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: this.props.view ? 'divCardList' : 'divCardGrid'
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["d" /* Card */], {
         style: {
-          backgroundColor: this.state.color
+          backgroundColor: this.state.noteData.color
         },
         className: "noteCard"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["e" /* CardContent */], {
@@ -124286,19 +124245,19 @@ function (_Component) {
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inputTitle",
         onClick: this.openEditBox
-      }, this.props.setTitle), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }, this.props.noteData.title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inNoteiconsclass"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: this.state.pin === '1' ? __WEBPACK_IMPORTED_MODULE_8__assets_icons_pined_svg___default.a : __WEBPACK_IMPORTED_MODULE_7__assets_icons_pin_svg___default.a,
+        src: this.state.noteData.pin === '1' ? __WEBPACK_IMPORTED_MODULE_8__assets_icons_pined_svg___default.a : __WEBPACK_IMPORTED_MODULE_7__assets_icons_pin_svg___default.a,
         className: "pin",
         alt: "pin",
         onClick: this.pinAndUnpin
       }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inputnote",
         onClick: this.openEditBox
-      }, this.props.setNote), this.state.reminder === null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["f" /* Chip */], {
+      }, this.props.noteData.note), this.state.noteData.reminder === null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core__["f" /* Chip */], {
         className: "reminderDateTimeOnNote",
-        label: this.state.reminder,
+        label: this.state.noteData.reminder,
         onDelete: this.removeReminder
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inNotetakeNoteIcons"
@@ -124321,7 +124280,7 @@ function (_Component) {
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "inNoteiconsclass"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: this.state.archive === '1' ? __WEBPACK_IMPORTED_MODULE_5__assets_icons_unarchive_svg___default.a : __WEBPACK_IMPORTED_MODULE_4__assets_icons_archive_24px_svg___default.a,
+        src: this.state.noteData.archive === '1' ? __WEBPACK_IMPORTED_MODULE_5__assets_icons_unarchive_svg___default.a : __WEBPACK_IMPORTED_MODULE_4__assets_icons_archive_24px_svg___default.a,
         className: "archive",
         alt: "archive   ",
         onClick: this.archiveAndUnarchive
@@ -124332,9 +124291,12 @@ function (_Component) {
         className: "more",
         alt: "more   "
       })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__EditNoteDialog__["a" /* default */], {
+        style: {
+          backgroundColor: this.state.noteData.color
+        },
         ref: this.editNoteDialog,
         update: this.updateNote,
-        note: this.state
+        note: this.state.noteData
       }));
     }
   }]);
@@ -124358,41 +124320,30 @@ module.exports = "/images/more_vert-24px.svg?db2457110c3e8817046f33cc430431a6";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditNoteDialog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_core_Button__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_core_Button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__material_ui_core_Button__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_Dialog__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_Dialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_Dialog__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogActions__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogActions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogActions__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__material_ui_core_DialogContent__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__material_ui_core_DialogContent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__material_ui_core_DialogContent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core_DialogContentText__ = __webpack_require__(148);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core_DialogContentText___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__material_ui_core_DialogContentText__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core_DialogTitle__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core_DialogTitle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_DialogTitle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__material_ui_core_withMobileDialog__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__material_ui_core_withMobileDialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__material_ui_core_withMobileDialog__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__material_ui_core__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__assets_icons_check_box_24px_svg__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__assets_icons_check_box_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__assets_icons_check_box_24px_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__assets_icons_brush_24px_svg__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__assets_icons_brush_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__assets_icons_brush_24px_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__assets_icons_image_24px_svg__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__assets_icons_image_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__assets_icons_image_24px_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__assets_icons_collab_svg__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__assets_icons_collab_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__assets_icons_collab_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__assets_icons_color_lens_24px_svg__ = __webpack_require__(307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__assets_icons_color_lens_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__assets_icons_color_lens_24px_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__assets_icons_archive_24px_svg__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__assets_icons_archive_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__assets_icons_archive_24px_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__assets_icons_pin_svg__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__assets_icons_pin_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__assets_icons_pin_svg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ReminderTab__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__material_ui_core_Button__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__material_ui_core_Button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_Button__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_core_Dialog__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_core_Dialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__material_ui_core_Dialog__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_DialogActions__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_DialogActions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_DialogActions__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogContent__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogContent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogContent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__material_ui_core__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__assets_icons_image_24px_svg__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__assets_icons_image_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__assets_icons_image_24px_svg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__assets_icons_collab_svg__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__assets_icons_collab_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__assets_icons_collab_svg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__assets_icons_archive_24px_svg__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__assets_icons_archive_24px_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__assets_icons_archive_24px_svg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__assets_icons_unarchive_svg__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__assets_icons_unarchive_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__assets_icons_unarchive_svg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__assets_icons_pin_svg__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__assets_icons_pin_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__assets_icons_pin_svg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__assets_icons_pined_svg__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__assets_icons_pined_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__assets_icons_pined_svg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ReminderTab__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__SetColor__ = __webpack_require__(306);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -124425,10 +124376,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
-
-
-
-
 var EditNoteDialog =
 /*#__PURE__*/
 function (_React$Component) {
@@ -124442,58 +124389,92 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditNoteDialog).call(this, props));
 
     _this.handleClose = function () {
-      var data = {
-        id: _this.state.id,
-        title: _this.state.title,
-        note: _this.state.note,
-        reminder: _this.state.reminder,
-        color: _this.state.color,
-        pin: _this.state.pin,
-        archive: _this.state.archive
-      };
+      var data = _this.state.noteData;
 
       _this.props.update(data);
 
       _this.setState({
-        open: false // id: null,
-        // title: null,
-        // note: null,
-        // reminder: null,
-        // color: null,
-        // pin: null,
-        // archive: null,
-
+        open: false
       });
     };
 
-    _this.removeReminder = function () {};
-
     _this.getInput = function () {
-      _this.setState(_defineProperty({}, event.target.name, event.target.value));
+      var note = _this.state.noteData;
+      note[event.target.name] = event.target.value;
+
+      _this.setState({
+        noteData: note
+      });
     };
 
     _this.setReminderDate = function (date) {
+      var note = _this.state.noteData;
+      note.reminder = date;
+
       _this.setState({
-        reminder: date
+        noteData: note
       });
     };
 
     _this.removeReminder = function () {
+      var note = _this.state.noteData;
+      note.reminder = null;
+
       _this.setState({
-        reminder: null
+        noteData: note
       });
     };
 
+    _this.updateColor = function (color) {
+      var notes = _this.state.noteData;
+      notes.color = color;
+
+      _this.props.update(notes);
+    };
+
+    _this.archiveAndUnarchive = function () {
+      var notes = _this.state.noteData;
+
+      if (_this.state.noteData.archive === '0') {
+        notes.archive = '1';
+
+        _this.setState({
+          noteData: notes,
+          open: false
+        });
+      } else {
+        notes.archive = '0';
+
+        _this.setState({
+          noteData: notes,
+          open: false
+        });
+      }
+
+      _this.props.update(notes);
+    };
+
+    _this.pinAndUnpin = function () {
+      var notes = _this.state.noteData;
+
+      if (_this.state.noteData.pin === '0') {
+        notes.pin = '1';
+
+        _this.setState({
+          noteData: notes
+        });
+      } else {
+        notes.pin = '0';
+
+        _this.setState({
+          noteData: notes
+        });
+      }
+    };
+
     _this.state = {
-      noteData: null,
       open: false,
-      id: _this.props.note.id,
-      title: _this.props.note.title,
-      note: _this.props.note.note,
-      reminder: _this.props.note.reminder,
-      color: _this.props.note.color,
-      pin: _this.props.note.pin,
-      archive: _this.props.note.archive
+      noteData: _this.props.note
     };
     _this.handleDialog = _this.handleDialog.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -124509,84 +124490,86 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('ch', this.state);
+      // console.log('ch', this.state);
       var fullScreen = this.props.fullScreen;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "dilogBoxMainDv"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_Dialog___default.a, {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__material_ui_core_Dialog___default.a, {
         fullWidth: true,
         className: "editNoteDialogBox",
         fullScreen: fullScreen,
         open: this.state.open,
         onClose: this.handleClose,
         "aria-labelledby": "responsive-dialog-title"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__material_ui_core_DialogContent___default.a, {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        style: {
+          backgroundColor: this.state.noteData.color
+        }
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogContent___default.a, {
         className: "editNoteContent"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "addTitlEdit"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__material_ui_core__["m" /* InputBase */], {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__material_ui_core__["m" /* InputBase */], {
         multiline: true,
         name: "title",
         fullWidth: true,
         onChange: this.getInput,
-        defaultValue: this.props.note.title
+        defaultValue: this.state.noteData.title
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: __WEBPACK_IMPORTED_MODULE_16__assets_icons_pin_svg___default.a,
+        src: this.state.noteData.pin === '1' ? __WEBPACK_IMPORTED_MODULE_11__assets_icons_pined_svg___default.a : __WEBPACK_IMPORTED_MODULE_10__assets_icons_pin_svg___default.a,
+        onClick: this.pinAndUnpin,
         className: "pin",
         alt: "pin   "
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "addNotesInputEdit"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__material_ui_core__["m" /* InputBase */], {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__material_ui_core__["m" /* InputBase */], {
         multiline: true,
         name: "note",
         id: "noteInput",
         fullWidth: true,
         onChange: this.getInput,
-        defaultValue: this.props.note.note
-      })), this.state.reminder === null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__material_ui_core__["f" /* Chip */], {
+        defaultValue: this.state.noteData.note
+      })), this.state.noteData.reminder === null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__material_ui_core__["f" /* Chip */], {
         className: "reminderDateTime",
-        label: this.state.reminder,
+        label: this.state.noteData.reminder,
         onDelete: this.removeReminder
-      }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__material_ui_core_DialogActions___default.a, null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_DialogActions___default.a, null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "iconClose"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         style: {
           position: 'fixed'
         },
         className: "takeNoteIcons"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_17__ReminderTab__["a" /* default */], {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12__ReminderTab__["a" /* default */], {
         className: "editBoxReminderTab",
         setDate: this.setReminderDate
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "iconsclass"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: __WEBPACK_IMPORTED_MODULE_13__assets_icons_collab_svg___default.a,
+        src: __WEBPACK_IMPORTED_MODULE_7__assets_icons_collab_svg___default.a,
         className: "collab",
         alt: "collab   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_13__SetColor__["a" /* default */], {
+        changeColor: this.updateColor
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "iconsclass"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: __WEBPACK_IMPORTED_MODULE_14__assets_icons_color_lens_24px_svg___default.a,
-        className: "colorLens",
-        alt: "colorLens   "
-      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-        className: "iconsclass"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: __WEBPACK_IMPORTED_MODULE_12__assets_icons_image_24px_svg___default.a,
+        src: __WEBPACK_IMPORTED_MODULE_6__assets_icons_image_24px_svg___default.a,
         className: "image",
         alt: "image   "
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "iconsclass"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-        src: __WEBPACK_IMPORTED_MODULE_15__assets_icons_archive_24px_svg___default.a,
+        src: this.state.noteData.archive === '1' ? __WEBPACK_IMPORTED_MODULE_9__assets_icons_unarchive_svg___default.a : __WEBPACK_IMPORTED_MODULE_8__assets_icons_archive_24px_svg___default.a,
         className: "archive",
-        alt: "archive   "
+        alt: "archive   ",
+        onClick: this.archiveAndUnarchive
       }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: "divCloseButton"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__material_ui_core_Button___default.a, {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_Button___default.a, {
         className: "noteCloseButton",
         onClick: this.handleClose
-      }, "Close"))))));
+      }, "Close")))))));
     }
   }]);
 

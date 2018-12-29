@@ -122,19 +122,13 @@ export default class DashBoard extends Component {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-        console.log('dashstate', this.state);
+        // console.log('dashstate', this.state);
 
         var notes = (this.state.noteData.map((note) => {
             if (note.pin === '0' && (note.archive === '0' || note.archive === null)) {
                 return <Note
                     key={note.id}
-                    setId={note.id}
-                    setTitle={note.title}
-                    setNote={note.note}
-                    setReminder={note.reminder}
-                    setColor={note.color}
-                    setPin={note.pin}
-                    setArchive={note.archive}
+                    noteData = {note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -147,13 +141,7 @@ export default class DashBoard extends Component {
             if (note.reminder !== null) {
                 return <Note
                     key={note.id}
-                    setId={note.id}
-                    setTitle={note.title}
-                    setNote={note.note}
-                    setReminder={note.reminder}
-                    setColor={note.color}
-                    setPin={note.pin}
-                    setArchive={note.archive}
+                    noteData = {note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -166,13 +154,7 @@ export default class DashBoard extends Component {
             if (note.pin === '1') {
                 return <Note
                     key={note.id}
-                    setId={note.id}
-                    setTitle={note.title}
-                    setNote={note.note}
-                    setReminder={note.reminder}
-                    setColor={note.color}
-                    setPin={note.pin}
-                    setArchive={note.archive}
+                    noteData = {note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -185,13 +167,7 @@ export default class DashBoard extends Component {
             if (note.archive === '1') {
                 return <Note
                     key={note.id}
-                    setId={note.id}
-                    setTitle={note.title}
-                    setNote={note.note}
-                    setReminder={note.reminder}
-                    setColor={note.color}
-                    setPin={note.pin}
-                    setArchive={note.archive}
+                    noteData = {note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}

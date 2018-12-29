@@ -19,20 +19,9 @@ export default class DashBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.setId,
-            title: this.props.setTitle,
-            note: this.props.setNote,
-            reminder: this.props.setReminder,
-            color:this.props.setColor,
-            pin:this.props.setPin,
-            archive:this.props.setArchive,
+           noteData:this.props.noteData
         }
         this.editNoteDialog = React.createRef();
-    }
-
-
-    onClickCard = () => {
-
     }
 
     openEditBox = () => {
@@ -40,84 +29,83 @@ export default class DashBoard extends Component {
     }
 
     removeReminder = () => {
-        var noteData = this.state;
+        var noteData = this.state.noteData;
         noteData.reminder = null;
         this.props.update(noteData);
     }
 
     setReminderDate = (date) => {
-        var noteData = this.state;
-        noteData.reminder = date;
-        this.props.update(noteData);
+        var note= this.state.noteData;
+        note.reminder = date;
+        this.props.update(note);
     }
 
-    updateNote = (data) =>{
-        
+    updateNote = (data) =>{    
         this.props.update(data);
     }
 
     updateColor = (color) =>{
-        var noteData = this.state;
-        noteData.color = color;
-        this.props.update(noteData);
+        var notes = this.state.noteData;
+        notes.color = color;
+        this.props.update(notes);
     }
 
     pinAndUnpin = () =>{
-        var noteData = this.state;
-        if (this.state.pin === '0') {
-            noteData.pin = '1';
+        var notes = this.state.noteData;
+        if (this.state.noteData.pin === '0') {
+            notes.pin = '1';
             this.setState({
-                pin:'1'
+                noteData:notes
             })
         }else{
-            noteData.pin = '0';
+            notes.pin = '0';
             this.setState({
-                pin:'0'
+                noteData:notes
             })
         }
-        this.props.update(noteData);
+        this.props.update(notes);
     }
 
     archiveAndUnarchive = () =>{
-        var noteData = this.state;
-        if (this.state.archive === '0') {
-            noteData.archive = '1';
+        var notes = this.state.noteData;
+        if (this.state.noteData.archive === '0') {
+            notes.archive = '1';
             this.setState({
-                archive:'1'
+                noteData:notes
             })
         }else{
-            noteData.archive = '0';
+            notes.archive = '0';
             this.setState({
-                archive:'0'
+                noteData:notes
             })
         }
-        this.props.update(noteData);
+        this.props.update(notes);
     }
 
     render() {
-        console.log(this.state);
+        // console.log('noteData',this.state);
         return (
 
             <div className={this.props.view ? ('divCardList') : ('divCardGrid')}>
 
-                <Card style={{backgroundColor: this.state.color}} className="noteCard">
+                <Card style={{backgroundColor: this.state.noteData.color}} className="noteCard">
                     <CardContent className='noteCardContent' >
                         <div className='cardTitlePin'>
                             <div className='inputTitle' onClick={this.openEditBox}>
-                                {this.props.setTitle}
+                                {this.props.noteData.title}
                             </div>
                             <div className='inNoteiconsclass'>
-                                <img src={this.state.pin === '1'?pined:pin} className="pin" alt="pin" onClick={this.pinAndUnpin}/>
+                                <img src={this.state.noteData.pin === '1'?pined:pin} className="pin" alt="pin" onClick={this.pinAndUnpin}/>
                             </div>
                         </div>
                         <div className='inputnote' onClick={this.openEditBox}>
-                            {this.props.setNote}
+                            {this.props.noteData.note}
                         </div>
 
-                        {this.state.reminder === null ? (<div />) : (
+                        {this.state.noteData.reminder === null ? (<div />) : (
                             <Chip
                                 className='reminderDateTimeOnNote'
-                                label={this.state.reminder}
+                                label={this.state.noteData.reminder}
                                 onDelete={this.removeReminder}
                             />
                         )}
@@ -133,14 +121,15 @@ export default class DashBoard extends Component {
                             <img src={image} className="image" alt="image   " />
                         </div>
                         <div className='inNoteiconsclass'>
-                            <img src={this.state.archive === '1'?unarchive:archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive}/>
+                            <img src={this.state.noteData.archive === '1'?unarchive:archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive}/>
                         </div>
                         <div className='inNoteiconsclass'>
                             <img src={more} className="more" alt="more   " />
                         </div>
                     </div>
                 </Card>
-                <EditNoteDialog ref={this.editNoteDialog} update={this.updateNote} note={this.state} />
+                <EditNoteDialog style={{backgroundColor: this.state.noteData.color}} ref={this.editNoteDialog} update={this.updateNote} note={this.state.noteData} />
+                
             </div>
         )
     }
