@@ -54,10 +54,21 @@ class NotesController extends Controller
             $noteData->color = $newNotesData['color'];
             $noteData->pin = $newNotesData['pin'];
             $noteData->archive = $newNotesData['archive'];
+            $noteData->trash = $newNotesData['trash'];
             $noteData->save();
             return response()->json('note update successfully',200);
         // }
-        // return response()->json('note not found',220);
-        
+        // return response()->json('note not found',220);    
+    }
+
+    public function deleteNotes(Request $request)
+    {
+        Cache::flush();
+        $note = NotesData::where('id',$request->id)->first();
+        if (!$note) {
+            return response()->json('no note found',220);
+        }
+        $note->delete();
+        return response()->json('note deleted',200);
     }
 }

@@ -10,6 +10,7 @@ import pin from "../assets/icons/pin.svg"
 import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
+import AdditionalOptions from "./AdditionalOptions";
 
 
 export default class AddNotes extends Component {
@@ -48,6 +49,7 @@ export default class AddNotes extends Component {
             color: this.state.color,
             pin: this.state.pin,
             archive: this.state.archive,
+            trash:false,
         }
 
 
@@ -107,6 +109,7 @@ export default class AddNotes extends Component {
             color: this.state.color,
             pin: this.state.pin,
             archive: '1',
+            trash:false,
         }
 
         if (this.state.reminder !== null || (this.state.title !== '' && this.state.note !== '')) {
@@ -119,6 +122,7 @@ export default class AddNotes extends Component {
                 color: null,
                 pin: false,
                 archive: false,
+                
             })
 
         }
@@ -172,6 +176,7 @@ export default class AddNotes extends Component {
                         <div className='iconsclass'>
                             <img src={archive} onClick={this.archiveAndUnarchive} className="archive" alt="archive   " />
                         </div>
+                        <AdditionalOptions />
                     </div>
 
                     <div className='divCloseButton'>

@@ -74,9 +74,9 @@ export default class DashBoard extends Component {
         noteservices.createNote(data)
             .then(res => {
                 if (res.status == 200) {
-                    console.log('data save');
+                    // console.log('data save');
                 } else if (res.status == 220) {
-                    console.log('unauthorised');
+                    // console.log('unauthorised');
                 }
             });
         this.SnackBarN.current.handleClick("new note: " + data.title);
@@ -109,11 +109,19 @@ export default class DashBoard extends Component {
     }
 
     onClickMenu = (name) => {
-        console.log('das', name);
+        // console.log('das', name);
 
         this.setState({
             noteState: name
         })
+    }
+
+    deleteNote = (id) => {
+        noteservices.deleteNote(id)
+            .then(res => {
+
+            })
+        this.getNoteData();
     }
 
 
@@ -125,23 +133,23 @@ export default class DashBoard extends Component {
         // console.log('dashstate', this.state);
 
         var notes = (this.state.noteData.map((note) => {
-            if (note.pin === '0' && (note.archive === '0' || note.archive === null)) {
+            if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note
                     key={note.id}
-                    noteData = {note}
+                    noteData={note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                 ></Note>
             }
-           return;
+            return;
         }));
 
         var reminderNote = (this.state.noteData.map((note) => {
-            if (note.reminder !== null) {
+            if (note.reminder !== null && note.trash === '0') {
                 return <Note
                     key={note.id}
-                    noteData = {note}
+                    noteData={note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -151,10 +159,10 @@ export default class DashBoard extends Component {
         }));
 
         var pined = (this.state.noteData.map((note) => {
-            if (note.pin === '1') {
+            if (note.pin === '1' && note.trash === '0') {
                 return <Note
                     key={note.id}
-                    noteData = {note}
+                    noteData={note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -164,10 +172,10 @@ export default class DashBoard extends Component {
         }));
 
         var archived = (this.state.noteData.map((note) => {
-            if (note.archive === '1') {
+            if (note.archive === '1' && note.trash === '0') {
                 return <Note
                     key={note.id}
-                    noteData = {note}
+                    noteData={note}
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
@@ -175,6 +183,21 @@ export default class DashBoard extends Component {
             }
             return;
         }));
+
+        var trashNotes = (this.state.noteData.map((note) => {
+            if (note.trash === '1') {
+                return <Note
+                    key={note.id}
+                    noteData={note}
+                    view={this.state.listView}
+                    editNote={this.openEditBox}
+                    update={this.updateNoteData}
+                    trashN={this.deleteNote}
+                ></Note>
+            }
+            return;
+        }));
+
 
         return (
             <div>
@@ -184,7 +207,7 @@ export default class DashBoard extends Component {
                     userData={this.state.userData}
                     view={this.listGridView}
                     viewIcon={this.state.listView}
-                    menuName = {this.state.noteState}
+                    menuName={this.state.noteState}
                 />
                 <ManuDrawer menuAction={this.state.menuBar} noteState={this.onClickMenu} />
                 <AddNotes noteData={this.createNewNote} />
@@ -204,9 +227,13 @@ export default class DashBoard extends Component {
                                 {reminderNote}
                             </div>;
                         case 'Archive':
-                            return<div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
-                            {archived}
-                        </div>;
+                            return <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                                {archived}
+                            </div>;
+                        case 'Trash':
+                            return <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                                {trashNotes}
+                            </div>;
                         default:
                             return null;
                     }

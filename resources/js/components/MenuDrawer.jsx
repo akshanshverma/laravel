@@ -76,7 +76,7 @@ export default class MenuDrawer extends Component {
                                 </ListItemIcon>
                                 <ListItemText>Archive</ListItemText>
                             </ListItem>
-                            <ListItem className='menuListItem' >
+                            <ListItem className='menuListItem'  button onClick={this.menuButtonAction} >
                                 <ListItemIcon>
                                     <img src={trash} className="menuBarIcon" alt="trash   " />
                                 </ListItemIcon>

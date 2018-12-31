@@ -12,6 +12,7 @@ import pin from "../assets/icons/pin.svg"
 import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
+import AdditionalOptions from "./AdditionalOptions";
 
 
 export default class EditNoteDialog extends React.Component {
@@ -156,6 +157,7 @@ export default class EditNoteDialog extends React.Component {
                                     <div className='iconsclass'>
                                         <img src={this.state.noteData.archive === '1'?unarchive:archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
                                     </div>
+                                    <AdditionalOptions/>
                                 </div>
 
                                 <div className='divCloseButton'>
