@@ -34,6 +34,7 @@ class LabelController extends Controller
         if ($user = Auth::user()) {
             Cache::flush();
             $labelData = $request->all();
+            $labelData['user_id'] = $user->id;
             $data = Labels::create($labelData);
             if (!$data) {
                 return response()->json('cant create label',222);
@@ -43,7 +44,7 @@ class LabelController extends Controller
         return response()->json('unauthorised',220);
     }
 
-    public function removeLabel()
+    public function removeLabel(Request $request)
     {
         if ($user = Auth::user()) {
             Cache::flush();
@@ -53,6 +54,22 @@ class LabelController extends Controller
                 return response()->json('cant delete',222);
             }
             return response()->json('delete',200);
+        }
+        return response()->json('unauthorised',220);
+    }
+
+    public function updateLabel(Request $request)
+    {
+        if ($user = Auth::user()) {
+            Cache::flush();
+            $labelData = $request->all();
+            $data = Labels::where('id',$labelData['id'])->first();
+            if (!$data) {
+                return response()->json('cant update',222);
+            }
+            $data->label = $labelData->label;
+            $data->save();
+            return response()->json('update',200);
         }
         return response()->json('unauthorised',220);
     }
