@@ -36,6 +36,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('getAllNotes', 'NotesController@getAllNotes');
     Route::post('updateNote', 'NotesController@updateNote');
     Route::post('deleteNotes', 'NotesController@deleteNotes');
+
+    Route::get('getAllLabel', 'LabelController@getAllLabel');
+    Route::post('createLabel', 'LabelController@createLabel');
+
     Route::any('getDetails', 'UserController@getData');
     Route::get('logout', 'UserController@logout');
 

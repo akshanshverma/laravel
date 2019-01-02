@@ -3,14 +3,15 @@ import NavBar from "../components/Navbar";
 import ManuDrawer from "../components/MenuDrawer";
 import AddNotes from "../components/AddNotes";
 import Note from "../components/Note";
-import ReminderTab from "../components/ReminderTab";
 import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
+import LabelServices from '../services/LabelServices';
 import SnackBar from "../components/SnackBar";
 import moment from "moment";
 
 var noteservices = new NoteService();
 var userServices = new UserServices();
+var labelServices = new LabelServices();
 
 
 export default class DashBoard extends Component {
@@ -19,6 +20,7 @@ export default class DashBoard extends Component {
         this.state = {
             menuBar: false,
             noteData: [],
+            labels: [],
             listView: false,
             noteState: "Notes",
         }
@@ -32,6 +34,7 @@ export default class DashBoard extends Component {
     componentDidMount() {
         this.getNoteData();
         this.checkReminder();
+        this.getAllLabels();
     }
 
     getNoteData() {
@@ -109,8 +112,6 @@ export default class DashBoard extends Component {
     }
 
     onClickMenu = (name) => {
-        // console.log('das', name);
-
         this.setState({
             noteState: name
         })
@@ -124,14 +125,24 @@ export default class DashBoard extends Component {
         this.getNoteData();
     }
 
+    getAllLabels = () => {
+        labelServices.getLabels()
+        .then(res =>{
+            console.log(res);
+            
+            this.setState({
+                labels: res.data
+            })
+        })
+    }
 
 
     render() {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-        // console.log('dashstate', this.state);
-
+        console.log(this.state);
+        
         var notes = (this.state.noteData.map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note
@@ -209,7 +220,7 @@ export default class DashBoard extends Component {
                     viewIcon={this.state.listView}
                     menuName={this.state.noteState}
                 />
-                <ManuDrawer menuAction={this.state.menuBar} noteState={this.onClickMenu} />
+                <ManuDrawer menuAction={this.state.menuBar} noteState={this.onClickMenu} labels={this.state.labels} />
                 <AddNotes noteData={this.createNewNote} />
                 {(() => {
                     switch (this.state.noteState) {

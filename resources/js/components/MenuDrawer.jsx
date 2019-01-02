@@ -7,6 +7,7 @@ import reminderIcon from "../assets/icons/reminderIcon.svg"
 import editIcon from "../assets/icons/editIcon.svg"
 import archive from "../assets/icons/archive-24px.svg"
 import trash from "../assets/icons/trash.svg"
+import labelicon from "../assets/icons/label.svg"
 
 
 const theme = createMuiTheme({
@@ -25,23 +26,32 @@ const theme = createMuiTheme({
 export default class MenuDrawer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
     }
 
     menuButtonAction = () => {
         console.log(event.target.textContent);
-        
+
         this.props.noteState(event.target.textContent);
     }
 
     render() {
 
+        var labelsName = this.props.labels.map((label) => {
+            console.log(label);
+            
+            return <ListItem className='menuListItem' key={label.id}>
+                <ListItemIcon>
+                    <img src={labelicon} className="menuBarIcon" alt="label   " />
+                </ListItemIcon>
+                <ListItemText>{label.label}</ListItemText>
+            </ListItem>
+        })
+
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
                     <Drawer
-                      
+
                         variant="persistent"
                         anchor="left"
                         open={this.props.menuAction}>
@@ -61,7 +71,7 @@ export default class MenuDrawer extends Component {
                             </ListItem>
                             <Divider />
                             <ListItem > <span className='menuLabelsSpan'>LABELS</span></ListItem>
-                           
+                            {labelsName}
                             <ListItem className='menuListItem'>
                                 <ListItemIcon>
                                     <img src={editIcon} className="menuBarIcon" alt="editIcon   " />
@@ -76,7 +86,7 @@ export default class MenuDrawer extends Component {
                                 </ListItemIcon>
                                 <ListItemText>Archive</ListItemText>
                             </ListItem>
-                            <ListItem className='menuListItem'  button onClick={this.menuButtonAction} >
+                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} >
                                 <ListItemIcon>
                                     <img src={trash} className="menuBarIcon" alt="trash   " />
                                 </ListItemIcon>

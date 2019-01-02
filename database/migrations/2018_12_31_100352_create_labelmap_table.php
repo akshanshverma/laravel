@@ -18,7 +18,7 @@ class CreateLabelmapTable extends Migration
             $table->unsignedInteger('label_id');
             $table->foreign('label_id')->references('id')->on('labels')->onDelete('cascade');
             $table->unsignedInteger('note_id');
-            $table->foreign('note_id')->references('id')->on('notes_datas')->onDelete('cascade');
+            $table->foreign('note_id')->references('id')->on('notes_datas');
             $table->timestamps();
         });
     }
