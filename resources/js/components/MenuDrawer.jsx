@@ -31,16 +31,12 @@ export default class MenuDrawer extends Component {
     }
 
     menuButtonAction = () => {
-        console.log(event.target.textContent);
-
         this.props.noteState(event.target.textContent);
     }
 
 
     render() {
-        console.log(this.state);
         var labelsName = this.props.labels.map((label) => {
-            
             return <ListItem className='menuListItem' key={label.id}>
                 <ListItemIcon>
                     <img src={labelicon} className="menuBarIcon" alt="label   " />
@@ -48,7 +44,8 @@ export default class MenuDrawer extends Component {
                 <ListItemText>{label.label}</ListItemText>
             </ListItem>
         })
-
+        
+        
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
@@ -74,7 +71,7 @@ export default class MenuDrawer extends Component {
                             <Divider />
                             <ListItem > <span className='menuLabelsSpan'>LABELS</span></ListItem>
                             {labelsName}
-                            <EditLabelDialog/>
+                            <EditLabelDialog labelsName = {this.props.labels} newLabel = {this.props.newLabel} removeLabel = {this.props.removeLabel}/>
                             <Divider />
 
                             <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Archive'>
@@ -91,8 +88,7 @@ export default class MenuDrawer extends Component {
                             </ListItem>
                         </List>
                     </Drawer>
-                </MuiThemeProvider>
-               
+                </MuiThemeProvider>   
             </div >
         )
     }

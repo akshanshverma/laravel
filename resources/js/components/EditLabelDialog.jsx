@@ -5,9 +5,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import editIconfill from "../assets/icons/editIconfill.svg";
 import editIcon from "../assets/icons/editIcon.svg";
-import closeIcon from "../assets/icons/close-24px.svg";
+import cancelButton from "../assets/icons/cancelButton.svg";
 import saveButton from "../assets/icons/saveButton.svg";
 import labelFill from "../assets/icons/labelFill.svg";
+import plus from "../assets/icons/plus.svg";
+import deleteIcon from "../assets/icons/deleteIcon.svg";
+
+import SingleLabel from "./SingleLabel";
+
 
 
 
@@ -15,7 +20,8 @@ export default class ResponsiveDialog extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false
+            open: false,
+            label:'',
         }
     }
 
@@ -27,10 +33,41 @@ export default class ResponsiveDialog extends React.Component {
         this.setState({ open: false });
     };
 
-    render() {
-        const { fullScreen } = this.props;
-        console.log('edLb', this.props.labelEditAction);
+    // mouseOver = () => {
+    //     this.setState({
+    //         delIcon: !this.state.delIcon
+    //     })
+    // }
+    createNewLabel = (event) =>{
+        this.setState({
+            [event.target.name]:event.target.value,
+        })
+    }
 
+    saveLabel=()=>{
+        if (this.state.lable !== '') {
+            var NewLabelName = {
+                label:this.state.label
+            }
+            this.props.newLabel(NewLabelName);
+            this.setState({
+                label:''
+            })
+        }
+    }
+
+    removeLabel = (event) => {
+        // console.log(event);
+        
+    }
+
+    render() {
+       
+        const { fullScreen } = this.props;
+        var labels = this.props.labelsName.map((labelData) => {
+            return (
+                <SingleLabel key={labelData.id} label={labelData} removeLabel = {this.props.removeLabel}/>);
+        });
         return (
             <div>
                 <ListItem className='menuListItem' button onClick={this.handleClickOpen}>
@@ -51,15 +88,13 @@ export default class ResponsiveDialog extends React.Component {
                             <samp>Edit label</samp>
                         </div>
                         <div style={{ display: 'flex' }}>
-                            <img src={closeIcon} className="image" alt="closeIcon   " />
-                            <InputBase placeholder="Create new label" name='title' fullWidth ></InputBase>
-                            <img src={saveButton} className="image" alt="saveButton   " />
+                            <img src={plus} className="image" alt="plus   " />
+                            <InputBase onChange={this.createNewLabel} placeholder="Create new label" name='label' fullWidth  value={this.state.label}></InputBase>
+                            <img src={saveButton} className="image" alt="saveButton   " onClick={this.saveLabel}/>
                         </div>
 
-                        <div style={{ display: 'flex' }}>
-                            <img src={labelFill} className="image" alt="labelFill   " />
-                            <InputBase fullWidth defaultValue='akku' ></InputBase>
-                            <img src={editIconfill} className="image" alt="editIconfill   " />
+                        <div >
+                            {labels}
                         </div>
                     </DialogContent>
                     <Divider />

@@ -19,7 +19,10 @@ class LabelController extends Controller
     {
         $user = Auth::user();
         $id = $user->id;
-        $labels = Labels::where('user_id', Auth::user()->id)->get();
+        $labels = Cache::remember('label'.$id, 5, function ()
+        {
+            return Labels::where('user_id', Auth::user()->id)->get();
+        });
         return response()->json($labels, 200);
     }
 
@@ -27,15 +30,29 @@ class LabelController extends Controller
      * createLabel is funtion which create new label in the database
      */
     public function createLabel(Request $request)
-    {
+    {   
         if ($user = Auth::user()) {
+            Cache::flush();
             $labelData = $request->all();
-            $labelData['user_id'] = $user->id;
             $data = Labels::create($labelData);
             if (!$data) {
                 return response()->json('cant create label',222);
             }
             return response()->json($data,200);
+        }
+        return response()->json('unauthorised',220);
+    }
+
+    public function removeLabel()
+    {
+        if ($user = Auth::user()) {
+            Cache::flush();
+            $labelData = $request->all();
+            $data = Labels::destroy($labelData['id']);
+            if ($data === 0 ) {
+                return response()->json('cant delete',222);
+            }
+            return response()->json('delete',200);
         }
         return response()->json('unauthorised',220);
     }

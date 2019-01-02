@@ -137,12 +137,30 @@ export default class DashBoard extends Component {
         })
     }
 
+    createLabel = (labelName) => {
+        
+        labelServices.createNewLabel(labelName)
+        .then(res=>{
+
+        })
+        this.getAllLabels();
+    }
+
+    removeLabel = (labelId) => {
+        console.log('service',labelId);
+        
+        labelServices.removeLabel(labelId)
+        .then(res=>{
+
+        })
+        this.getAllLabels();
+    }
+
 
     render() {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-        console.log(this.state);
         
         var notes = (this.state.noteData.map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
@@ -221,7 +239,14 @@ export default class DashBoard extends Component {
                     viewIcon={this.state.listView}
                     menuName={this.state.noteState}
                 />
-                <ManuDrawer menuAction={this.state.menuBar} noteState={this.onClickMenu} labels={this.state.labels} />
+                <ManuDrawer 
+                menuAction={this.state.menuBar} 
+                noteState={this.onClickMenu} 
+                labels={this.state.labels}
+                newLabel = {this.createLabel} 
+                removeLabel = {this.removeLabel}
+                />
+                
                 <AddNotes noteData={this.createNewNote} />
                 {(() => {
                     switch (this.state.noteState) {
