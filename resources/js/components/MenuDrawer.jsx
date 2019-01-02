@@ -4,10 +4,12 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
 import noteIcon from "../assets/icons/noteIcon.svg"
 import reminderIcon from "../assets/icons/reminderIcon.svg"
-import editIcon from "../assets/icons/editIcon.svg"
+
 import archive from "../assets/icons/archive-24px.svg"
 import trash from "../assets/icons/trash.svg"
 import labelicon from "../assets/icons/label.svg"
+
+import EditLabelDialog from "./EditLabelDialog";
 
 
 const theme = createMuiTheme({
@@ -34,10 +36,10 @@ export default class MenuDrawer extends Component {
         this.props.noteState(event.target.textContent);
     }
 
-    render() {
 
+    render() {
+        console.log(this.state);
         var labelsName = this.props.labels.map((label) => {
-            console.log(label);
             
             return <ListItem className='menuListItem' key={label.id}>
                 <ListItemIcon>
@@ -72,12 +74,7 @@ export default class MenuDrawer extends Component {
                             <Divider />
                             <ListItem > <span className='menuLabelsSpan'>LABELS</span></ListItem>
                             {labelsName}
-                            <ListItem className='menuListItem'>
-                                <ListItemIcon>
-                                    <img src={editIcon} className="menuBarIcon" alt="editIcon   " />
-                                </ListItemIcon>
-                                <ListItemText>Edit labels</ListItemText>
-                            </ListItem>
+                            <EditLabelDialog/>
                             <Divider />
 
                             <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Archive'>
@@ -95,6 +92,7 @@ export default class MenuDrawer extends Component {
                         </List>
                     </Drawer>
                 </MuiThemeProvider>
+               
             </div >
         )
     }

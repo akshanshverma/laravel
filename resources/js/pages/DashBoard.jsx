@@ -7,6 +7,7 @@ import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
 import LabelServices from '../services/LabelServices';
 import SnackBar from "../components/SnackBar";
+
 import moment from "moment";
 
 var noteservices = new NoteService();
@@ -249,8 +250,7 @@ export default class DashBoard extends Component {
                             return null;
                     }
                 })()}
-
-
+                
                 <SnackBar ref={this.SnackBarN} />
 
             </div>
