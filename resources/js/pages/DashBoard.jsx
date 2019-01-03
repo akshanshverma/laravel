@@ -128,31 +128,37 @@ export default class DashBoard extends Component {
 
     getAllLabels = () => {
         labelServices.getLabels()
-        .then(res =>{
-            console.log(res);
-            
-            this.setState({
-                labels: res.data
+            .then(res => {
+                console.log(res);
+
+                this.setState({
+                    labels: res.data
+                })
             })
-        })
     }
 
     createLabel = (labelName) => {
-        
-        labelServices.createNewLabel(labelName)
-        .then(res=>{
 
-        })
+        labelServices.createNewLabel(labelName)
+            .then(res => {
+
+            })
         this.getAllLabels();
     }
 
     removeLabel = (labelId) => {
-        console.log('service',labelId);
-        
         labelServices.removeLabel(labelId)
-        .then(res=>{
+            .then(res => {
 
-        })
+            })
+        this.getAllLabels();
+    }
+
+    updateLabel = (labelData) => {
+        labelServices.updateLabel(labelData)
+            .then(res => {
+
+            })
         this.getAllLabels();
     }
 
@@ -161,7 +167,7 @@ export default class DashBoard extends Component {
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-        
+
         var notes = (this.state.noteData.map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note
@@ -170,6 +176,7 @@ export default class DashBoard extends Component {
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
+                    labels={this.state.labels}
                 ></Note>
             }
             return;
@@ -183,6 +190,7 @@ export default class DashBoard extends Component {
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
+                    labels={this.state.labels}
                 ></Note>
             }
             return;
@@ -196,6 +204,7 @@ export default class DashBoard extends Component {
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
+                    labels={this.state.labels}
                 ></Note>
             }
             return;
@@ -209,6 +218,7 @@ export default class DashBoard extends Component {
                     view={this.state.listView}
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
+                    labels={this.state.labels}
                 ></Note>
             }
             return;
@@ -230,7 +240,7 @@ export default class DashBoard extends Component {
 
 
         return (
-            <div>
+            <div className={this.state.menuBar ? 'mainDivMenuBarOpen' : 'mainDivMenuBar'}>
                 <NavBar
                     menuClick={this.menuClickHandle}
                     logoutClick={this.onClickLogout}
@@ -239,14 +249,15 @@ export default class DashBoard extends Component {
                     viewIcon={this.state.listView}
                     menuName={this.state.noteState}
                 />
-                <ManuDrawer 
-                menuAction={this.state.menuBar} 
-                noteState={this.onClickMenu} 
-                labels={this.state.labels}
-                newLabel = {this.createLabel} 
-                removeLabel = {this.removeLabel}
+                <ManuDrawer
+                    menuAction={this.state.menuBar}
+                    noteState={this.onClickMenu}
+                    labels={this.state.labels}
+                    newLabel={this.createLabel}
+                    removeLabel={this.removeLabel}
+                    updateLabel={this.updateLabel}
                 />
-                
+
                 <AddNotes noteData={this.createNewNote} />
                 {(() => {
                     switch (this.state.noteState) {
@@ -275,7 +286,7 @@ export default class DashBoard extends Component {
                             return null;
                     }
                 })()}
-                
+
                 <SnackBar ref={this.SnackBarN} />
 
             </div>

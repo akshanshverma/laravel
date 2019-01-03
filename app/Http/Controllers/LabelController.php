@@ -67,7 +67,7 @@ class LabelController extends Controller
             if (!$data) {
                 return response()->json('cant update',222);
             }
-            $data->label = $labelData->label;
+            $data->label = $labelData['label'];
             $data->save();
             return response()->json('update',200);
         }

@@ -13,6 +13,7 @@ import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
 import AdditionalOptions from "./AdditionalOptions";
+import AdditionalOptionsOnDel from "./AdditionalOptionsOnDel";
 
 
 export default class EditNoteDialog extends React.Component {
@@ -70,36 +71,36 @@ export default class EditNoteDialog extends React.Component {
         notes.color = color;
         this.props.update(notes);
     }
-    archiveAndUnarchive = () =>{
+    archiveAndUnarchive = () => {
         var notes = this.state.noteData;
         if (this.state.noteData.archive === '0') {
             notes.archive = '1';
             this.setState({
-                noteData:notes,
-                open:false
+                noteData: notes,
+                open: false
             })
-        }else{
+        } else {
             notes.archive = '0';
             this.setState({
-                noteData:notes,
-                open:false
+                noteData: notes,
+                open: false
             })
         }
         this.props.update(notes);
     }
 
 
-    pinAndUnpin = () =>{
+    pinAndUnpin = () => {
         var notes = this.state.noteData;
         if (this.state.noteData.pin === '0') {
             notes.pin = '1';
             this.setState({
-                noteData:notes
+                noteData: notes
             })
-        }else{
+        } else {
             notes.pin = '0';
             this.setState({
-                noteData:notes
+                noteData: notes
             })
         }
     }
@@ -123,11 +124,16 @@ export default class EditNoteDialog extends React.Component {
                     aria-labelledby="responsive-dialog-title"
                 >
                     {/* <div className={this.state.noteData.reminder===null?<div/>:'reminderBarDialog' }><span className='reminderBarDialogSpan' >{this.state.noteData.reminder}</span></div> */}
-                    <div style={{backgroundColor: this.state.noteData.color}}>
+                    <div style={{ backgroundColor: this.state.noteData.color }}>
                         <DialogContent className='editNoteContent'>
                             <div className='addTitlEdit' >
                                 <InputBase multiline name='title' fullWidth onChange={this.getInput} defaultValue={this.state.noteData.title}></InputBase>
-                                <img src={this.state.noteData.pin === '1'?pined:pin} onClick={this.pinAndUnpin} className="pin" alt="pin   " />
+                                {this.state.noteData.trash === '1' ?
+                                    <div></div>
+                                    :
+                                    <div className='inNoteiconsclass'>
+                                        <img src={this.state.noteData.pin === '1' ? pined : pin} className="pin" alt="pin" onClick={this.pinAndUnpin} />
+                                    </div>}
                             </div>
                             <div className='addNotesInputEdit'>
                                 <InputBase multiline name='note' id='noteInput' fullWidth onChange={this.getInput} defaultValue={this.state.noteData.note} />
@@ -141,25 +147,33 @@ export default class EditNoteDialog extends React.Component {
                             )}
                         </DialogContent>
                         <DialogActions >
+
                             <div className='iconClose'>
-                                <div style={{ position: 'fixed' }} className='takeNoteIcons'>
-                                    <div >
-                                        <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
+                                {this.state.noteData.trash === '1' ?
+                                    <div style={{ position: 'fixed' }} className='takeNoteIcons'>
+                                        <AdditionalOptionsOnDel
+                                            deleteNote={this.props.deleteNote}
+                                            deleteForever={this.props.deleteForeverNote} />
                                     </div>
+                                    :
+                                    <div style={{ position: 'fixed' }} className='takeNoteIcons'>
+                                        <div >
+                                            <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
+                                        </div>
 
-                                    <div className='iconsclass'>
-                                        <img src={collab} className="collab" alt="collab   " />
+                                        <div className='iconsclass'>
+                                            <img src={collab} className="collab" alt="collab   " />
+                                        </div>
+                                        <SetColor changeColor={this.updateColor} />
+                                        <div className='iconsclass'>
+                                            <img src={image} className="image" alt="image   " />
+                                        </div>
+                                        <div className='iconsclass'>
+                                            <img src={this.state.noteData.archive === '1' ? unarchive : archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
+                                        </div>
+                                        <AdditionalOptions deleteNote={this.props.deleteNote}/>
                                     </div>
-                                    <SetColor changeColor={this.updateColor} />
-                                    <div className='iconsclass'>
-                                        <img src={image} className="image" alt="image   " />
-                                    </div>
-                                    <div className='iconsclass'>
-                                        <img src={this.state.noteData.archive === '1'?unarchive:archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
-                                    </div>
-                                    <AdditionalOptions/>
-                                </div>
-
+                                }
                                 <div className='divCloseButton'>
                                     <Button className='noteCloseButton' onClick={this.handleClose}>Close</Button>
                                 </div>

@@ -34,4 +34,16 @@ export default class LabelServices {
             return error;
         })
     }
+
+
+    updateLabel(labelData){
+        var auth = "Bearer ".concat(localStorage.getItem('token'))
+        return axios.post('/api/updateLabel', labelData, { headers: { Authorization: auth } })
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        })
+    }
 }

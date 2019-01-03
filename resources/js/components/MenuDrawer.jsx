@@ -16,14 +16,19 @@ const theme = createMuiTheme({
     overrides: {
         MuiDrawer: {
             paper: {
-                top: 64,
+                top: 66,
                 width: 270,
+               
+            },
+            paperAnchorDockedLeft:{
+               borderRight:'0px solid rgba(0, 0, 0, 0.12)' 
             }
         }
     }, typography: {
         useNextVariants: true,
     },
 })
+//.MuiDrawer-paperAnchorDockedLeft-117
 
 export default class MenuDrawer extends Component {
     constructor(props) {
@@ -44,8 +49,8 @@ export default class MenuDrawer extends Component {
                 <ListItemText>{label.label}</ListItemText>
             </ListItem>
         })
-        
-        
+
+
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
@@ -71,7 +76,12 @@ export default class MenuDrawer extends Component {
                             <Divider />
                             <ListItem > <span className='menuLabelsSpan'>LABELS</span></ListItem>
                             {labelsName}
-                            <EditLabelDialog labelsName = {this.props.labels} newLabel = {this.props.newLabel} removeLabel = {this.props.removeLabel}/>
+                            <EditLabelDialog
+                                labelsName={this.props.labels}
+                                newLabel={this.props.newLabel}
+                                removeLabel={this.props.removeLabel}
+                                updateLabel={this.props.updateLabel}
+                            />
                             <Divider />
 
                             <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Archive'>
@@ -88,7 +98,7 @@ export default class MenuDrawer extends Component {
                             </ListItem>
                         </List>
                     </Drawer>
-                </MuiThemeProvider>   
+                </MuiThemeProvider>
             </div >
         )
     }

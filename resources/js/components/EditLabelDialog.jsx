@@ -3,14 +3,9 @@ import { Button, ListItem, ListItemIcon, ListItemText, InputBase, Divider } from
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import editIconfill from "../assets/icons/editIconfill.svg";
 import editIcon from "../assets/icons/editIcon.svg";
-import cancelButton from "../assets/icons/cancelButton.svg";
 import saveButton from "../assets/icons/saveButton.svg";
-import labelFill from "../assets/icons/labelFill.svg";
 import plus from "../assets/icons/plus.svg";
-import deleteIcon from "../assets/icons/deleteIcon.svg";
-
 import SingleLabel from "./SingleLabel";
 
 
@@ -66,7 +61,7 @@ export default class ResponsiveDialog extends React.Component {
         const { fullScreen } = this.props;
         var labels = this.props.labelsName.map((labelData) => {
             return (
-                <SingleLabel key={labelData.id} label={labelData} removeLabel = {this.props.removeLabel}/>);
+                <SingleLabel key={labelData.id} label={labelData} removeLabel = {this.props.removeLabel} updateLabel={this.props.updateLabel}/>);
         });
         return (
             <div>
@@ -85,11 +80,11 @@ export default class ResponsiveDialog extends React.Component {
                 >
                     <DialogContent>
                         <div>
-                            <samp>Edit label</samp>
+                            <samp className='editLabelSpan'>Edit label</samp>
                         </div>
-                        <div style={{ display: 'flex' }}>
+                        <div className='labelEdit' style={{ display: 'flex' }}>
                             <img src={plus} className="image" alt="plus   " />
-                            <InputBase onChange={this.createNewLabel} placeholder="Create new label" name='label' fullWidth  value={this.state.label}></InputBase>
+                            <InputBase  className='labelInput' onChange={this.createNewLabel} placeholder="Create new label" name='label' fullWidth  value={this.state.label}></InputBase>
                             <img src={saveButton} className="image" alt="saveButton   " onClick={this.saveLabel}/>
                         </div>
 

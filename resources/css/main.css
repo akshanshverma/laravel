@@ -1,5 +1,13 @@
 
-
+.mainDivMenuBarOpen{
+    margin-left: 270px;
+    transition: margin-left 0.13s;
+    transition-timing-function: ease-out;
+}
+.mainDivMenuBar{
+    transition: margin-left 0.13s;
+    transition-timing-function: ease-out;
+}
 
 #registerT{
     font-size: 40px;
@@ -466,6 +474,23 @@ div.dilogBoxMainDv .editNoteDialogBox.editNoteContent{
 
 div .menuListItem{
     border-radius: 0 25px 25px 0;
+}
+
+/**********label edit************/
+
+.labelEdit img{
+    opacity: .5;
+}
+.labelEdit img:hover{
+    opacity: 1 ;
+}
+.editLabelSpan{
+    opacity: .5;
+}
+
+.labelEdit .labelInput{
+    padding-left: 10px;
+    padding-right: 10px;
 }
 /* ............... */
 @media only screen and (max-width: 800px) {

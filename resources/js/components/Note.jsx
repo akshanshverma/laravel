@@ -13,6 +13,7 @@ import AdditionalOptions from "./AdditionalOptions";
 import AdditionalOptionsOnDel from "./AdditionalOptionsOnDel";
 import SetColor from "./SetColor";
 import EditNoteDialog from "./EditNoteDialog";
+import AddLabelOnNote from "./AddLabelOnNote";
 
 
 
@@ -20,7 +21,8 @@ export default class DashBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            noteData: this.props.noteData
+            noteData: this.props.noteData,
+            labelTab: false
         }
         this.editNoteDialog = React.createRef();
     }
@@ -87,6 +89,7 @@ export default class DashBoard extends Component {
         var notes = this.state.noteData;
         if (this.state.noteData.trash === '0') {
             notes.trash = '1';
+            notes.pin = '0'
         } else {
             notes.trash = '0';
         }
@@ -94,8 +97,8 @@ export default class DashBoard extends Component {
     }
 
     deleteForeverNote = () => {
-        console.log(this.state.noteData,'check');
-        
+        console.log(this.state.noteData, 'check');
+
         this.props.trashN(this.state.noteData);
     }
     render() {
@@ -110,9 +113,13 @@ export default class DashBoard extends Component {
                             <div className='inputTitle' onClick={this.openEditBox}>
                                 {this.props.noteData.title}
                             </div>
-                            <div className='inNoteiconsclass'>
-                                <img src={this.state.noteData.pin === '1' ? pined : pin} className="pin" alt="pin" onClick={this.pinAndUnpin} />
-                            </div>
+                            {this.state.noteData.trash === '1' ?
+                                <div></div>
+                                :
+                                <div className='inNoteiconsclass'>
+                                    <img src={this.state.noteData.pin === '1' ? pined : pin} className="pin" alt="pin" onClick={this.pinAndUnpin} />
+                                </div>}
+
                         </div>
 
                         <div className='inputnote' onClick={this.openEditBox}>
@@ -145,10 +152,15 @@ export default class DashBoard extends Component {
                             <div className='inNoteiconsclass'>
                                 <img src={this.state.noteData.archive === '1' ? unarchive : archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
                             </div>
-                            <AdditionalOptions deleteNote={this.deleteNote} />
+                            <AdditionalOptions deleteNote={this.deleteNote} labels={this.props.labels} />
                         </div>}
                 </Card>
-                <EditNoteDialog style={{ backgroundColor: this.state.noteData.color }} ref={this.editNoteDialog} update={this.updateNote} note={this.state.noteData} />
+                <EditNoteDialog
+                    style={{ backgroundColor: this.state.noteData.color }}
+                    ref={this.editNoteDialog} update={this.updateNote}
+                    note={this.state.noteData}
+                    deleteNote={this.deleteNote}
+                    deleteForever={this.deleteForeverNote} />
             </div>
         )
     }
