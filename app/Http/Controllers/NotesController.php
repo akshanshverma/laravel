@@ -36,7 +36,8 @@ class NotesController extends Controller
         $id = $user->id;
         $notes = Cache::remember($id, 5, function ()
         {
-            return NotesData::where('user_id', Auth::user()->id)->get();
+            return NotesData::with('labels')->where('user_id', Auth::user()->id)->get();
+            // return NotesData::with()
         });
         return response()->json($notes,200);
     }

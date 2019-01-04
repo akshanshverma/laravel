@@ -40,9 +40,10 @@ export default class MenuDrawer extends Component {
     }
 
 
+
     render() {
         var labelsName = this.props.labels.map((label) => {
-            return <ListItem className='menuListItem' key={label.id}>
+            return <ListItem className='menuListItem' button key={label.id} onClick={this.menuButtonAction}>
                 <ListItemIcon>
                     <img src={labelicon} className="menuBarIcon" alt="label   " />
                 </ListItemIcon>

@@ -39,6 +39,7 @@ export default class DashBoard extends Component {
     }
 
     getNoteData() {
+       
         noteservices.getNote()
             .then(res => {
                 this.setState({
@@ -162,12 +163,30 @@ export default class DashBoard extends Component {
         this.getAllLabels();
     }
 
+    addLabelsOnNotes = (labelData) => {
+        labelServices.addLabelOnNote(labelData)
+        .then(res=>{
+            
+        })
+
+        this.getNoteData();
+       
+    }
+
+    removeLabelFromNote = (labelMapData) => {
+        labelServices.deleteLabelFromNote(labelMapData)
+        .then(res=>{
+
+        })
+        this.getNoteData();
+    }
 
     render() {
+         console.log('dash',this.state);
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-
+      
         var notes = (this.state.noteData.map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note
@@ -177,6 +196,8 @@ export default class DashBoard extends Component {
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                     labels={this.state.labels}
+                    addLabel={this.addLabelsOnNotes}
+                    removeNoteLabel = {this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -191,6 +212,8 @@ export default class DashBoard extends Component {
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                     labels={this.state.labels}
+                    addLabel={this.addLabelsOnNotes}
+                    removeNoteLabel = {this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -205,6 +228,8 @@ export default class DashBoard extends Component {
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                     labels={this.state.labels}
+                    addLabel={this.addLabelsOnNotes}
+                    removeNoteLabel = {this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -219,6 +244,8 @@ export default class DashBoard extends Component {
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                     labels={this.state.labels}
+                    addLabel={this.addLabelsOnNotes}
+                    removeNoteLabel = {this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -237,6 +264,22 @@ export default class DashBoard extends Component {
             }
             return;
         }));
+
+        // var Labelnote =  (this.state.noteData.map((note) => {
+        //     if (note.labes.label.label === this.state.noteState) {
+        //         return <Note
+        //             key={note.id}
+        //             noteData={note}
+        //             view={this.state.listView}
+        //             editNote={this.openEditBox}
+        //             update={this.updateNoteData}
+        //             labels={this.state.labels}
+        //             addLabel={this.addLabelsOnNotes}
+        //             removeNoteLabel = {this.removeLabelFromNote}
+        //         ></Note>
+        //     }
+        //     return;
+        // }));
 
 
         return (

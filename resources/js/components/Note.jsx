@@ -14,6 +14,7 @@ import AdditionalOptionsOnDel from "./AdditionalOptionsOnDel";
 import SetColor from "./SetColor";
 import EditNoteDialog from "./EditNoteDialog";
 import AddLabelOnNote from "./AddLabelOnNote";
+import NoteLabelChip from "./NoteLabelChip";
 
 
 
@@ -101,6 +102,12 @@ export default class DashBoard extends Component {
 
         this.props.trashN(this.state.noteData);
     }
+
+    removeLabel = (event) =>{
+        console.log(event.target);
+        
+        // this.props.removeLabel();
+    }
     render() {
         return (
 
@@ -134,6 +141,13 @@ export default class DashBoard extends Component {
                             />
                         )}
 
+
+                        {this.props.noteData.labels.map(labelData=> {
+                            return <NoteLabelChip key={labelData.id} label = {labelData} removeNoteLabel= {this.props.removeNoteLabel}/>
+                        }
+
+                        )}
+
                     </CardContent>
                     {this.state.noteData.trash === '1' ?
                         <div className='inNotetakeNoteIcons'>
@@ -152,7 +166,13 @@ export default class DashBoard extends Component {
                             <div className='inNoteiconsclass'>
                                 <img src={this.state.noteData.archive === '1' ? unarchive : archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
                             </div>
-                            <AdditionalOptions deleteNote={this.deleteNote} labels={this.props.labels} />
+                            <AdditionalOptions 
+                            deleteNote={this.deleteNote} 
+                            labels={this.props.labels} 
+                            addLabel={this.props.addLabel} 
+                            noteData = {this.state.noteData}
+                            removeNoteLabel= {this.props.removeNoteLabel}
+                            />
                         </div>}
                 </Card>
                 <EditNoteDialog

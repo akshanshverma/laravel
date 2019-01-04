@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('createLabel', 'LabelController@createLabel');
     Route::post('removeLabel', 'LabelController@removeLabel');
     Route::post('updateLabel', 'LabelController@updateLabel');
+    Route::post('addLabelOnNote', 'LabelController@addLabelOnNote');
+    Route::post('removeLabelFromNote', 'LabelController@removeLabelFromNote');
+    
 
     Route::any('getDetails', 'UserController@getData');
     Route::get('logout', 'UserController@logout');

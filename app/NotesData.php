@@ -12,8 +12,18 @@ class NotesData extends Model
     ];
 
 
+    // protected $with=['labels'];
+
+
     public function createNewNote($input)
     {
         return NotesData::create($input);
     }
+
+
+    public function labels()
+    {
+        return $this->hasMany('App\LabelMap','note_id');
+    }
+
 }

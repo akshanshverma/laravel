@@ -37,6 +37,36 @@ export default class AdditionalOptions extends Component {
         })
     }
 
+    addLabel = (event) => {
+        var labelData = {
+            label_id:event.target.defaultValue,
+            note_id:this.props.noteData.id
+        }
+        if (!event.target.defaultChecked) {
+            this.props.addLabel(labelData);
+        }else{
+            this.props.removeNoteLabel(labelData);
+        }
+       
+        
+    }
+
+    checkLabel = (labelID) => {
+        var check = this.props.noteData.labels
+        .map((label) => {
+            return label.label.id;
+        })
+        for (let index = 0; index < check.length; index++) {
+            if (check[index] === labelID) {
+                console.log('t');
+                
+                return true;
+            }
+        }
+        console.log('f');
+       return false;
+
+    }
 
     render() {
         return (
@@ -58,16 +88,21 @@ export default class AdditionalOptions extends Component {
                                     <ClickAwayListener onClickAway={this.handleClose} >
                                         {this.state.labelTab ?
                                             <MenuList>
-                                                <div>Label note</div>
+                                                <div >Label note</div>
                                                 {this.props.labels.map((label) => {
-                                                    return <MenuItem key={label.id}>
-                                                        <Checkbox
+                                                    return <MenuItem key={label.id} >
+                                                        {/* <Checkbox
                                                             color='default'
-                                                            // checked
                                                             disableRipple
-                                                        />
-                                                        <div>{label.label}</div>
-                                                </MenuItem>
+                                                        /> */}
+                                                        <input
+                                                            type='Checkbox'
+                                                            defaultValue={label.id}
+                                                            onClick={this.addLabel}
+                                                            defaultChecked={this.checkLabel(label.id)}
+                                                        ></input>
+                                                        <div name={label.id}>{label.label}</div>
+                                                    </MenuItem>
                                                 })}
                                             </MenuList> :
                                             <MenuList>

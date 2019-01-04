@@ -46,4 +46,26 @@ export default class LabelServices {
             return error;
         })
     }
+
+    addLabelOnNote(labelData) {
+        var auth = "Bearer ".concat(localStorage.getItem('token'))
+        return axios.post('/api/addLabelOnNote', labelData, { headers: { Authorization: auth } })
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        })
+    }
+
+    deleteLabelFromNote(labelData){
+        var auth = "Bearer ".concat(localStorage.getItem('token'))
+        return axios.post('/api/removeLabelFromNote', labelData, { headers: { Authorization: auth } })
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        })
+    }
 }
