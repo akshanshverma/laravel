@@ -130,7 +130,7 @@ export default class DashBoard extends Component {
     getAllLabels = () => {
         labelServices.getLabels()
             .then(res => {
-                console.log(res);
+                // console.log(res);
 
                 this.setState({
                     labels: res.data
@@ -182,7 +182,7 @@ export default class DashBoard extends Component {
     }
 
     render() {
-         console.log('dash',this.state);
+        //  console.log('dash',this.state);
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }

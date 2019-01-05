@@ -114,4 +114,21 @@ export default class UserServices {
             });
     }
 
+
+    socialLogin(userData) {
+        return axios.post('/api/loginWithSocialAccoount', userData)
+            .then((response) => {
+                if (response.status == 200) {
+                    localStorage.setItem('token', response.data.success.token);
+                    localStorage.setItem('username', response.data.success.userData.username);
+                    localStorage.setItem('email', response.data.success.userData.email);
+                }
+                return response;
+            }
+            )
+            .catch((error) => {
+                return error;
+            });
+    }
+
 }

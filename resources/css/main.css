@@ -67,7 +67,7 @@ span.psw {
 }
 .errMsg{
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
     color: red;
 }
 
@@ -95,6 +95,15 @@ span.psw {
 .spanGoLogin{
     margin-left: 3%;
 
+}
+.googleLoginButtonDiv Button{
+    width: 100px;
+    height: 42px;
+}
+.socialLogin{
+    display: flex;
+    padding: 5px 0 10px 0;
+    justify-content: space-between;
 }
 
 /********** dashboard **************/

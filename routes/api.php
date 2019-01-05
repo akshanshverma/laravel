@@ -31,6 +31,9 @@ Route::get('verifymail/{token}', 'UserController@verifyMail');
 Route::get('checkverification/{token}', 'UserController@checkVerification');
 
 
+Route::post('loginWithSocialAccoount', 'UserController@loginWithSocialAccoount');
+
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('createnote', 'NotesController@createNote');
     Route::get('getAllNotes', 'NotesController@getAllNotes');

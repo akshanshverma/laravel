@@ -3,6 +3,8 @@ import Input from '../components/Input';
 import { Button, Card, Typography } from '@material-ui/core';
 import "../../css/main.css";
 import userService from '../services/UserServices';
+import LoginWithGoogle from '../components/LoginWithGoogle';
+import LoginWithFacebook from '../components/LoginWithFacebook';
 //import { Redirect } from "react-router-dom";
 
 
@@ -39,14 +41,14 @@ export default class Login extends Component {
                 if (res.status === 200) {
                     this.props.history.push("/home");
                 }
-                if(res.status === 220) {
+                if (res.status === 220) {
                     this.setState({
                         errors: {
                             msg: 'invalid email or password',
                         }
                     });
                 }
-                if(res.status === 221) {
+                if (res.status === 221) {
                     this.setState({
                         errors: {
                             msg: 'email is not verified',
@@ -58,9 +60,18 @@ export default class Login extends Component {
             }).catch();
     }
 
+    socialLogin = (userData) => {
+        services.socialLogin(userData)
+            .then(res => {
+                if (res.status === 200) {
+                    this.props.history.push("/home");
+                }
+            })
+    }
+
     render() {
-       
-        if (localStorage.getItem('token') !==null) {
+
+        if (localStorage.getItem('token') !== null) {
             this.props.history.push("/home");
         }
         return (
@@ -79,6 +90,10 @@ export default class Login extends Component {
                         </div>
                         <div className='errMsg' >
                             {this.state.errors["msg"]}
+                        </div>
+                        <div className='socialLogin'>
+                            <LoginWithGoogle loginWithGoogle={this.socialLogin} />
+                            <LoginWithFacebook loginWithGoogle={this.socialLogin} />
                         </div>
                         <div id='spanDiv'>
 

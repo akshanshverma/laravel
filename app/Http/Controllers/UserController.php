@@ -30,8 +30,8 @@ class UserController extends Controller
                 return response()->json(['error' => 'user is not verified'], 221);
             }
             $success['token'] = $user->createToken('fundoonotes')->accessToken;
-           
-            $success['userData'] =[
+
+            $success['userData'] = [
                 'email' => $user->email,
                 'username' => $user->username,
             ];
@@ -82,7 +82,7 @@ class UserController extends Controller
             $user->email_verified_at = now();
             $user->save();
             return response()->json(['verified successfully'], 201);
-        }else {
+        } else {
             return response()->json(['already verified'], 222);
         }
     }
@@ -92,12 +92,12 @@ class UserController extends Controller
         $token = request('token');
         $user = User::where('token', $token)->first();
         $time = $user->email_verified_at;
-        
+
         if (!$time) {
             return response()->json(['not verified'], 200);
         } else {
             return response()->json(['already verified'], 201);
-        }      
+        }
     }
 
     /**
@@ -115,6 +115,42 @@ class UserController extends Controller
         }
 
     }
+
+
+    public function loginWithSocialAccoount(Request $request)
+    {
+        $userData = $request->all();
+      
+        $UserDetail = User::where('email', $userData['email'])->first();
+        // dd($userData);
+        if (!$UserDetail) {
+            $userData['token'] = str_random(60);
+            $userData['password'] = bcrypt($userData['password']);
+            $user = User::create($userData);
+            $user->email_verified_at = now();
+            $user->save();
+            if (Auth::attempt(['email' => $userData['email'], 'password' => $request['password'] ])) {
+                $success['token'] = $user->createToken('fundoonotes')->accessToken;
+                $success['userData'] = [
+                    'email' => $user->email,
+                    'username' => $user->username,
+                ];
+                return response()->json(['success' => $success], 200);
+            }
+            return response()->json(['successful register'], 220);
+        }
+        if (Auth::attempt(['email' => $userData['U3'], 'password' => $userData['Eea']])) {
+            $user = Auth::user();
+            $success['token'] = $user->createToken('fundoonotes')->accessToken;
+            $success['userData'] = [
+                'email' => $user->email,
+                'username' => $user->username,
+            ];
+            return response()->json(['success' => $success], 200);
+        }
+
+    }
+
 
     /**
      * 
