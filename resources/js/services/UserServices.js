@@ -54,6 +54,8 @@ export default class UserServices {
             .then((response) => {
                 if (response.status == 200) {
                     localStorage.removeItem('token');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('email');
                 }
                 return response;
             }
