@@ -265,23 +265,26 @@ export default class DashBoard extends Component {
             return;
         }));
 
-        // var Labelnote =  (this.state.noteData.map((note) => {
-        //     if (note.labes.label.label === this.state.noteState) {
-        //         return <Note
-        //             key={note.id}
-        //             noteData={note}
-        //             view={this.state.listView}
-        //             editNote={this.openEditBox}
-        //             update={this.updateNoteData}
-        //             labels={this.state.labels}
-        //             addLabel={this.addLabelsOnNotes}
-        //             removeNoteLabel = {this.removeLabelFromNote}
-        //         ></Note>
-        //     }
-        //     return;
-        // }));
+        var labelnote =  (this.state.noteData.map((note) => {
+            // console.log((note.labels));
+            
+            // if (note.labes.label === this.state.noteState) {
+            //     return <Note
+            //         key={note.id}
+            //         noteData={note}
+            //         view={this.state.listView}
+            //         editNote={this.openEditBox}
+            //         update={this.updateNoteData}
+            //         labels={this.state.labels}
+            //         addLabel={this.addLabelsOnNotes}
+            //         removeNoteLabel = {this.removeLabelFromNote}
+            //     ></Note>
+            // }
+            // return;
+        }));
 
-
+      
+        
         return (
             <div className={this.state.menuBar ? 'mainDivMenuBarOpen' : 'mainDivMenuBar'}>
                 <NavBar

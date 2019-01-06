@@ -139,7 +139,7 @@ class UserController extends Controller
             }
             return response()->json(['successful register'], 220);
         }
-        if (Auth::attempt(['email' => $userData['U3'], 'password' => $userData['Eea']])) {
+        if (Auth::attempt(['email' => $userData['email'], 'password' => $userData['password']])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('fundoonotes')->accessToken;
             $success['userData'] = [
