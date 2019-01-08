@@ -7,6 +7,8 @@ export default class LoginWithGoogle extends Component {
 
     render() {
         const responseGoogle = (response) => {
+            console.log(response);
+            
             if (response.error === 'popup_closed_by_user') {
                 
             }else{
@@ -14,6 +16,7 @@ export default class LoginWithGoogle extends Component {
                     'email':response.w3.U3,
                     'username':response.w3.ig,
                     'password':response.w3.Eea,
+                    'profile_image':response.w3.Paa,
                 }
                 this.props.loginWithGoogle(userData);
             }

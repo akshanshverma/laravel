@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('');
+    //return view('');
+    return view('welcome');
 });
 Route::get('/login', function () {
     return view('welcome');
@@ -35,10 +36,9 @@ Route::get('/verifyaccount/{token}', function () {
     return view('welcome');
 });
 
-
-
-
 Route::get('/home', function () {
     return view('welcome');
 });
 
+
+//URL::forceScheme('https');

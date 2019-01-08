@@ -9,6 +9,8 @@ import refresh from "../assets/icons/refresh-24px.svg"
 import agenda from "../assets/icons/agenda-24px.svg"
 import setting from "../assets/icons/settings-24px.svg"
 import gridView from "../assets/icons/gridView.svg"
+import ImgUpload from "./ImgUpload"
+
 
 export default class Navbar extends Component {
 
@@ -18,7 +20,7 @@ export default class Navbar extends Component {
             logoutmenu: false,
             anchorEl: null,
             email: localStorage.getItem('email'),
-            username: localStorage.getItem('username')
+            username: localStorage.getItem('username'),
         }
         this.logoutMenuOpen = this.logoutMenuOpen.bind(this);
         this.logoutMenuClose = this.logoutMenuClose.bind(this);
@@ -49,10 +51,10 @@ export default class Navbar extends Component {
                                     <img src={menuicon} className="menuicon" alt="menuicon" />
                                 </IconButton>
                             </div>
-                            {this.props.menuName === 'Notes'?<img src={appIcon} className="appIcon" alt="appIcon" />:<div/>}
+                            {this.props.menuName === 'Notes' ? <img src={appIcon} className="appIcon" alt="appIcon" /> : <div />}
                             <div className='appName'>
                                 <Typography variant='h5'>
-                                    {this.props.menuName === 'Notes'?'FundooNotes':this.props.menuName}
+                                    {this.props.menuName === 'Notes' ? 'FundooNotes' : this.props.menuName}
                                 </Typography>
                             </div>
                         </div>
@@ -100,7 +102,8 @@ export default class Navbar extends Component {
                             </div>
                             <div className='avatarIcon'>
                                 <IconButton onClick={this.logoutMenuOpen}>
-                                    <Avatar >{this.state.username.substr(0, 1)}</Avatar>
+                                    {/* <Avatar >{this.state.username.substr(0, 1)}</Avatar> */}
+                                    <Avatar src={this.props.profilePic} className="prodilePic" alt="profileIcon"> </Avatar>
                                 </IconButton>
                             </div>
                         </div>
@@ -120,12 +123,15 @@ export default class Navbar extends Component {
                                     <ClickAwayListener onClickAway={this.logoutMenuClose}>
                                         <MenuList>
                                             <div className='divAvatarMenu'>
-                                                <Avatar className='MenuAvtar' >{this.state.username.substr(0, 1)}</Avatar>
+                                                {/* <Avatar className='MenuAvtar' >{this.state.username.substr(0, 1)}</Avatar> */}
+
+                                                <Avatar className='MenuAvtar' src={this.props.profilePic} alt="profileIcon" ></Avatar>
                                                 <div className='userData'>
                                                     <span className='usernameSpan'>{this.state.username}</span>
                                                     <span>{this.state.email}</span>
                                                 </div>
                                             </div>
+                                            <ImgUpload uploadImage={this.props.uploadImage} />
                                             <Divider />
                                             <MenuItem onClick={this.props.logoutClick}>Logout</MenuItem>
                                             <div className='logoutDiv'></div>

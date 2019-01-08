@@ -25,6 +25,7 @@ export default class UserServices {
                     localStorage.setItem('token', response.data.success.token);
                     localStorage.setItem('username', response.data.success.userData.username);
                     localStorage.setItem('email', response.data.success.userData.email);
+                    localStorage.setItem('profile_image', response.data.success.userData.profile_image);
                 }
                 return response;
             }
@@ -56,6 +57,7 @@ export default class UserServices {
                     localStorage.removeItem('token');
                     localStorage.removeItem('username');
                     localStorage.removeItem('email');
+                    localStorage.removeItem('profile_image');
                 }
                 return response;
             }
@@ -124,7 +126,21 @@ export default class UserServices {
                     localStorage.setItem('token', response.data.success.token);
                     localStorage.setItem('username', response.data.success.userData.username);
                     localStorage.setItem('email', response.data.success.userData.email);
+                    localStorage.setItem('profile_image', response.data.success.userData.profile_image);
                 }
+                return response;
+            }
+            )
+            .catch((error) => {
+                return error;
+            });
+    }
+
+    uploadImage(imageData) {
+        var auth = "Bearer ".concat(localStorage.getItem('token'))
+        return axios.post('/api/uploadProfileImage',imageData, { headers: { Authorization: auth } })
+            .then((response) => {
+                localStorage.setItem('profile_image', response.data.success);
                 return response;
             }
             )

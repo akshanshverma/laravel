@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('addLabelOnNote', 'LabelController@addLabelOnNote');
     Route::post('removeLabelFromNote', 'LabelController@removeLabelFromNote');
     
+    Route::post('uploadProfileImage', 'UserController@uploadProfileImage');
 
     Route::any('getDetails', 'UserController@getData');
     Route::get('logout', 'UserController@logout');

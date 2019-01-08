@@ -24,6 +24,7 @@ export default class DashBoard extends Component {
             labels: [],
             listView: false,
             noteState: "Notes",
+            profileImage: localStorage.getItem('profile_image')
         }
         this.SnackBarN = React.createRef();
 
@@ -181,6 +182,21 @@ export default class DashBoard extends Component {
         this.getNoteData();
     }
 
+    uploadProfilePic = (imageData) => {
+       
+        userServices.uploadImage(imageData)
+        .then(res=>{
+            console.log('status',res);
+            
+            if (res.status === 200) {
+            
+                this.setState({
+                    profileImage:res.data.success
+                })
+            }
+        })
+    }
+
     render() {
         //  console.log('dash',this.state);
         if (localStorage.getItem('token') === null) {
@@ -294,6 +310,8 @@ export default class DashBoard extends Component {
                     view={this.listGridView}
                     viewIcon={this.state.listView}
                     menuName={this.state.noteState}
+                    uploadImage = {this.uploadProfilePic}
+                    profilePic = {this.state.profileImage}
                 />
                 <ManuDrawer
                     menuAction={this.state.menuBar}

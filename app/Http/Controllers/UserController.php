@@ -126,6 +126,14 @@ class UserController extends Controller
         if (!$UserDetail) {
             $userData['token'] = str_random(60);
             $userData['password'] = bcrypt($userData['password']);
+
+            //get image file 
+            $imgData = file_get_contents($userData['profile_image']);
+            // $type = pathinfo($img_path, PATHINFO_EXTENSION);
+            $userData['profile_image'] = 'data:image/jpg;base64,'.base64_encode($imgData);
+
+
+
             $user = User::create($userData);
             $user->email_verified_at = now();
             $user->save();
@@ -134,6 +142,7 @@ class UserController extends Controller
                 $success['userData'] = [
                     'email' => $user->email,
                     'username' => $user->username,
+                    'profile_image' => $user->profile_image,
                 ];
                 return response()->json(['success' => $success], 200);
             }
@@ -145,10 +154,21 @@ class UserController extends Controller
             $success['userData'] = [
                 'email' => $user->email,
                 'username' => $user->username,
+                'profile_image' => $user->profile_image,
             ];
             return response()->json(['success' => $success], 200);
         }
 
+    }
+
+    public function uploadProfileImage(Request $request)
+    {   
+        
+        $file = $request->file('profile_image')->getRealPath();
+        $profilePic['profile_image'] = 'data:image/jpg;base64,'.base64_encode(file_get_contents($file));
+        $userDetails = Auth::user();
+        $user = User::where('email',$userDetails->email)->first();
+        return response()->json(['success' => $user->profile_image], 200);
     }
 
 

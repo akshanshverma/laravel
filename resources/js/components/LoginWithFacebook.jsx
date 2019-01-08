@@ -11,8 +11,9 @@ export default class LoginWithFacebook extends Component {
                 'email':response.email,
                 'username':response.name,
                 'password':response.id,
+                'profile_image':response.picture.data.url,
             }
-            console.log(userData);
+            console.log(response);
             
             this.props.loginWithGoogle(userData);
         }
