@@ -12,7 +12,7 @@ export default class BranchTest extends Component {
 
         return (
             <div>
-               hi
+               hello
             </div>
         )
     }
