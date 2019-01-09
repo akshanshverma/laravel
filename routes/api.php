@@ -23,6 +23,11 @@ use Illuminate\Http\Request;
 //     return $r->get("key1");
 // });
 
+
+
+/**
+ * api call for user control 
+ */
 Route::any('login', 'UserController@login')->name('login');
 
 
@@ -33,28 +38,38 @@ Route::get('checkverification/{token}', 'UserController@checkVerification');
 
 Route::post('loginWithSocialAccoount', 'UserController@loginWithSocialAccoount');
 
-
+/**
+ * api call which need middleware for auth
+ */
 Route::group(['middleware' => 'auth:api'], function () {
+    /**
+     * notes api calls
+     */
     Route::post('createnote', 'NotesController@createNote');
     Route::get('getAllNotes', 'NotesController@getAllNotes');
     Route::post('updateNote', 'NotesController@updateNote');
     Route::post('deleteNotes', 'NotesController@deleteNotes');
-
+    /**
+     * labels api calls
+     */
     Route::get('getAllLabel', 'LabelController@getAllLabel');
     Route::post('createLabel', 'LabelController@createLabel');
     Route::post('removeLabel', 'LabelController@removeLabel');
     Route::post('updateLabel', 'LabelController@updateLabel');
     Route::post('addLabelOnNote', 'LabelController@addLabelOnNote');
     Route::post('removeLabelFromNote', 'LabelController@removeLabelFromNote');
-    
+    /**
+     * user api call 
+     */
     Route::post('uploadProfileImage', 'UserController@uploadProfileImage');
-
     Route::any('getDetails', 'UserController@getData');
     Route::get('logout', 'UserController@logout');
 
 });
 
-
+/**
+ * password  action api calls
+ */
 Route::group([
     'namespace' => 'Auth',
     'middleware' => 'api',

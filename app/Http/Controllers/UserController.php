@@ -70,6 +70,11 @@ class UserController extends Controller
         return response()->json(['successful'], 200);
     }
 
+    /**
+     * verifyMail is to take of the user and verify the user 
+     * 
+     * @return json response
+     */
     public function verifyMail()
     {
         $inputToken = request('token');
@@ -87,6 +92,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * checkVerification is to check that user is verify or not 
+     * @return  json response 
+     */
     public function checkVerification()
     {
         $token = request('token');
@@ -104,7 +113,7 @@ class UserController extends Controller
      * funtion getData is to take user is to take user data form the database
      * only if user is authenticated 
      * 
-     * @return json respomse
+     * @return json response
      */
     public function getData()
     {
@@ -116,6 +125,12 @@ class UserController extends Controller
 
     }
 
+    /**
+     * loginWithSocialAccoount is a function which is user to login and registre user with the 
+     * help of social account 
+     * 
+     * @return json response
+     */
 
     public function loginWithSocialAccoount(Request $request)
     {
@@ -161,19 +176,25 @@ class UserController extends Controller
 
     }
 
+    /**
+     * uploadProfileImage is to change user profile image
+     * 
+     * @return json with changed profile image and status of success 
+     */
     public function uploadProfileImage(Request $request)
     {   
         
         $file = $request->file('profile_image')->getRealPath();
         $profilePic['profile_image'] = 'data:image/jpg;base64,'.base64_encode(file_get_contents($file));
-        $userDetails = Auth::user();
-        $user = User::where('email',$userDetails->email)->first();
+        $user = Auth::user();
+        $user->profile_image= $profilePic['profile_image'];
+        $user->save();
         return response()->json(['success' => $user->profile_image], 200);
     }
 
 
     /**
-     * 
+     * logout is to logout user account
      */
     public function Logout()
     {

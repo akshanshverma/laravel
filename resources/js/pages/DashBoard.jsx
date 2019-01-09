@@ -33,14 +33,25 @@ export default class DashBoard extends Component {
         this.createNewNote = this.createNewNote.bind(this);
         this.getNoteData = this.getNoteData.bind(this);
     }
+
+    /**
+     * mount data after render 
+     * noteData 
+     * checek Reminder
+     * and get labels
+     */
     componentDidMount() {
         this.getNoteData();
         this.checkReminder();
         this.getAllLabels();
     }
 
+
+    /**
+     * get all note data form database
+     */
     getNoteData() {
-       
+
         noteservices.getNote()
             .then(res => {
                 this.setState({
@@ -49,6 +60,10 @@ export default class DashBoard extends Component {
             })
     }
 
+
+    /**
+     * side menu click
+     */
     menuClickHandle() {
         if (this.state.menuBar === false) {
             this.setState({
@@ -61,6 +76,9 @@ export default class DashBoard extends Component {
         }
     }
 
+    /**
+     * action on click logout
+     */
     onClickLogout() {
         userServices.logoutUser()
             .then(res => {
@@ -73,6 +91,10 @@ export default class DashBoard extends Component {
             }).catch();
     }
 
+    /**
+     * function to create new note and send to backend 
+     * @param {array} data 
+     */
     createNewNote(data) {
         // this.setState({
         //     noteData: [...this.state.noteData, data]
@@ -89,12 +111,19 @@ export default class DashBoard extends Component {
         this.getNoteData();
     }
 
+
+    /**
+     * function to control list and grid view 
+     */
     listGridView = () => {
         this.setState({
             listView: !this.state.listView
         })
     }
 
+    /**
+     * check reminder of every note in every 60s
+     */
     checkReminder = () => {
 
         setInterval(() => {
@@ -131,8 +160,6 @@ export default class DashBoard extends Component {
     getAllLabels = () => {
         labelServices.getLabels()
             .then(res => {
-                // console.log(res);
-
                 this.setState({
                     labels: res.data
                 })
@@ -166,43 +193,41 @@ export default class DashBoard extends Component {
 
     addLabelsOnNotes = (labelData) => {
         labelServices.addLabelOnNote(labelData)
-        .then(res=>{
-            
-        })
+            .then(res => {
+
+            })
 
         this.getNoteData();
-       
+
     }
 
     removeLabelFromNote = (labelMapData) => {
         labelServices.deleteLabelFromNote(labelMapData)
-        .then(res=>{
+            .then(res => {
 
-        })
+            })
         this.getNoteData();
     }
 
     uploadProfilePic = (imageData) => {
-       
+
         userServices.uploadImage(imageData)
-        .then(res=>{
-            console.log('status',res);
-            
-            if (res.status === 200) {
-            
-                this.setState({
-                    profileImage:res.data.success
-                })
-            }
-        })
+            .then(res => {
+                console.log('status', res);
+                if (res.status === 200) {
+                    this.setState({
+                        profileImage: res.data.success
+                    })
+                }
+            })
     }
 
     render() {
-        //  console.log('dash',this.state);
+        // console.log('dash', this.state.noteState);
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
         }
-      
+
         var notes = (this.state.noteData.map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note
@@ -213,7 +238,7 @@ export default class DashBoard extends Component {
                     update={this.updateNoteData}
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
-                    removeNoteLabel = {this.removeLabelFromNote}
+                    removeNoteLabel={this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -229,7 +254,7 @@ export default class DashBoard extends Component {
                     update={this.updateNoteData}
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
-                    removeNoteLabel = {this.removeLabelFromNote}
+                    removeNoteLabel={this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -245,7 +270,7 @@ export default class DashBoard extends Component {
                     update={this.updateNoteData}
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
-                    removeNoteLabel = {this.removeLabelFromNote}
+                    removeNoteLabel={this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -261,7 +286,7 @@ export default class DashBoard extends Component {
                     update={this.updateNoteData}
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
-                    removeNoteLabel = {this.removeLabelFromNote}
+                    removeNoteLabel={this.removeLabelFromNote}
                 ></Note>
             }
             return;
@@ -281,26 +306,26 @@ export default class DashBoard extends Component {
             return;
         }));
 
-        var labelnote =  (this.state.noteData.map((note) => {
-            // console.log((note.labels));
-            
-            // if (note.labes.label === this.state.noteState) {
-            //     return <Note
-            //         key={note.id}
-            //         noteData={note}
-            //         view={this.state.listView}
-            //         editNote={this.openEditBox}
-            //         update={this.updateNoteData}
-            //         labels={this.state.labels}
-            //         addLabel={this.addLabelsOnNotes}
-            //         removeNoteLabel = {this.removeLabelFromNote}
-            //     ></Note>
-            // }
-            // return;
-        }));
 
-      
-        
+        var noteWithLabel = this.state.noteData.map((note) => {
+            for (let i = 0; i < note.labels.length; i++) {
+                const label = note.labels[i];
+                if (label.label.label === this.state.noteState) {
+                    return <Note
+                        key={note.id}
+                        noteData={note}
+                        view={this.state.listView}
+                        editNote={this.openEditBox}
+                        update={this.updateNoteData}
+                        labels={this.state.labels}
+                        addLabel={this.addLabelsOnNotes}
+                        removeNoteLabel={this.removeLabelFromNote}
+                    ></Note>
+                }
+            }
+        })
+
+
         return (
             <div className={this.state.menuBar ? 'mainDivMenuBarOpen' : 'mainDivMenuBar'}>
                 <NavBar
@@ -310,8 +335,8 @@ export default class DashBoard extends Component {
                     view={this.listGridView}
                     viewIcon={this.state.listView}
                     menuName={this.state.noteState}
-                    uploadImage = {this.uploadProfilePic}
-                    profilePic = {this.state.profileImage}
+                    uploadImage={this.uploadProfilePic}
+                    profilePic={this.state.profileImage}
                 />
                 <ManuDrawer
                     menuAction={this.state.menuBar}
@@ -347,7 +372,10 @@ export default class DashBoard extends Component {
                                 {trashNotes}
                             </div>;
                         default:
-                            return null;
+                            return <div className={this.state.listView ? ("cardListView") : ("cardGridView")}>
+                                {noteWithLabel}
+                            </div>;
+                        // return null;
                     }
                 })()}
 
