@@ -27,10 +27,12 @@ export default class Navbar extends Component {
     }
 
     logoutMenuOpen(event) {
+        console.log('check');
+        
         const { currentTarget } = event;
         this.setState({
             anchorEl: currentTarget,
-            logoutmenu: true
+            logoutmenu: !this.state.logoutmenu
         })
     }
     logoutMenuClose() {
@@ -40,7 +42,8 @@ export default class Navbar extends Component {
     }
 
     render() {
-
+        console.log(this.state.logoutmenu);
+        
         return (
             <div >
                 <AppBar id='tb' style={{ backgroundColor: 'white' }}>

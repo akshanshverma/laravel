@@ -16,7 +16,7 @@
         <title>FundooNotes</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css"> -->
         <!-- <link rel="stylesheet" href="/resources/css/main.css"> -->
     </head>
     <body>
