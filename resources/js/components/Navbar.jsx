@@ -27,8 +27,8 @@ export default class Navbar extends Component {
     }
 
     logoutMenuOpen(event) {
-        console.log('check');
-        
+
+
         const { currentTarget } = event;
         this.setState({
             anchorEl: currentTarget,
@@ -36,14 +36,20 @@ export default class Navbar extends Component {
         })
     }
     logoutMenuClose() {
+        // console.log('check');
         this.setState({
             logoutmenu: false
         })
     }
 
-    render() {
-        console.log(this.state.logoutmenu);
+    searchNote = (event) =>{
         
+        this.props.searchNote(event.target.value);
+    }
+
+    render() {
+        // console.log(this.state.logoutmenu);
+
         return (
             <div >
                 <AppBar id='tb' style={{ backgroundColor: 'white' }}>
@@ -67,7 +73,7 @@ export default class Navbar extends Component {
                                     <img src={search} className="search" alt="search" />
                                 </IconButton>
                             </div>
-                            <InputBase placeholder='Search' id='inputSearch' fullWidth />
+                            <InputBase onChange={this.searchNote} placeholder='Search' id='inputSearch' fullWidth />
                             <div className="iconBtn">
                                 <IconButton>
                                     <img src={close} className="close" alt="close" />
@@ -103,48 +109,55 @@ export default class Navbar extends Component {
 
                                 </div>
                             </div>
-                            <div className='avatarIcon'>
-                                <IconButton onClick={this.logoutMenuOpen}>
-                                    {/* <Avatar >{this.state.username.substr(0, 1)}</Avatar> */}
-                                    <Avatar src={this.props.profilePic} className="prodilePic" alt="profileIcon"> </Avatar>
-                                </IconButton>
-                            </div>
+                            <ClickAwayListener onClickAway={this.logoutMenuClose}>
+                                <div className='avatarIcon'>
+
+                                    <IconButton onClick={this.logoutMenuOpen}>
+                                        {/* <Avatar >{this.state.username.substr(0, 1)}</Avatar> */}
+                                        <Avatar src={this.props.profilePic} className="prodilePic" alt="profileIcon"> </Avatar>
+                                    </IconButton>
+                                    <div className='logoutMenu'>
+                                        <Popper className='logoutMenuPopper' anchorEl={this.state.anchorEl} open={this.state.logoutmenu} transition disablePortal>
+                                            {({ TransitionProps, placement }) => (
+                                                <Grow
+                                                    {...TransitionProps}
+                                                    id="menu-list-grow"
+                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                >
+                                                    <Paper>
+
+                                                        <MenuList>
+                                                            <div className='divAvatarMenu'>
+                                                                {/* <Avatar className='MenuAvtar' >{this.state.username.substr(0, 1)}</Avatar> */}
+
+                                                                <Avatar className='MenuAvtar' src={this.props.profilePic} alt="profileIcon" ></Avatar>
+                                                                <div className='userData'>
+                                                                    <span className='usernameSpan'>{this.state.username}</span>
+                                                                    <span className='userEmailSpan'>{this.state.email}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className='uploadImage'>
+                                                                <ImgUpload uploadImage={this.props.uploadImage} />
+                                                            </div>
+                                                            <Divider />
+                                                            <MenuItem onClick={this.props.logoutClick}>Logout</MenuItem>
+                                                            <div className='logoutDiv'></div>
+                                                        </MenuList>
+
+                                                    </Paper>
+                                                </Grow>
+                                            )}
+                                        </Popper>
+                                    </div>
+
+                                </div>
+                            </ClickAwayListener>
                         </div>
                     </Toolbar>
                     <Divider />
                 </AppBar>
 
-                <div className='logoutMenu'>
-                    <Popper className='logoutMenuPopper' anchorEl={this.state.anchorEl} open={this.state.logoutmenu} transition disablePortal>
-                        {({ TransitionProps, placement }) => (
-                            <Grow
-                                {...TransitionProps}
-                                id="menu-list-grow"
-                                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                            >
-                                <Paper>
-                                    <ClickAwayListener onClickAway={this.logoutMenuClose}>
-                                        <MenuList>
-                                            <div className='divAvatarMenu'>
-                                                {/* <Avatar className='MenuAvtar' >{this.state.username.substr(0, 1)}</Avatar> */}
 
-                                                <Avatar className='MenuAvtar' src={this.props.profilePic} alt="profileIcon" ></Avatar>
-                                                <div className='userData'>
-                                                    <span className='usernameSpan'>{this.state.username}</span>
-                                                    <span>{this.state.email}</span>
-                                                </div>
-                                            </div>
-                                            <ImgUpload uploadImage={this.props.uploadImage} />
-                                            <Divider />
-                                            <MenuItem onClick={this.props.logoutClick}>Logout</MenuItem>
-                                            <div className='logoutDiv'></div>
-                                        </MenuList>
-                                    </ClickAwayListener>
-                                </Paper>
-                            </Grow>
-                        )}
-                    </Popper>
-                </div>
             </div>
         )
     }

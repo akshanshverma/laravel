@@ -210,7 +210,19 @@ div.MenuAvtar{
     text-align: center;
 }
 .usernameSpan{
+    color: rgba(0, 0, 0, 0.75);
     font-size: 35px;
+}
+.userEmailSpan{
+    color: rgba(0, 0, 0, 0.75);
+    
+}
+.uploadImage{
+    padding-left: 25px;
+}
+.uploadImageInput{
+    color: rgba(0, 0, 0, 0.75);
+    
 }
 /*****menudrawer******/
 

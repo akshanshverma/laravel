@@ -19,7 +19,7 @@ export default class ImgUpload extends Component {
 
         return (
             <div>
-                <input onChange={this.getImage} type='file' name='file' ></input>
+                <input className='uploadImageInput'onChange={this.getImage} type='file' name='file' ></input>
             </div>
         )
     }

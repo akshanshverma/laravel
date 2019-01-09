@@ -24,7 +24,8 @@ export default class DashBoard extends Component {
             labels: [],
             listView: false,
             noteState: "Notes",
-            profileImage: localStorage.getItem('profile_image')
+            profileImage: localStorage.getItem('profile_image'),
+            searchKey:''
         }
         this.SnackBarN = React.createRef();
 
@@ -222,13 +223,24 @@ export default class DashBoard extends Component {
             })
     }
 
+    setSearchValue = (value) => {
+        this.setState({
+            searchKey:value
+        })
+    }
+
     render() {
-        // console.log('dash', this.state.noteState);
+        // console.log('dash', this.state.searchKey);
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
+            return;
         }
 
-        var notes = (this.state.noteData.map((note) => {
+        var notes = (this.state.noteData
+            // .filter(note=>{
+            //     return note.title.indexOf(this.state.searchKey)>=0 
+            // })
+            .map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note
                     key={note.id}
@@ -337,6 +349,7 @@ export default class DashBoard extends Component {
                     menuName={this.state.noteState}
                     uploadImage={this.uploadProfilePic}
                     profilePic={this.state.profileImage}
+                    searchNote = {this.setSearchValue}
                 />
                 <ManuDrawer
                     menuAction={this.state.menuBar}
