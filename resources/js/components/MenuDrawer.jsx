@@ -42,8 +42,8 @@ export default class MenuDrawer extends Component {
 
 
     render() {
-        var labelsName = this.props.labels.map((label) => {
-            return <ListItem className='menuListItem' button key={label.id} onClick={this.menuButtonAction}>
+        var labelsName = this.props.labels.map((label) => { 
+            return <ListItem className='menuListItem' button style ={this.props.menuState===label['label']?{backgroundColor:'#feefc3'}:{backgroundColor:'#ffffff'}} key={label.id} onClick={this.menuButtonAction}>
                 <ListItemIcon>
                     <img src={labelicon} className="menuBarIcon" alt="label   " />
                 </ListItemIcon>
@@ -62,13 +62,13 @@ export default class MenuDrawer extends Component {
                         open={this.props.menuAction}>
 
                         <List className='menuDrawerList'>
-                            <ListItem className='menuListItem' style={{backgroundColor:'#feefc3'}} button onClick={this.menuButtonAction} value='Notes'>
+                            <ListItem className='menuListItem' style ={this.props.menuState==='Notes'?{backgroundColor:'#feefc3'}:{backgroundColor:'#ffffff'}} button onClick={this.menuButtonAction} value='Notes'>
                                 <ListItemIcon>
                                     <img src={noteIcon} className="menuBarIcon" alt="noteIcon   " />
                                 </ListItemIcon>
                                 <ListItemText>Notes</ListItemText>
                             </ListItem>
-                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Reminders'>
+                            <ListItem className='menuListItem' style ={this.props.menuState==='Reminders'?{backgroundColor:'#feefc3'}:{backgroundColor:'#ffffff'}} button onClick={this.menuButtonAction} value='Reminders'>
                                 <ListItemIcon>
                                     <img src={reminderIcon} className="menuBarIcon" alt="reminderIcon   " />
                                 </ListItemIcon>
@@ -82,16 +82,18 @@ export default class MenuDrawer extends Component {
                                 newLabel={this.props.newLabel}
                                 removeLabel={this.props.removeLabel}
                                 updateLabel={this.props.updateLabel}
+                                menuState= {this.props.menuState}
+                                noteState = { this.props.noteState}
                             />
                             <Divider />
 
-                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Archive'>
+                            <ListItem className='menuListItem' style ={this.props.menuState==='Archive'?{backgroundColor:'#feefc3'}:{backgroundColor:'#ffffff'}} button onClick={this.menuButtonAction} value='Archive'>
                                 <ListItemIcon>
                                     <img src={archive} className="menuBarIcon" alt="archive   " />
                                 </ListItemIcon>
                                 <ListItemText>Archive</ListItemText>
                             </ListItem>
-                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} >
+                            <ListItem className='menuListItem' style ={this.props.menuState==='Trash'?{backgroundColor:'#feefc3'}:{backgroundColor:'#ffffff'}} button onClick={this.menuButtonAction} >
                                 <ListItemIcon>
                                     <img src={trash} className="menuBarIcon" alt="trash   " />
                                 </ListItemIcon>

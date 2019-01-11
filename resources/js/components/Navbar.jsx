@@ -42,8 +42,7 @@ export default class Navbar extends Component {
         })
     }
 
-    searchNote = (event) =>{
-        
+    searchNote = (event) =>{    
         this.props.searchNote(event.target.value);
     }
 

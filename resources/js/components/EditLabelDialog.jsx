@@ -22,6 +22,7 @@ export default class ResponsiveDialog extends React.Component {
 
     handleClickOpen = () => {
         this.setState({ open: true });
+        this.props.noteState(event.target.textContent);
     };
 
     handleClose = () => {
@@ -65,7 +66,7 @@ export default class ResponsiveDialog extends React.Component {
         });
         return (
             <div>
-                <ListItem className='menuListItem' button onClick={this.handleClickOpen}>
+                <ListItem className='menuListItem' style ={this.props.menuState==='Edit labels'?{backgroundColor:'#feefc3'}:{backgroundColor:'#ffffff'}} button onClick={this.handleClickOpen}>
                     <ListItemIcon>
                         <img src={editIcon} className="menuBarIcon" alt="editIcon   " />
                     </ListItemIcon>

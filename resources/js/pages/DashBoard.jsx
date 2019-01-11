@@ -230,7 +230,7 @@ export default class DashBoard extends Component {
     }
 
     render() {
-        // console.log('dash', this.state.searchKey);
+        // console.log('dash', this.state.noteState);
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
             return;
@@ -363,6 +363,7 @@ export default class DashBoard extends Component {
                     newLabel={this.createLabel}
                     removeLabel={this.removeLabel}
                     updateLabel={this.updateLabel}
+                    menuState={this.state.noteState}
                 />
 
                 <AddNotes noteData={this.createNewNote} />
