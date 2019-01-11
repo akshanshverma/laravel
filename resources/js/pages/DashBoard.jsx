@@ -237,9 +237,14 @@ export default class DashBoard extends Component {
         }
 
         var notes = (this.state.noteData
-            // .filter(note=>{
-            //     return note.title.indexOf(this.state.searchKey)>=0 
-            // })
+            .filter(note=>{
+                if (note.title.indexOf(this.state.searchKey)>=0 ) {
+                    return true;
+                }else if (note.note.indexOf(this.state.searchKey)>=0 ) {
+                    return true;
+                }
+                return false; 
+            })
             .map((note) => {
             if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
                 return <Note

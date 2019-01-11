@@ -111,7 +111,7 @@ export default class DashBoard extends Component {
     render() {
         return (
 
-            <div className={this.props.view ? ('divCardList') : ('divCardGrid')}>
+            <div draggable className={this.props.view ? ('divCardList') : ('divCardGrid')}>
 
                 <Card style={{ backgroundColor: this.state.noteData.color }} className="noteCard">
                     <CardContent className='noteCardContent' >
