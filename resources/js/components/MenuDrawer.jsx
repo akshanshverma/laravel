@@ -62,7 +62,7 @@ export default class MenuDrawer extends Component {
                         open={this.props.menuAction}>
 
                         <List className='menuDrawerList'>
-                            <ListItem className='menuListItem' button onClick={this.menuButtonAction} value='Notes'>
+                            <ListItem className='menuListItem' style={{backgroundColor:'#feefc3'}} button onClick={this.menuButtonAction} value='Notes'>
                                 <ListItemIcon>
                                     <img src={noteIcon} className="menuBarIcon" alt="noteIcon   " />
                                 </ListItemIcon>
