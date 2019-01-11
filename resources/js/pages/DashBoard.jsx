@@ -25,7 +25,8 @@ export default class DashBoard extends Component {
             listView: false,
             noteState: "Notes",
             profileImage: localStorage.getItem('profile_image'),
-            searchKey:''
+            searchKey: '',
+            dragKey: '',
         }
         this.SnackBarN = React.createRef();
 
@@ -225,41 +226,64 @@ export default class DashBoard extends Component {
 
     setSearchValue = (value) => {
         this.setState({
-            searchKey:value
+            searchKey: value
         })
     }
 
+    dragAndDrop = (noteIndex) => {
+        this.setState({
+            dragKey: noteIndex
+        })
+    }
+
+    moveNote = (dropNoteId) => {
+        var noteArr = this.state.noteData;
+        var dragNote = noteArr[this.state.dragKey];
+        if (dropNoteId > this.state.dragKey) {
+            let i = this.state.dragKey;
+            for (i ; i < dropNoteId; i++) {
+                noteArr[i] = noteArr[i + 1];
+                console.log( i, '.....', i + 1);
+            }
+            noteArr[i] = dragNote;
+        }
+    }
+
     render() {
-        // console.log('dash', this.state.noteState);
+        console.log('dash', this.state.dragKey);
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
             return;
         }
 
         var notes = (this.state.noteData
-            .filter(note=>{
-                if (note.title.indexOf(this.state.searchKey)>=0 ) {
+            .filter(note => {
+                if (note.title.indexOf(this.state.searchKey) >= 0) {
                     return true;
-                }else if (note.note.indexOf(this.state.searchKey)>=0 ) {
+                } else if (note.note.indexOf(this.state.searchKey) >= 0) {
                     return true;
                 }
-                return false; 
+                return false;
             })
             .map((note) => {
-            if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
-                return <Note
-                    key={note.id}
-                    noteData={note}
-                    view={this.state.listView}
-                    editNote={this.openEditBox}
-                    update={this.updateNoteData}
-                    labels={this.state.labels}
-                    addLabel={this.addLabelsOnNotes}
-                    removeNoteLabel={this.removeLabelFromNote}
-                ></Note>
-            }
-            return;
-        }));
+                if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
+
+                    return <Note
+                        key={note.id}
+                        noteIndex={this.state.noteData.indexOf(note)}
+                        noteData={note}
+                        view={this.state.listView}
+                        editNote={this.openEditBox}
+                        update={this.updateNoteData}
+                        labels={this.state.labels}
+                        addLabel={this.addLabelsOnNotes}
+                        removeNoteLabel={this.removeLabelFromNote}
+                        dragAndDrop={this.dragAndDrop}
+                        dropAction={this.moveNote}
+                    ></Note>
+                }
+                return;
+            }));
 
         var reminderNote = (this.state.noteData.map((note) => {
             if (note.reminder !== null && note.trash === '0') {
@@ -354,7 +378,7 @@ export default class DashBoard extends Component {
                     menuName={this.state.noteState}
                     uploadImage={this.uploadProfilePic}
                     profilePic={this.state.profileImage}
-                    searchNote = {this.setSearchValue}
+                    searchNote={this.setSearchValue}
                 />
                 <ManuDrawer
                     menuAction={this.state.menuBar}

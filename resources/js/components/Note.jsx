@@ -23,6 +23,7 @@ export default class DashBoard extends Component {
         super(props);
         this.state = {
             noteData: this.props.noteData,
+            noteIndex:this.props.noteIndex,
             labelTab: false
         }
         this.editNoteDialog = React.createRef();
@@ -108,10 +109,19 @@ export default class DashBoard extends Component {
         
         // this.props.removeLabel();
     }
+
+    dragStart = () => {
+        this.props.dragAndDrop(this.state.noteIndex);     
+    }
+
+    onDrop = () => {
+      
+        this.props.dropAction(this.state.noteIndex);
+    }
     render() {
         return (
 
-            <div draggable className={this.props.view ? ('divCardList') : ('divCardGrid')}>
+            <div draggable onDragStart={this.dragStart} onDragLeave={this.onDrop} className={this.props.view ? ('divCardList') : ('divCardGrid')}>
 
                 <Card style={{ backgroundColor: this.state.noteData.color }} className="noteCard">
                     <CardContent className='noteCardContent' >
