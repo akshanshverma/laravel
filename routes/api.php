@@ -49,6 +49,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('getAllNotes', 'NotesController@getAllNotes');
     Route::post('updateNote', 'NotesController@updateNote');
     Route::post('deleteNotes', 'NotesController@deleteNotes');
+    Route::post('addImage', 'NotesController@addImage');
+    
     /**
      * labels api calls
      */

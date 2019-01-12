@@ -12,7 +12,7 @@ class NotesData extends Model
     ];
 
 
-    // protected $with=['labels'];
+    protected $with=['images'];
 
 
     public function createNewNote($input)
@@ -24,6 +24,11 @@ class NotesData extends Model
     public function labels()
     {
         return $this->hasMany('App\LabelMap','note_id');
+    }
+    
+    public function images()
+    {
+        return $this->hasMany('App\NoteImage','note_id');
     }
 
 }

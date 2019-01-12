@@ -305,7 +305,7 @@ div.MenuAvtar{
 .divCardGrid{
     margin-top: 25px;
     width: 240px;
-    max-height: 304px;
+    /* max-height: 304px; */
 }
 .divCardList{
     /* margin-top: 25px; */

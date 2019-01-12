@@ -1,6 +1,6 @@
 import React, { Component, useRef } from 'react';
 import { Card, CardContent, Typography, CardActions, Popper, Paper, Chip } from '@material-ui/core';
-import image from "../assets/icons/image-24px.svg"
+
 
 
 import collab from "../assets/icons/collab.svg"
@@ -13,8 +13,9 @@ import AdditionalOptions from "./AdditionalOptions";
 import AdditionalOptionsOnDel from "./AdditionalOptionsOnDel";
 import SetColor from "./SetColor";
 import EditNoteDialog from "./EditNoteDialog";
-import AddLabelOnNote from "./AddLabelOnNote";
 import NoteLabelChip from "./NoteLabelChip";
+import ImageUploadOnNote from "./ImageUploadOnNote";
+import ShowImageOnNote from "./ShowImageOnNote";
 
 
 
@@ -23,7 +24,6 @@ export default class DashBoard extends Component {
         super(props);
         this.state = {
             noteData: this.props.noteData,
-            noteIndex:this.props.noteIndex,
             labelTab: false
         }
         this.editNoteDialog = React.createRef();
@@ -104,26 +104,43 @@ export default class DashBoard extends Component {
         this.props.trashN(this.state.noteData);
     }
 
-    removeLabel = (event) =>{
+    removeLabel = (event) => {
         console.log(event.target);
-        
+
         // this.props.removeLabel();
     }
 
     dragStart = () => {
-        this.props.dragAndDrop(this.state.noteIndex);     
+
+        this.props.dragAndDrop(this.props.noteIndex);
     }
 
     onDrop = () => {
-      
-        this.props.dropAction(this.state.noteIndex);
+        this.props.dragEnd(this.props.noteIndex)
     }
+
+    dragEnd = () => {
+        if (this.props.dragKey === this.props.dragEndkey) {
+            return;
+        }
+        this.props.dropAction();
+    }
+
     render() {
+        console.log(this.state.noteData);
+        var noteImage = this.state.noteData.images.map(image => {
+            return <ShowImageOnNote key={image.id} image={image} />
+        })
+
         return (
 
-            <div draggable onDragStart={this.dragStart} onDragLeave={this.onDrop} className={this.props.view ? ('divCardList') : ('divCardGrid')}>
+
+            <div draggable onDragStart={this.dragStart} onDragEnd={this.dragEnd} onDragLeave={this.onDrop} className={this.props.view ? ('divCardList') : ('divCardGrid')}>
 
                 <Card style={{ backgroundColor: this.state.noteData.color }} className="noteCard">
+                    <div>
+                        {noteImage}
+                    </div>
                     <CardContent className='noteCardContent' >
 
                         <div className='cardTitlePin'>
@@ -152,8 +169,8 @@ export default class DashBoard extends Component {
                         )}
 
 
-                        {this.props.noteData.labels.map(labelData=> {
-                            return <NoteLabelChip key={labelData.id} label = {labelData} removeNoteLabel= {this.props.removeNoteLabel}/>
+                        {this.props.noteData.labels.map(labelData => {
+                            return <NoteLabelChip key={labelData.id} label={labelData} removeNoteLabel={this.props.removeNoteLabel} />
                         }
 
                         )}
@@ -170,18 +187,16 @@ export default class DashBoard extends Component {
                                 <img src={collab} className="collab" alt="collab   " />
                             </div>
                             <SetColor changeColor={this.updateColor} />
-                            <div className='inNoteiconsclass'>
-                                <img src={image} className="image" alt="image   " />
-                            </div>
+                            <ImageUploadOnNote addImageOnNote={this.props.addImageOnNote} noteData={this.props.noteData} />
                             <div className='inNoteiconsclass'>
                                 <img src={this.state.noteData.archive === '1' ? unarchive : archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
                             </div>
-                            <AdditionalOptions 
-                            deleteNote={this.deleteNote} 
-                            labels={this.props.labels} 
-                            addLabel={this.props.addLabel} 
-                            noteData = {this.state.noteData}
-                            removeNoteLabel= {this.props.removeNoteLabel}
+                            <AdditionalOptions
+                                deleteNote={this.deleteNote}
+                                labels={this.props.labels}
+                                addLabel={this.props.addLabel}
+                                noteData={this.state.noteData}
+                                removeNoteLabel={this.props.removeNoteLabel}
                             />
                         </div>}
                 </Card>

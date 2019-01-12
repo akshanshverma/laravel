@@ -27,6 +27,7 @@ export default class DashBoard extends Component {
             profileImage: localStorage.getItem('profile_image'),
             searchKey: '',
             dragKey: '',
+            dragEndkey:'',
         }
         this.SnackBarN = React.createRef();
 
@@ -230,27 +231,49 @@ export default class DashBoard extends Component {
         })
     }
 
-    dragAndDrop = (noteIndex) => {
+    dragStart = (noteIndex) => {
         this.setState({
             dragKey: noteIndex
         })
     }
+    dragEnd = (noteIndex) => {
+        this.setState({
+            dragEndkey: noteIndex
+        })
+    }
 
-    moveNote = (dropNoteId) => {
-        var noteArr = this.state.noteData;
+    moveNote = () => {
+        var noteArr = [...this.state.noteData];
         var dragNote = noteArr[this.state.dragKey];
-        if (dropNoteId > this.state.dragKey) {
+        if (this.state.dragEndkey > this.state.dragKey) {
             let i = this.state.dragKey;
-            for (i ; i < dropNoteId; i++) {
+            for (i ; i < this.state.dragEndkey; i++) {
                 noteArr[i] = noteArr[i + 1];
-                console.log( i, '.....', i + 1);
+            }
+            noteArr[i] = dragNote;
+        }else if (this.state.dragEndkey < this.state.dragKey) {
+            let i = this.state.dragKey;
+            for (i ; i > this.state.dragEndkey; i--) {
+                noteArr[i] = noteArr[i - 1];
             }
             noteArr[i] = dragNote;
         }
+        this.setState({
+            noteData:noteArr
+        })
     }
 
+    addImageOnNote = (imageData) => {
+        noteservices.noteImage(imageData)
+        .then(res=>{
+            console.log(res);   
+        })
+    }
+
+
     render() {
-        console.log('dash', this.state.dragKey);
+        // console.log(this.state.noteData);
+        
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
             return;
@@ -278,8 +301,12 @@ export default class DashBoard extends Component {
                         labels={this.state.labels}
                         addLabel={this.addLabelsOnNotes}
                         removeNoteLabel={this.removeLabelFromNote}
-                        dragAndDrop={this.dragAndDrop}
+                        dragAndDrop={this.dragStart}
                         dropAction={this.moveNote}
+                        dragEnd={this.dragEnd}
+                        dragKey = {this.state.dragKey}
+                        dragEndkey = {this.state.dragEndkey}
+                        addImageOnNote={this.addImageOnNote}
                     ></Note>
                 }
                 return;
@@ -296,6 +323,7 @@ export default class DashBoard extends Component {
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
+                    addImageOnNote={this.addImageOnNote}
                 ></Note>
             }
             return;
@@ -312,6 +340,7 @@ export default class DashBoard extends Component {
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
+                    addImageOnNote={this.addImageOnNote}
                 ></Note>
             }
             return;
@@ -328,6 +357,7 @@ export default class DashBoard extends Component {
                     labels={this.state.labels}
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
+                    addImageOnNote={this.addImageOnNote}
                 ></Note>
             }
             return;
@@ -361,6 +391,7 @@ export default class DashBoard extends Component {
                         labels={this.state.labels}
                         addLabel={this.addLabelsOnNotes}
                         removeNoteLabel={this.removeLabelFromNote}
+                        addImageOnNote={this.addImageOnNote}
                     ></Note>
                 }
             }
