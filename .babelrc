@@ -3,3 +3,15 @@
         "transform-class-properties"
     ]
 }
+
+// {
+//     "presets": [
+//       ["env", {
+//         "modules": false,
+//         "targets": {
+//           "browsers": "> 2%",
+//           "uglify": true
+//         }
+//       }]
+//     ]
+//   }
