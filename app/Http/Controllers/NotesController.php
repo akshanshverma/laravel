@@ -83,6 +83,17 @@ class NotesController extends Controller
             $successData = NoteImage::create($imageData);
             return response()->json(['success' => $successData], 200);
         }
+    }
 
+    public function removeImageFromNote(Request $request)
+    {
+        Cache::flush();
+        $id= $request->id;
+        $image = NoteImage::where('id',$request->id)->first();
+        if (!$image) {
+            return response()->json('no image found', 220);
+        }
+        $image->delete();
+        return response()->json('image deleted', 200);
     }
 }

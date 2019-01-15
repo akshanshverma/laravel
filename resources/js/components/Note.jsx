@@ -19,7 +19,7 @@ import ShowImageOnNote from "./ShowImageOnNote";
 
 
 
-export default class DashBoard extends Component {
+export default class Note extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -127,9 +127,9 @@ export default class DashBoard extends Component {
     }
 
     render() {
-        console.log(this.state.noteData);
-        var noteImage = this.state.noteData.images.map(image => {
-            return <ShowImageOnNote key={image.id} image={image} />
+        // console.log(this.state.noteData);
+        var noteImage = this.props.noteData.images.map(image => {
+            return <ShowImageOnNote openEditBox={this.openEditBox} key={image.id} image={image} />
         })
 
         return (
@@ -203,9 +203,12 @@ export default class DashBoard extends Component {
                 <EditNoteDialog
                     style={{ backgroundColor: this.state.noteData.color }}
                     ref={this.editNoteDialog} update={this.updateNote}
-                    note={this.state.noteData}
+                    note={this.props.noteData}
                     deleteNote={this.deleteNote}
-                    deleteForever={this.deleteForeverNote} />
+                    deleteForever={this.deleteForeverNote}
+                    addImageOnNote = {this.props.addImageOnNote} 
+                    deleteNoteImage = {this.props.deleteNoteImage}
+                    />
             </div>
         )
     }

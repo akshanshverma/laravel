@@ -7,13 +7,13 @@ import NoteService from '../services/NoteServices';
 import UserServices from '../services/UserServices';
 import LabelServices from '../services/LabelServices';
 import SnackBar from "../components/SnackBar";
-
+import FormData from 'form-data';
 import moment from "moment";
 
 var noteservices = new NoteService();
 var userServices = new UserServices();
 var labelServices = new LabelServices();
-
+const formdata = new FormData();
 
 export default class DashBoard extends Component {
     constructor(props) {
@@ -54,9 +54,10 @@ export default class DashBoard extends Component {
      * get all note data form database
      */
     getNoteData() {
-
+        
         noteservices.getNote()
             .then(res => {
+               
                 this.setState({
                     noteData: res.data
                 })
@@ -264,9 +265,28 @@ export default class DashBoard extends Component {
     }
 
     addImageOnNote = (imageData) => {
-        noteservices.noteImage(imageData)
+        formdata.append('image', imageData['image']);
+        formdata.append('note_id', imageData['note_id']);
+
+        noteservices.noteImage(formdata)
         .then(res=>{
-            console.log(res);   
+            
+            if (res.status === 200) {
+                console.log(res);
+                this.getNoteData(); 
+            }    
+        })
+    }
+
+    deleteNoteImage = (imageData) =>{
+        var data = {
+            id:imageData
+        }
+        noteservices.deleteImageFromNote(data)
+        .then(res=>{
+            if (res.status === 200) {
+                this.getNoteData();
+            }
         })
     }
 
@@ -307,6 +327,7 @@ export default class DashBoard extends Component {
                         dragKey = {this.state.dragKey}
                         dragEndkey = {this.state.dragEndkey}
                         addImageOnNote={this.addImageOnNote}
+                        deleteNoteImage = {this.deleteNoteImage}
                     ></Note>
                 }
                 return;
@@ -324,6 +345,7 @@ export default class DashBoard extends Component {
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
                     addImageOnNote={this.addImageOnNote}
+                    deleteNoteImage = {this.deleteNoteImage}
                 ></Note>
             }
             return;
@@ -341,6 +363,7 @@ export default class DashBoard extends Component {
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
                     addImageOnNote={this.addImageOnNote}
+                    deleteNoteImage = {this.deleteNoteImage}
                 ></Note>
             }
             return;
@@ -358,6 +381,7 @@ export default class DashBoard extends Component {
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
                     addImageOnNote={this.addImageOnNote}
+                    deleteNoteImage = {this.deleteNoteImage}
                 ></Note>
             }
             return;
@@ -392,6 +416,7 @@ export default class DashBoard extends Component {
                         addLabel={this.addLabelsOnNotes}
                         removeNoteLabel={this.removeLabelFromNote}
                         addImageOnNote={this.addImageOnNote}
+                        deleteNoteImage = {this.deleteNoteImage}
                     ></Note>
                 }
             }

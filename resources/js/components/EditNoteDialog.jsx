@@ -4,7 +4,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { InputBase, Chip } from "@material-ui/core";
-import image from "../assets/icons/image-24px.svg"
 import collab from "../assets/icons/collab.svg"
 import archive from "../assets/icons/archive-24px.svg"
 import unarchive from "../assets/icons/unarchive.svg"
@@ -14,6 +13,9 @@ import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
 import AdditionalOptions from "./AdditionalOptions";
 import AdditionalOptionsOnDel from "./AdditionalOptionsOnDel";
+import ShowImageOnNote from "./ShowImageOnNote";
+import ImageUploadOnNote from "./ImageUploadOnNote";
+
 
 
 export default class EditNoteDialog extends React.Component {
@@ -21,7 +23,8 @@ export default class EditNoteDialog extends React.Component {
         super(props);
         this.state = {
             open: false,
-            noteData: this.props.note
+            noteData: this.props.note,
+            img:''
         }
         this.handleDialog = this.handleDialog.bind(this);
     }
@@ -107,10 +110,12 @@ export default class EditNoteDialog extends React.Component {
 
     render() {
 
-        // console.log('ch', this.state);
-
-
+    
         const { fullScreen } = this.props;
+        var noteImage = this.props.note.images.map(image => {
+            return <ShowImageOnNote deleteNoteImage={this.props.deleteNoteImage} key={image.id} image={image} />
+        })
+
         return (
             <div className='dilogBoxMainDv'  >
                 <Dialog
@@ -123,9 +128,11 @@ export default class EditNoteDialog extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="responsive-dialog-title"
                 >
+                    {noteImage}
                     {/* <div className={this.state.noteData.reminder===null?<div/>:'reminderBarDialog' }><span className='reminderBarDialogSpan' >{this.state.noteData.reminder}</span></div> */}
                     <div style={{ backgroundColor: this.state.noteData.color }}>
                         <DialogContent className='editNoteContent'>
+
                             <div className='addTitlEdit' >
                                 <InputBase multiline name='title' fullWidth onChange={this.getInput} defaultValue={this.state.noteData.title}></InputBase>
                                 {this.state.noteData.trash === '1' ?
@@ -150,28 +157,32 @@ export default class EditNoteDialog extends React.Component {
 
                             <div className='iconClose'>
                                 {this.state.noteData.trash === '1' ?
-                                    <div style={{ position: 'fixed' }} className='takeNoteIcons'>
+                                    <div className='takeNoteIcons'>
                                         <AdditionalOptionsOnDel
                                             deleteNote={this.props.deleteNote}
                                             deleteForever={this.props.deleteForeverNote} />
                                     </div>
                                     :
-                                    <div style={{ position: 'fixed' }} className='takeNoteIcons'>
-                                        <div >
+                                    <div className='takeNoteIcons'>
+                                        <div className='iconsclass'>
                                             <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
                                         </div>
 
                                         <div className='iconsclass'>
                                             <img src={collab} className="collab" alt="collab   " />
                                         </div>
-                                        <SetColor changeColor={this.updateColor} />
                                         <div className='iconsclass'>
-                                            <img src={image} className="image" alt="image   " />
+                                            <SetColor changeColor={this.updateColor} />
+                                        </div>
+                                        <div className='iconsclass'>
+                                            <ImageUploadOnNote addImageOnNote={this.props.addImageOnNote} noteData={this.props.note} />
                                         </div>
                                         <div className='iconsclass'>
                                             <img src={this.state.noteData.archive === '1' ? unarchive : archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
                                         </div>
-                                        <AdditionalOptions deleteNote={this.props.deleteNote}/>
+                                        <div className='iconsclass'>
+                                            <AdditionalOptions deleteNote={this.props.deleteNote} />
+                                        </div>
                                     </div>
                                 }
                                 <div className='divCloseButton'>

@@ -11,7 +11,7 @@ import pined from "../assets/icons/pined.svg"
 import ReminderTab from "./ReminderTab";
 import SetColor from "./SetColor";
 import AdditionalOptions from "./AdditionalOptions";
-
+import ImageUploadOnNote from "./ImageUploadOnNote";
 
 export default class AddNotes extends Component {
     constructor(props) {
@@ -49,7 +49,7 @@ export default class AddNotes extends Component {
             color: this.state.color,
             pin: this.state.pin,
             archive: this.state.archive,
-            trash:false,
+            trash: false,
         }
 
 
@@ -109,7 +109,7 @@ export default class AddNotes extends Component {
             color: this.state.color,
             pin: this.state.pin,
             archive: '1',
-            trash:false,
+            trash: false,
         }
 
         if (this.state.reminder !== null || (this.state.title !== '' && this.state.note !== '')) {
@@ -122,7 +122,7 @@ export default class AddNotes extends Component {
                 color: null,
                 pin: false,
                 archive: false,
-                
+
             })
 
         }
@@ -165,14 +165,19 @@ export default class AddNotes extends Component {
 
                 <div className='iconClose'>
                     <div className='takeNoteIcons'>
-                        <ReminderTab setDate={this.setReminderDate} />
+                        <div  className='iconsclass'>
+                            <ReminderTab setDate={this.setReminderDate} />
+                        </div>
+
                         <div className='iconsclass'>
                             <img src={collab} className="collab" alt="collab   " />
                         </div>
-                        <SetColor changeColor={this.changeColor} />
+                        <div className='iconsclass'><SetColor changeColor={this.changeColor} /></div>
                         <div className='iconsclass'>
-                            <img src={image} className="image" alt="image   " />
+                            <ImageUploadOnNote addImageOnNote={this.props.addImageOnNote} noteData={this.props.noteData} />
                         </div>
+
+
                         <div className='iconsclass'>
                             <img src={archive} onClick={this.archiveAndUnarchive} className="archive" alt="archive   " />
                         </div>

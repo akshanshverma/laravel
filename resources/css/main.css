@@ -292,7 +292,7 @@ div.MenuAvtar{
    float: right;
 }
 .iconsclass{
-    padding: 0 8px 0 15px;
+    padding: 0 8px 0 8px;
 }
 
 .divCloseButton{
@@ -497,6 +497,27 @@ div .menuListItem{
     border-radius: 0 25px 25px 0;
 }
 
+/*************image on notes***************/
+
+.imageOnNote{
+    width: 100%;
+}
+.divImageAndDelIcon{
+    position: relative;
+}
+
+.deleteImage{
+  margin: 5px;
+}
+.delIconOnImage{
+    right: 3px;
+    position: absolute;
+    bottom: 10px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 2px;
+}
+
+
 /**********label edit************/
 
 .labelEdit img{
@@ -562,7 +583,7 @@ div .menuListItem{
     }
     .NotesBox{
         width: auto;
-        
+        min-width: 310px;
     }
 
     .cardGridView{
@@ -571,7 +592,23 @@ div .menuListItem{
     }
     .divCardGrid {
         width: auto;
+        min-width: 310px;
     }
+    .divCardList {
+        width: auto;
+        min-width: 310px;
+    }
+    .addNoteBox{
+        width: auto;
+        min-width: 310px;
+    }
+
+
+    .mainDivMenuBarOpen{
+        margin-left: unset;
+       
+    }
+   
 }
 @media only screen and (max-width: 400px) {
     .maindiv{
@@ -579,12 +616,24 @@ div .menuListItem{
     }
     #card{
         box-shadow: 0px 0px 5px;        
-        width: 273px;
+        min-width: 310px;
         padding-left: 2%;
         padding-right: 2%;      
     }
     .MuiFormControl-fullWidth-67 {
         width: 86%;
+    }
+    .NotesBox {
+        min-width: 310px;
+    }
+    /* .divCardGrid {
+        width: 310px;
+    }
+    .divCardList {
+        width: 310px;
+    } */
+    .addNoteBox{
+        min-width: 310px;
     }
 }
 

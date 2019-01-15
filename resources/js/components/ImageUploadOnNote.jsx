@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import image from "../assets/icons/image-24px.svg"
-import FormData from 'form-data';
-const formdata = new FormData();
+
+
 
 export default class ImageUploadOnNote extends Component {
 
@@ -10,11 +10,11 @@ export default class ImageUploadOnNote extends Component {
     }
 
     getImage = (event) => {
-        formdata.append('image', event.target.files[0]);
-        formdata.append('note_id', this.props.noteData.id);
-        console.log('upload',formdata);
-        
-        this.props.addImageOnNote(formdata);
+        var imageData = {
+            image:event.target.files[0],
+            note_id:this.props.noteData.id,
+        }
+        this.props.addImageOnNote(imageData);
     }
 
     render() {
