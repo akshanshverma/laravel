@@ -37,6 +37,7 @@ export default class Note extends Component {
         var noteData = this.state.noteData;
         noteData.reminder = null;
         this.props.update(noteData);
+        this.props.SnackBarN.current.handleClick("remove reminder ");
     }
 
     setReminderDate = (date) => {
@@ -78,11 +79,13 @@ export default class Note extends Component {
             this.setState({
                 noteData: notes
             })
+            this.props.SnackBarN.current.handleClick("note archive");
         } else {
             notes.archive = '0';
             this.setState({
                 noteData: notes
             })
+            this.props.SnackBarN.current.handleClick("note unarchive");
         }
         this.props.update(notes);
     }
@@ -92,14 +95,16 @@ export default class Note extends Component {
         if (this.state.noteData.trash === '0') {
             notes.trash = '1';
             notes.pin = '0'
+            this.props.SnackBarN.current.handleClick("note move to trash");
         } else {
             notes.trash = '0';
+            this.props.SnackBarN.current.handleClick("restore note");
         }
         this.props.update(notes);
     }
 
     deleteForeverNote = () => {
-        console.log(this.state.noteData, 'check');
+        // console.log(this.state.noteData, 'check');
 
         this.props.trashN(this.state.noteData);
     }
@@ -111,7 +116,6 @@ export default class Note extends Component {
     }
 
     dragStart = () => {
-
         this.props.dragAndDrop(this.props.noteIndex);
     }
 
@@ -133,8 +137,6 @@ export default class Note extends Component {
         })
 
         return (
-
-
             <div draggable onDragStart={this.dragStart} onDragEnd={this.dragEnd} onDragLeave={this.onDrop} className={this.props.view ? ('divCardList') : ('divCardGrid')}>
 
                 <Card style={{ backgroundColor: this.state.noteData.color }} className="noteCard">
@@ -203,6 +205,9 @@ export default class Note extends Component {
                 <EditNoteDialog
                     style={{ backgroundColor: this.state.noteData.color }}
                     ref={this.editNoteDialog} update={this.updateNote}
+                    labels={this.props.labels}
+                    addLabel={this.props.addLabel}
+                    removeNoteLabel={this.props.removeNoteLabel}
                     note={this.props.noteData}
                     deleteNote={this.deleteNote}
                     deleteForever={this.deleteForeverNote}

@@ -27,7 +27,7 @@ export default class DashBoard extends Component {
             profileImage: localStorage.getItem('profile_image'),
             searchKey: '',
             dragKey: '',
-            dragEndkey:'',
+            dragEndkey: '',
         }
         this.SnackBarN = React.createRef();
 
@@ -47,17 +47,21 @@ export default class DashBoard extends Component {
         this.getNoteData();
         this.checkReminder();
         this.getAllLabels();
+       
     }
+
+    // componentDidUpdate(){
+    //     this.notePosition();
+    // }
 
 
     /**
      * get all note data form database
      */
     getNoteData() {
-        
+
         noteservices.getNote()
             .then(res => {
-               
                 this.setState({
                     noteData: res.data
                 })
@@ -66,7 +70,7 @@ export default class DashBoard extends Component {
 
 
     /**
-     * side menu click
+     * side menu click handle 
      */
     menuClickHandle() {
         if (this.state.menuBar === false) {
@@ -97,22 +101,25 @@ export default class DashBoard extends Component {
 
     /**
      * function to create new note and send to backend 
-     * @param {array} data 
+     * @param {array} data data for new note 
      */
     createNewNote(data) {
         // this.setState({
         //     noteData: [...this.state.noteData, data]
         // })
+        data['note_index'] = this.state.noteData.length;
+        console.log(data);
+        
         noteservices.createNote(data)
             .then(res => {
                 if (res.status == 200) {
                     // console.log('data save');
+                    this.SnackBarN.current.handleClick("new note: " + data.title);
+                    this.getNoteData();
                 } else if (res.status == 220) {
                     // console.log('unauthorised');
                 }
             });
-        this.SnackBarN.current.handleClick("new note: " + data.title);
-        this.getNoteData();
     }
 
 
@@ -129,7 +136,6 @@ export default class DashBoard extends Component {
      * check reminder of every note in every 60s
      */
     checkReminder = () => {
-
         setInterval(() => {
             this.state.noteData.map(note => {
                 if (moment().format('MM/DD/YYYY, h:mm A') === note.reminder) {
@@ -139,12 +145,17 @@ export default class DashBoard extends Component {
         }, (1000 * 60));
     }
 
+    /**
+     * update note is to change note data and update it
+     * @param {array} data for update note 
+     */
     updateNoteData = (data) => {
         noteservices.updateNote(data)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getNoteData();
+                }
             })
-        this.getNoteData();
     }
 
     onClickMenu = (name) => {
@@ -156,9 +167,11 @@ export default class DashBoard extends Component {
     deleteNote = (id) => {
         noteservices.deleteNote(id)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getNoteData();
+                    this.SnackBarN.current.handleClick("note deleted ");
+                }
             })
-        this.getNoteData();
     }
 
     getAllLabels = () => {
@@ -171,53 +184,54 @@ export default class DashBoard extends Component {
     }
 
     createLabel = (labelName) => {
-
         labelServices.createNewLabel(labelName)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getAllLabels();
+                }
             })
-        this.getAllLabels();
     }
 
     removeLabel = (labelId) => {
         labelServices.removeLabel(labelId)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getAllLabels();
+                }
             })
-        this.getAllLabels();
     }
 
     updateLabel = (labelData) => {
         labelServices.updateLabel(labelData)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getAllLabels();
+                }
             })
-        this.getAllLabels();
     }
 
     addLabelsOnNotes = (labelData) => {
         labelServices.addLabelOnNote(labelData)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getAllLabels();
+                }
             })
-
-        this.getNoteData();
-
     }
 
     removeLabelFromNote = (labelMapData) => {
         labelServices.deleteLabelFromNote(labelMapData)
             .then(res => {
-
+                if (res.status === 200) {
+                    this.getAllLabels();
+                }
             })
-        this.getNoteData();
     }
 
     uploadProfilePic = (imageData) => {
-
         userServices.uploadImage(imageData)
             .then(res => {
-                console.log('status', res);
+                // console.log('status', res);
                 if (res.status === 200) {
                     this.setState({
                         profileImage: res.data.success
@@ -248,19 +262,19 @@ export default class DashBoard extends Component {
         var dragNote = noteArr[this.state.dragKey];
         if (this.state.dragEndkey > this.state.dragKey) {
             let i = this.state.dragKey;
-            for (i ; i < this.state.dragEndkey; i++) {
+            for (i; i < this.state.dragEndkey; i++) {
                 noteArr[i] = noteArr[i + 1];
             }
             noteArr[i] = dragNote;
-        }else if (this.state.dragEndkey < this.state.dragKey) {
+        } else if (this.state.dragEndkey < this.state.dragKey) {
             let i = this.state.dragKey;
-            for (i ; i > this.state.dragEndkey; i--) {
+            for (i; i > this.state.dragEndkey; i--) {
                 noteArr[i] = noteArr[i - 1];
             }
             noteArr[i] = dragNote;
         }
         this.setState({
-            noteData:noteArr
+            noteData: noteArr
         })
     }
 
@@ -269,31 +283,29 @@ export default class DashBoard extends Component {
         formdata.append('note_id', imageData['note_id']);
 
         noteservices.noteImage(formdata)
-        .then(res=>{
-            
-            if (res.status === 200) {
-                console.log(res);
-                this.getNoteData(); 
-            }    
-        })
+            .then(res => {
+                if (res.status === 200) {
+                    console.log(res);
+                    this.getNoteData();
+                }
+            })
     }
 
-    deleteNoteImage = (imageData) =>{
+    deleteNoteImage = (imageData) => {
         var data = {
-            id:imageData
+            id: imageData
         }
         noteservices.deleteImageFromNote(data)
-        .then(res=>{
-            if (res.status === 200) {
-                this.getNoteData();
-            }
-        })
+            .then(res => {
+                if (res.status === 200) {
+                    this.getNoteData();
+                }
+            })
     }
 
 
     render() {
-        // console.log(this.state.noteData);
-        
+
         if (localStorage.getItem('token') === null) {
             this.props.history.push("/login");
             return;
@@ -310,7 +322,6 @@ export default class DashBoard extends Component {
             })
             .map((note) => {
                 if (note.pin === '0' && note.archive === '0' && note.trash === '0') {
-
                     return <Note
                         key={note.id}
                         noteIndex={this.state.noteData.indexOf(note)}
@@ -324,10 +335,11 @@ export default class DashBoard extends Component {
                         dragAndDrop={this.dragStart}
                         dropAction={this.moveNote}
                         dragEnd={this.dragEnd}
-                        dragKey = {this.state.dragKey}
-                        dragEndkey = {this.state.dragEndkey}
+                        dragKey={this.state.dragKey}
+                        dragEndkey={this.state.dragEndkey}
                         addImageOnNote={this.addImageOnNote}
-                        deleteNoteImage = {this.deleteNoteImage}
+                        deleteNoteImage={this.deleteNoteImage}
+                        SnackBarN={this.SnackBarN}
                     ></Note>
                 }
                 return;
@@ -345,7 +357,7 @@ export default class DashBoard extends Component {
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
                     addImageOnNote={this.addImageOnNote}
-                    deleteNoteImage = {this.deleteNoteImage}
+                    deleteNoteImage={this.deleteNoteImage}
                 ></Note>
             }
             return;
@@ -363,7 +375,7 @@ export default class DashBoard extends Component {
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
                     addImageOnNote={this.addImageOnNote}
-                    deleteNoteImage = {this.deleteNoteImage}
+                    deleteNoteImage={this.deleteNoteImage}
                 ></Note>
             }
             return;
@@ -381,7 +393,8 @@ export default class DashBoard extends Component {
                     addLabel={this.addLabelsOnNotes}
                     removeNoteLabel={this.removeLabelFromNote}
                     addImageOnNote={this.addImageOnNote}
-                    deleteNoteImage = {this.deleteNoteImage}
+                    deleteNoteImage={this.deleteNoteImage}
+                    SnackBarN={this.SnackBarN}
                 ></Note>
             }
             return;
@@ -396,6 +409,7 @@ export default class DashBoard extends Component {
                     editNote={this.openEditBox}
                     update={this.updateNoteData}
                     trashN={this.deleteNote}
+                    SnackBarN={this.SnackBarN}
                 ></Note>
             }
             return;
@@ -416,7 +430,7 @@ export default class DashBoard extends Component {
                         addLabel={this.addLabelsOnNotes}
                         removeNoteLabel={this.removeLabelFromNote}
                         addImageOnNote={this.addImageOnNote}
-                        deleteNoteImage = {this.deleteNoteImage}
+                        deleteNoteImage={this.deleteNoteImage}
                     ></Note>
                 }
             }

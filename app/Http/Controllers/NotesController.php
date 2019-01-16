@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
 use App\NoteImage;
+use App\note_drag;
 
 class NotesController extends Controller
 {
-    public function index()
-    {
-
-    }
-
+    /**
+     * create note is a function to create new note in the app
+     * 
+     * @var Request 
+     * @return json
+     */
     public function createNote(Request $request)
     {
         if ($user = Auth::user()) {
@@ -30,6 +32,11 @@ class NotesController extends Controller
 
     }
 
+    /**
+     * get all note is a function to fatch note from data base 
+     * 
+     * @return json note data 
+     */
     public function getAllNotes()
     {
         Cache::flush();
@@ -42,6 +49,12 @@ class NotesController extends Controller
         return response()->json($notes, 200);
     }
 
+    /**
+     * update note is function which update tha data of note in the data base
+     * 
+     * @var Request 
+     * @return json
+     */
     public function updateNote(Request $request)
     {
         Cache::flush();
@@ -62,6 +75,12 @@ class NotesController extends Controller
         // return response()->json('note not found',220);    
     }
 
+    /**
+     * delete note function delete a note from data base
+     * 
+     * @var Request 
+     * @return json
+     */
     public function deleteNotes(Request $request)
     {
         Cache::flush();
@@ -69,31 +88,61 @@ class NotesController extends Controller
         if (!$note) {
             return response()->json('no note found', 220);
         }
+        $deletedIndex = $note->note_index;
         $note->delete();
+        $allNote = NotesData::where('user_id',Auth::user()->id)->get();
+        foreach ($allNote as $noteData ) {
+            if ($noteData->note_index > $deletedIndex) {
+                $noteData->note_index = $noteData['note_index']-1;
+                $noteData->save();
+            }
+        }
         return response()->json('note deleted', 200);
     }
 
+    /**
+     * add image function add image on image data base ane make relation with note 
+     * 
+     * @var Request 
+     * @return json
+     */
     public function addImage(Request $request)
     {
         if ($request->hasFile('image')) {
             Cache::flush();
             $file = $request->file('image')->getRealPath();
-            $imageData['image'] = 'data:image/jpg;base64,'.base64_encode(file_get_contents($file));
+            $imageData['image'] = 'data:image/jpg;base64,' . base64_encode(file_get_contents($file));
             $imageData['note_id'] = $request->get('note_id');
             $successData = NoteImage::create($imageData);
             return response()->json(['success' => $successData], 200);
         }
     }
 
+    /**
+     * remove image function remove image from note 
+     * 
+     * @var Request 
+     * @return json
+     */
     public function removeImageFromNote(Request $request)
     {
         Cache::flush();
-        $id= $request->id;
-        $image = NoteImage::where('id',$request->id)->first();
+        $id = $request->id;
+        $image = NoteImage::where('id', $request->id)->first();
         if (!$image) {
             return response()->json('no image found', 220);
         }
         $image->delete();
         return response()->json('image deleted', 200);
+    }
+
+    public function changeIndex(Request $request)
+    {
+        $changeIndexData =  $request->all();
+        foreach ($changeIndexData as $note) {
+            $noten = NotesData::where('id' ,$note['id'])->first();
+            $noten->note_index = $note['note_index'];
+            $noten->save();
+        }
     }
 }

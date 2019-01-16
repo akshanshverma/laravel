@@ -15,6 +15,7 @@ import AdditionalOptions from "./AdditionalOptions";
 import AdditionalOptionsOnDel from "./AdditionalOptionsOnDel";
 import ShowImageOnNote from "./ShowImageOnNote";
 import ImageUploadOnNote from "./ImageUploadOnNote";
+import NoteLabelChip from "./NoteLabelChip";
 
 
 
@@ -24,7 +25,7 @@ export default class EditNoteDialog extends React.Component {
         this.state = {
             open: false,
             noteData: this.props.note,
-            img:''
+            img: ''
         }
         this.handleDialog = this.handleDialog.bind(this);
     }
@@ -110,7 +111,7 @@ export default class EditNoteDialog extends React.Component {
 
     render() {
 
-    
+
         const { fullScreen } = this.props;
         var noteImage = this.props.note.images.map(image => {
             return <ShowImageOnNote deleteNoteImage={this.props.deleteNoteImage} key={image.id} image={image} />
@@ -152,6 +153,11 @@ export default class EditNoteDialog extends React.Component {
                                     onDelete={this.removeReminder}
                                 /></div>
                             )}
+                            {this.props.note.labels.map(labelData => {
+                                return <NoteLabelChip key={labelData.id} label={labelData} removeNoteLabel={this.props.removeNoteLabel} />
+                            }
+
+                            )}
                         </DialogContent>
                         <DialogActions >
 
@@ -164,7 +170,7 @@ export default class EditNoteDialog extends React.Component {
                                     </div>
                                     :
                                     <div className='takeNoteIcons'>
-                                        <div className='iconsclass'>
+                                        <div className='iconsclass' >
                                             <ReminderTab className='editBoxReminderTab' setDate={this.setReminderDate} />
                                         </div>
 
@@ -181,7 +187,13 @@ export default class EditNoteDialog extends React.Component {
                                             <img src={this.state.noteData.archive === '1' ? unarchive : archive} className="archive" alt="archive   " onClick={this.archiveAndUnarchive} />
                                         </div>
                                         <div className='iconsclass'>
-                                            <AdditionalOptions deleteNote={this.props.deleteNote} />
+                                            <AdditionalOptions
+                                                deleteNote={this.props.deleteNote}
+                                                labels={this.props.labels}
+                                                addLabel={this.props.addLabel}
+                                                removeNoteLabel={this.props.removeNoteLabel}
+                                                noteData={this.props.note}
+                                            />
                                         </div>
                                     </div>
                                 }

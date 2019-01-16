@@ -24,6 +24,7 @@ class CreateNotesDatasTable extends Migration
             $table->boolean("pin")->default(0);
             $table->boolean("archive")->default(0);
             $table->boolean("trash")->default(0);
+            $table->string("note_index");
             $table->timestamps();
         });
     }

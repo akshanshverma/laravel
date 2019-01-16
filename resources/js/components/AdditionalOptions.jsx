@@ -58,12 +58,9 @@ export default class AdditionalOptions extends Component {
         })
         for (let index = 0; index < check.length; index++) {
             if (check[index] === labelID) {
-                console.log('t');
-                
                 return true;
             }
         }
-        console.log('f');
        return false;
 
     }
@@ -88,7 +85,7 @@ export default class AdditionalOptions extends Component {
                                     <ClickAwayListener onClickAway={this.handleClose} >
                                         {this.state.labelTab ?
                                             <MenuList>
-                                                <div >Label note</div>
+                                                <div className='noteLabelMenuHead' >Label note</div>
                                                 {this.props.labels.map((label) => {
                                                     return <MenuItem key={label.id} >
                                                         {/* <Checkbox

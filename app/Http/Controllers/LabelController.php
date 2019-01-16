@@ -28,6 +28,9 @@ class LabelController extends Controller
 
     /**
      * createLabel is funtion which create new label in the database
+     * 
+     * @var Request 
+     * @return json label data 
      */
     public function createLabel(Request $request)
     {
@@ -44,6 +47,12 @@ class LabelController extends Controller
         return response()->json('unauthorised', 220);
     }
 
+    /**
+     * remove label is a function to remove label from label list 
+     * 
+     * @var Request 
+     * @return json 
+     */
     public function removeLabel(Request $request)
     {
         if ($user = Auth::user()) {
@@ -58,6 +67,13 @@ class LabelController extends Controller
         return response()->json('unauthorised', 220);
     }
 
+
+    /**
+     * update label is a function to change the name of the label
+     * 
+     * @var Request 
+     * @return json
+     */
     public function updateLabel(Request $request)
     {
         if (Auth::user()) {
@@ -74,6 +90,12 @@ class LabelController extends Controller
         return response()->json('unauthorised', 220);
     }
 
+    /**
+     * addLabelOnNote is a function to add label on note
+     * 
+     * @var Request 
+     * @return json
+     */
     public function addLabelOnNote(Request $request)
     {
         if (Auth::user()) {
@@ -87,6 +109,12 @@ class LabelController extends Controller
         }
     }
 
+    /**
+     * removeLabelFromNote is to remove label 
+     * 
+     * @var Request  
+     * @return json
+     */
     public function removeLabelFromNote(Request $request)
     {
         if (Auth::user()) {
@@ -102,6 +130,4 @@ class LabelController extends Controller
         }
         return response()->json('unauthorised', 220);
     }
-
-
 }

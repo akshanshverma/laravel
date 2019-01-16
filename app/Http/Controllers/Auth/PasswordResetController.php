@@ -12,6 +12,12 @@ use Carbon\Carbon;
 
 class PasswordResetController extends Controller
 {
+    /**
+     * create funtion is to create forget password request 
+     * 
+     * @var Request 
+     * @return json
+     */
     public function create(Request $request)
     {
         $request->validate([
@@ -44,6 +50,12 @@ class PasswordResetController extends Controller
     }
 
 
+    /**
+     * funtion find check token in the data base
+     * 
+     * @param json Token
+     * @return json
+     */
     public function find($token)
     {
         $passwordReset = PasswordReset::where('token', $token)->first();
@@ -61,6 +73,12 @@ class PasswordResetController extends Controller
     }
 
 
+    /**
+     * reset function is to change the password and save it to data base
+     * 
+     * @var Request 
+     * @return json 
+     */
     public function reset(Request $request)
     {
         $request->validate([
