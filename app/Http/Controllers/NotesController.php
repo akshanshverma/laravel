@@ -7,6 +7,7 @@ use Facades\App\NotesData;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
+use JD\Cloudder\Facades\Cloudder;
 use App\NoteImage;
 use App\note_drag;
 
@@ -90,10 +91,10 @@ class NotesController extends Controller
         }
         $deletedIndex = $note->note_index;
         $note->delete();
-        $allNote = NotesData::where('user_id',Auth::user()->id)->get();
-        foreach ($allNote as $noteData ) {
+        $allNote = NotesData::where('user_id', Auth::user()->id)->get();
+        foreach ($allNote as $noteData) {
             if ($noteData->note_index > $deletedIndex) {
-                $noteData->note_index = $noteData['note_index']-1;
+                $noteData->note_index = $noteData['note_index'] - 1;
                 $noteData->save();
             }
         }
@@ -111,8 +112,11 @@ class NotesController extends Controller
         if ($request->hasFile('image')) {
             Cache::flush();
             $file = $request->file('image')->getRealPath();
-            $imageData['image'] = 'data:image/jpg;base64,' . base64_encode(file_get_contents($file));
-            $imageData['note_id'] = $request->get('note_id');
+           
+            // dd(env('CLOUDINARY_API_KEY'));
+            $url = Cloudder::upload($file, null)->getResult()['url'];
+            $imageData['image'] = $url;
+            $imageData['note_id'] = $request->get('note_id');    
             $successData = NoteImage::create($imageData);
             return response()->json(['success' => $successData], 200);
         }
@@ -138,11 +142,16 @@ class NotesController extends Controller
 
     public function changeIndex(Request $request)
     {
-        $changeIndexData =  $request->all();
-        foreach ($changeIndexData as $note) {
-            $noten = NotesData::where('id' ,$note['id'])->first();
-            $noten->note_index = $note['note_index'];
-            $noten->save();
+        $indexData = $request->all();
+        $noten = NotesData::where('user_id', Auth::user()->id)->get();
+
+        if ($indexData['dropIndex'] < $indexData['noteIndex']) {
+            foreach ($noten as $note) {
+                if ($note['note_index'] >= $indexData['dropIndex'] && $note['note_index'] < $indexData['note_index']) {
+                    $note->note_index = $note['note_index'] + 1;
+                    $note->save();
+                }
+            }
         }
     }
 }

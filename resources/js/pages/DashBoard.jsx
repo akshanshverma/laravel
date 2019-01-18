@@ -47,7 +47,7 @@ export default class DashBoard extends Component {
         this.getNoteData();
         this.checkReminder();
         this.getAllLabels();
-       
+
     }
 
     // componentDidUpdate(){
@@ -59,12 +59,22 @@ export default class DashBoard extends Component {
      * get all note data form database
      */
     getNoteData() {
-
         noteservices.getNote()
             .then(res => {
+                var notesData = res.data;
+                for (let i = 1; i < notesData.length; i++) {
+                    var temp = notesData[i];
+                    var k = i - 1;
+                    while (k >= 0 && notesData[k].note_index > temp.note_index) {
+                        notesData[k + 1] = notesData[k];
+                        k--;
+                    }
+                    notesData[k + 1] = temp;
+                }
                 this.setState({
-                    noteData: res.data
+                    noteData: notesData
                 })
+
             })
     }
 
@@ -109,7 +119,7 @@ export default class DashBoard extends Component {
         // })
         data['note_index'] = this.state.noteData.length;
         console.log(data);
-        
+
         noteservices.createNote(data)
             .then(res => {
                 if (res.status == 200) {
@@ -302,6 +312,10 @@ export default class DashBoard extends Component {
                 }
             })
     }
+
+    // moveNoteIndex = (note1 , note2) => {
+         
+    // }
 
 
     render() {
