@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\NotesData;
 use Carbon\Carbon;
 
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -27,9 +28,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $mytime = Carbon::now();
-            $allNotes = DB::table('notes_datas')->get();
-
+            $allNotes = NotesData::where('trash', 0)->get();
+            foreach ($allNotes as $note) {
+                if ((Carbon::parse($note->updated_at)->addDays(7)->isPast())) {
+                    $note->delete();
+                }
+            }
         })->daily();
     }
 
@@ -40,7 +44,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
